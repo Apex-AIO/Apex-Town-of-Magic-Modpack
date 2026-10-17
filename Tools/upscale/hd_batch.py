@@ -34,6 +34,11 @@ sys.path.insert(0, HERE)
 import torch, spandrel
 from compare_upscalers import WS, MODEL_DIR, ALPHA_MODEL, DEV, font, load_image, upscale4, IMG_DIR, bleed
 from refine_compare import color_match, comfy, COMFY, COMFY_DIR, CKPT, POS, NEG, STEPS
+sys.path.insert(0, os.path.join(os.path.dirname(HERE), "art"))
+try:
+    import artdb                 # the art catalog (Tools/art): roles, measured context, twins - see Tools/art/roles.py
+except Exception:
+    artdb = None
 
 MOD = os.path.join(WS, "Mods", "hd_sprites_mod")
 GAME = os.path.normpath(os.path.join(WS, "..", "game"))
@@ -56,6 +61,10 @@ NEG_P = ("blurry, soft, jpeg artifacts, noise, grain, sketch, text, bad anatomy,
          "fused toes, extra fingers")
 FACE_DENOISE = 0.10          # expression layers (name contains "_face"): tiny features, must stay identical to vanilla
 QUEUE = 3                    # detailer jobs kept queued in ComfyUI
+# Checkerboard dithering (Celica's blush, some shading) upscales into diagonal stripes.  True = turn it into a smooth
+# see-through colour before the upscale (soft blush).  Tested in Tools/art/dither_test.py -> Catalog/dither_test.png.
+# OFF until approved (it changes the locked recipe's look); --smooth-dither turns it on for one run.
+SMOOTH_DITHER = True                 # approved by the user 2026-10-18 (soft blush instead of stripes)
 MARGIN = 24                  # surroundings kept around a layer (in original pixels)
 
 # ---- layer kinds (by the part of the name after the pose), in drawing order.  Only hairb/body/breasts/neck/head
@@ -162,7 +171,15 @@ def pose_of(rel, poses=None):
 
 
 def context_for(rel, poses):
-    """vanilla layers that lie under this layer in the game (same pose, same frame layout)"""
+    """vanilla layers that lie under this layer in the game (same pose, same frame layout).
+    The art catalog's measured context is used when it knows the sprite; the name rules below are the fallback."""
+    i = artdb.info(rel) if artdb else None
+    if i is not None:
+        return list(i["context"])
+    return _context_by_name(rel, poses)
+
+
+def _context_by_name(rel, poses):
     base, w, h, n = parse(rel)
     folder = rel.rsplit("/", 1)[0]
     pose = pose_of(rel, poses)
@@ -180,7 +197,29 @@ def context_for(rel, poses):
         crel = "%s/%s%s-%d-%d-%d.png" % (folder, pose, suf, w, h, n)
         if crel != rel and exists_in_game(crel):
             out.append(crel)
+    if out and _covers(out, rel):
+        return out
+    # Some characters (Evie, ...) keep their whole body in "<face file>_<outfit>panties" files and the plain pose file
+    # is only the floor shadow - without a body under it a face layer is upscaled floating on grey and smears.
+    stem = re.sub(r"_talk$", "", base)
+    for outfit in ("_nopanties", "_cephpanties", "_normalpanties"):
+        for b in (stem, pose):
+            crel = "%s/%s%s-%d-%d-%d.png" % (folder, b, outfit, w, h, n)
+            if crel != rel and exists_in_game(crel) and _covers([crel], rel):
+                return out + [crel]
     return out
+
+
+def _covers(ctx_rels, rel):
+    """True if the context layers lie under most of this layer's pixels (first frame)"""
+    base, w, h, n = parse(rel)
+    a = np.array(full_sheet(rel).crop((0, 0, w, h)))[..., 3] > 8
+    if not a.any():
+        return True
+    under = np.zeros_like(a)
+    for c in ctx_rels:
+        under |= np.array(full_sheet(c).crop((0, 0, w, h)))[..., 3] > 8
+    return (a & under).sum() >= 0.8 * a.sum()
 
 
 # ---------------------------------------------------------------------------------------------------- detailer (async)
@@ -229,18 +268,83 @@ def detail_submit(img, denoise, seed=1, ckpt=None, pos=None, neg=None, loras=(),
                    "control_net": ["7", 0], "image": ["4", 0], "strength": cn[1], "start_percent": 0.0, "end_percent": 1.0}}
         wf["5"]["inputs"]["positive"], wf["5"]["inputs"]["negative"] = ["8", 0], ["8", 1]
     pid = comfy("/prompt", {"prompt": wf, "client_id": "tom"})["prompt_id"]
-    return {"pid": pid, "name": name, "box": box, "img": img}
+    return {"pid": pid, "name": name, "box": box, "img": img, "tries": 0, "running_since": None,
+            "args": dict(img=img, denoise=denoise, seed=seed, ckpt=ckpt, pos=pos, neg=neg, loras=loras, cn=cn, steps=steps)}
+
+
+# ---- stall watchdog -------------------------------------------------------------------------------------------------
+# ComfyUI sometimes crawls instead of failing (VRAM full -> the driver spills into system RAM, 10-100x slower).
+# A job that has been RUNNING (not just queued) for STALL_S seconds is interrupted, ComfyUI is asked to free its
+# memory, and the job is sent again.  A second stall keeps the upscale without the AI detail and logs the file to
+# Upscale/stalled.txt (render it again later with --force).
+STALL_S = 300
+
+
+def free_vram():
+    """give cached GPU memory back so ComfyUI has room (PyTorch keeps it reserved otherwise)"""
+    try:
+        torch.cuda.empty_cache()
+    except Exception:
+        pass
+
+
+def _watchdog(t):
+    """True if the job was restarted or given up (the caller then just keeps polling)"""
+    try:
+        q = comfy("/queue")
+    except Exception:
+        return False
+    running = [x[1] for x in q.get("queue_running", [])]
+    if t["pid"] not in running:
+        t["running_since"] = None
+        return False
+    if t["running_since"] is None:
+        t["running_since"] = time.time()
+        return False
+    if time.time() - t["running_since"] < STALL_S:
+        return False
+    label = t.get("label", t["name"])
+    print("   ! ComfyUI stalled %.0f s on %s - interrupting, freeing memory%s" % (
+        time.time() - t["running_since"], label, ", sending it again" if t["tries"] < 1 else ""), flush=True)
+    try:
+        comfy("/interrupt", {})
+        comfy("/free", {"unload_models": True, "free_memory": True})
+    except Exception:
+        pass
+    free_vram()
+    time.sleep(5)
+    if t["tries"] < 1:
+        n = detail_submit(**t["args"])
+        if n is not None:
+            n["tries"] = t["tries"] + 1
+            n["label"] = label
+            t.clear()
+            t.update(n)
+            return True
+    t["gave_up"] = True
+    try:
+        with open(os.path.join(WS, "Upscale", "stalled.txt"), "a", encoding="utf8") as f:
+            f.write("%s\t%s\n" % (time.strftime("%Y-%m-%d %H:%M"), label))
+    except Exception:
+        pass
+    return True
 
 
 def recipe_for(rel, a):
-    """detailer settings for a layer: faces gentle, glow overlays none, body layers + feet LoRA, the rest recipe P"""
+    """detailer settings for a layer: faces gentle, glow overlays none, body layers + feet LoRA, the rest recipe P.
+    The kind of layer comes from the art catalog (it knows that "evie_face_normal_nopanties" is a body, not a face);
+    without it, from the name."""
     base = parse(rel)[0]
-    if "glow" in base:
+    i = artdb.info(rel) if artdb else None
+    kind = i["recipe"] if i is not None else None
+    if kind is None:
+        kind = "none" if "glow" in base else "face" if "_face" in base else "body" if base == pose_of(rel) else "p"
+    if kind in ("none", "shadow"):
         return None
-    if "_face" in base:
+    if kind == "face":
         return {"denoise": a.face_denoise}
     p = {"denoise": a.denoise, "loras": P_LORAS, "cn": (CN_TILE, CN_STRENGTH), "steps": P_STEPS, "pos": POS_P, "neg": NEG_P}
-    if base == pose_of(rel):                                   # the pose's body layer
+    if kind == "body":                                         # a body layer (Celica's pose body, an outfit body)
         p.update(loras=P_LORAS + BODY_EXTRA_LORAS, pos=POS_P_BODY)
     return p
 
@@ -257,10 +361,18 @@ def _read_retry(path, tries=40):
     raise RuntimeError("could not read " + path)
 
 
+_KEPT_PREVIEWS = []                                    # recent ComfyUI preview files (see detail_poll)
+
+
 def detail_poll(t):
-    """None while still running; the detailed RGBA image when done"""
+    """None while still running; the detailed RGBA image when done (a stalled job is restarted, see _watchdog)"""
+    if t.get("gave_up"):
+        print("   ! keeping the upscale without AI detail for %s (logged in Upscale/stalled.txt)" % t.get("label", "?"),
+              flush=True)
+        return t["img"]
     h = comfy("/history/" + t["pid"])
     if t["pid"] not in h:
+        _watchdog(t)
         return None
     st = h[t["pid"]].get("status", {})
     img = t["img"]
@@ -274,10 +386,14 @@ def detail_poll(t):
     o = h[t["pid"]]["outputs"]["6"]["images"][0]
     src = os.path.join(COMFY_DIR, o.get("type", "temp"), o.get("subfolder", ""), o["filename"])
     res = np.array(_read_retry(src))
-    try:
-        os.remove(src)
-    except OSError:
-        pass                                               # ComfyUI empties its temp folder itself
+    # keep the last few previews: deleting each one at once made ComfyUI reuse the same file name, and its queue
+    # panel then showed the first picture as every thumbnail (it caches by name)
+    _KEPT_PREVIEWS.append(src)
+    while len(_KEPT_PREVIEWS) > 20:
+        try:
+            os.remove(_KEPT_PREVIEWS.pop(0))
+        except OSError:
+            pass                                           # ComfyUI empties its temp folder itself
     out = img.copy()
     a = np.array(img.crop(t["box"]))[..., 3]
     out.paste(Image.fromarray(np.dstack([res, a]), "RGBA"), t["box"][:2])
@@ -310,6 +426,7 @@ def main():
     ap.add_argument("--face-denoise", type=float, default=FACE_DENOISE)
     ap.add_argument("--sheet-at4", action="store_true")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--smooth-dither", action="store_true", help="smooth checkerboard dithering first (see SMOOTH_DITHER)")
     ap.add_argument("--only", nargs="*", help="only files whose name contains one of these")
     ap.add_argument("--no-install", action="store_true")
     ap.add_argument("--no-open", action="store_true")
@@ -339,6 +456,51 @@ def main():
     todo = [r for r in rels if a.force or not all(os.path.exists(out_path(r, s)) for s in scales(r))]
     print("%d images in set '%s', %d to make" % (len(rels), a.set, len(todo)), flush=True)
 
+    def install(p):
+        if not a.no_install:
+            dst = os.path.join(GAME, os.path.relpath(p, MOD))
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            shutil.copy2(p, dst)
+
+    def copy_result(src, dst):
+        for s in scales(dst):
+            sp, dp = out_path(src, s), out_path(dst, s)
+            if not os.path.exists(sp):
+                return False
+        for s in scales(dst):
+            os.makedirs(os.path.dirname(out_path(dst, s)), exist_ok=True)
+            shutil.copy2(out_path(src, s), out_path(dst, s))
+            install(out_path(dst, s))
+        return True
+
+    # render once, copy: a sprite with the same pixels AND the same layers under it as another one gets the same HD
+    # result (the art catalog finds them - 44% of the game's sprite files are exact copies of another file)
+    followers = {}
+    if artdb and not a.force:
+        keep, lead = [], {}
+        stale = set()                                    # waiting for a redo: never copy from these
+        if os.path.exists(os.path.join(SETS, "redo.txt")):
+            stale = set(l.strip() for l in open(os.path.join(SETS, "redo.txt"), encoding="utf8") if l.strip())
+        for r in todo:
+            k = artdb.twin_key(r)
+            if k is None:
+                keep.append(r)
+                continue
+            done = next((t for t in artdb.twins_of(r) if t not in stale
+                         and all(os.path.exists(out_path(t, s)) for s in scales(r))), None)
+            if done and a.dry_run:
+                pass                                         # would be copied (a dry run never writes)
+            elif done and copy_result(done, r):
+                print("   copied (identical to %s): %s" % (done.split("/")[-1], r.split("/")[-1]), flush=True)
+            elif k in lead:
+                followers.setdefault(lead[k], []).append(r)
+            else:
+                lead[k] = r
+                keep.append(r)
+        if len(keep) != len(todo):
+            print("render once, copy: %d to render, %d copies" % (len(keep), len(todo) - len(keep)), flush=True)
+        todo = keep
+
     poses = None
 
     model = amodel = None
@@ -346,7 +508,9 @@ def main():
     def up8(img):
         w, h = img.size
         x4 = upscale4(model, amodel, img)
-        return color_match(upscale4(model, amodel, x4.resize((w * 2, h * 2), Image.LANCZOS)), img)
+        out = color_match(upscale4(model, amodel, x4.resize((w * 2, h * 2), Image.LANCZOS)), img)
+        free_vram()                                              # leave the VRAM to ComfyUI
+        return out
 
     # one job per non-empty, non-repeated frame
     jobs, files = deque(), {}
@@ -432,10 +596,9 @@ def main():
             os.makedirs(os.path.dirname(p), exist_ok=True)
             # compress_level 1: decodes ~2.7x faster in Ren'Py than max compression (18 vs 50 ms per 6360x1060 sheet)
             clean_alpha(canv).save(p, compress_level=1)
-            if not a.no_install:
-                dst = os.path.join(GAME, os.path.relpath(p, MOD))
-                os.makedirs(os.path.dirname(dst), exist_ok=True)
-                shutil.copy2(p, dst)
+            install(p)
+        for t in followers.pop(rel, []):
+            copy_result(rel, t)
         del files[rel]
 
     for rel in [r for r in list(files) if files[r]["left"] == 0]:
@@ -459,6 +622,9 @@ def main():
         sm = shadow_mask(np.array(van))
         j["shadow"] = sm if sm.any() else None              # the floor shadow is redrawn cleanly, not by the AI
         van = no_shadow(van)
+        if SMOOTH_DITHER or a.smooth_dither:
+            from dither_test import smooth_dither                         # Tools/art (on the path via artdb)
+            van = Image.fromarray(smooth_dither(np.array(van))[0], "RGBA")
         if not van.getchannel("A").getbbox():
             j["alone"] = van.resize((van.width * 8, van.height * 8))
             j["big"], j["ticket"] = j["alone"], None
@@ -471,6 +637,8 @@ def main():
             j["below"] = up8(below)
         j["big"] = big
         j["ticket"] = detail_submit(big, **j["recipe"]) if j["recipe"] else None
+        if j["ticket"] is not None:
+            j["ticket"]["label"] = "%s frame %d" % (j["rel"], j["f"] + 1)
 
     def complete(j, detailed):
         if j["ctx"]:

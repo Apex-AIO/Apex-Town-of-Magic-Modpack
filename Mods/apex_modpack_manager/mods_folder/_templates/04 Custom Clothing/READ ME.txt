@@ -1,0 +1,16 @@
+CUSTOM CLOTHING
+---------------
+What it does: adds "Red Top" to Celica's inventory. Equip it in Equip -> Appearance.
+
+The pictures: the game draws clothing as its own picture on top of Celica, one picture per pose.
+For a top with picture="redtop" the names are:
+  standing:   images/CHAR/celica/celica_top_redtop-530-530-1.png        (this template has it)
+  any pose:   images/CHAR/celica/<pose>_top_redtop-<size>.png
+              e.g. celica_squat_top_redtop-530-530-1.png
+Area words in the names: top/bra -> "top", bottom/panties -> "bottom", shoes -> "feet".
+
+Poses without your picture show Celica without that piece (nothing breaks).
+To cover more poses: Mod Tools -> Export game pictures -> type  _top_normal  -> you get the normal top in
+EVERY pose, with the right names and sizes. Recolor or redraw them, rename "normal" to your word.
+
+Check your mod: Mod Tools -> Check my mods.

@@ -3,20 +3,20 @@ APEX'S MODPACK for Town of Magic  (made for game version 0.77.002)
 
 INSTALL (drag and drop)
   1. Open your Town of Magic folder (the one with TownOfMagic.exe in it).
-  2. Drag the "game" folder from this zip into it. If Windows asks, choose to merge / replace.
-     (Or put Apex_Modpack.rpa into Town of Magic\game\ yourself, next to scripts.rpa.)
+  2. Drag the "game" and "mods" folders from this zip into it. If Windows asks, choose to merge / replace.
+     For HD pictures, also install the HD Pack (Apex_HD_Pack zip) the same way.
   3. Start the game. "Apex's Modpack Manager" is at the top of the main menu.
 
 APEX'S MODPACK MANAGER (main menu)
-  Switch each module (and sub-module) on or off, and use the gear on the right of a module to change its
+  Switch each mod (and sub-mod) on or off, and use the gear on the right of a mod to change its
   settings (how often Nel taunts, the lust bar per climax, how often the morning scene plays, sound volume...).
   Changes apply after a restart; the manager offers to restart for you.
-  It also shows each module's revision, your game version, the version the pack was made for and the date
+  It also shows each mod's revision, your game version, the version the pack was made for and the date
   of the last update.
 
-MODULES
+MODS
   Nel's Auto Battler Sex Autonomy Mod   Nel teases monsters during her auto-battles, with a climax ladder.
-                                         Sub-modules: Half XP and Never One-Shots (balancing).
+                                         Sub-mods: Half XP and Never One-Shots (balancing).
   Game Engine Stutter Fix               Removes the short freezes in battle when a pose changes.
   Appearance Menu Insta Unlock          Equip > Appearance is open from the start.
   Celica's Autonomy Dildo Events        On quiet mornings Celica sometimes uses the dildo by herself (1 in 9).
@@ -24,13 +24,18 @@ MODULES
   H-Scene Idle Loop                     Grope and H-scene animations keep looping on your turn.
   HD x8 Upscale Project (VERY EARLY WIP) HD sprites when the window is bigger than 1066x600.
 
+YOUR OWN MODS
+  The "mods" folder is for your own mods and mods you download from others. Make one in the manager:
+  Mod Tools -> Create a new mod. Full help: mods\_guide\Modding Guide.html.
+
 UNINSTALL
-  Delete Town of Magic\game\Apex_Modpack.rpa. Your saves keep working.
+  Delete Town of Magic\game\Apex_Modpack.rpa, game\Apex_HD.rpa and game\apex_mods_loader.rpe.py.
+  The mods folder can stay. Your saves keep working.
 
 GAME UPDATES
-  If your game is newer than the version this modpack was made for, every module is switched off and the main
+  If your game is newer than the version this modpack was made for, every Apex mod is switched off and the main
   menu tells you. To try the modpack anyway, open the manager, set "Test modpack?" to Yes and restart.
-  Even then, any module whose part of the game changed switches itself off and the game runs normally.
+  Even then, any mod whose part of the game changed switches itself off and the game runs normally.
   Details are in game\tom_mod_report.txt.
 
 Support the modpack: https://buymeacoffee.com/apex_modding

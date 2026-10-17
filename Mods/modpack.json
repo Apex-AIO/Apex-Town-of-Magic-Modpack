@@ -1,10 +1,10 @@
 {
   "name": "Apex's Modpack",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "made_for_game": "0.77.002",
   "tip_url": "https://buymeacoffee.com/apex_modding",
   "core": {
-    "rev": "1.1",
+    "rev": "2.0",
     "files": {
       "_shared/tom_mod_guard.rpy": "apex_modpack/tom_mod_guard.rpy",
       "apex_modpack_manager/apex_modpack_manager.rpy": "apex_modpack/apex_modpack_manager.rpy",
@@ -15,7 +15,9 @@
       "apex_modpack_manager/gear.png": "apex_modpack/gear.png",
       "apex_modpack_manager/gear@2.png": "apex_modpack/gear@2.png",
       "apex_modpack_manager/gear_hover.png": "apex_modpack/gear_hover.png",
-      "apex_modpack_manager/gear_hover@2.png": "apex_modpack/gear_hover@2.png"
+      "apex_modpack_manager/gear_hover@2.png": "apex_modpack/gear_hover@2.png",
+      "apex_modpack_manager/apex_modkit.rpy": "apex_modpack/apex_modkit.rpy",
+      "apex_modpack_manager/ui/": "apex_modpack/ui/"
     }
   },
   "_settings_help": "type: one_in (shown '1 in N'), percent (N%), int (N + unit), number (decimals), bool (On/Off). {key} in a desc shows that setting's current value.",
@@ -25,36 +27,138 @@
       "title": "Nel's Auto Battler Sex Autonomy Mod",
       "rev": "1.6",
       "desc": "At the start of each of her turns, Nel has a {chance} chance to taunt the monsters, teasing them to come and fuck her until she orgasms.",
-      "files": {"nel_taunt_mod/nel_taunt.rpy": "apex_modpack/nel_taunt.rpy"},
+      "files": {
+        "nel_taunt_mod/nel_taunt.rpy": "apex_modpack/nel_taunt.rpy"
+      },
       "subs": [
-        {"key": "half_xp", "type": "bool", "default": true, "title": "Half XP",
-         "desc": "Balancing: Celica only gets {xp_share} of the battle XP while Nel is in control."},
-        {"key": "no_one_shot", "type": "bool", "default": true, "title": "Never One-Shots",
-         "desc": "Balancing: Nel's first hit on a monster leaves it on 1 HP; the next hit kills it."}
+        {
+          "key": "half_xp",
+          "type": "bool",
+          "default": true,
+          "title": "Half XP",
+          "desc": "Balancing: Celica only gets {xp_share} of the battle XP while Nel is in control."
+        },
+        {
+          "key": "no_one_shot",
+          "type": "bool",
+          "default": true,
+          "title": "Never One-Shots",
+          "desc": "Balancing: Nel's first hit on a monster leaves it on 1 HP; the next hit kills it."
+        }
       ],
       "settings": [
-        {"key": "chance", "type": "one_in", "default": 16, "min": 2, "max": 60, "step": 1,
-         "label": "Taunt chance", "help": "Checked at the start of each of Nel's turns."},
-        {"key": "cooldown", "type": "int", "default": 3, "min": 0, "max": 15, "step": 1, "unit": " turns",
-         "label": "Cooldown after a taunt", "help": "Nel's turns without a new taunt after one ends."},
-        {"key": "talk", "type": "percent", "default": 33, "min": 0, "max": 100, "step": 5,
-         "label": "How often Nel talks while taunting", "help": "Her teasing lines, waiting lines and reactions."},
-        {"key": "max_turns", "type": "int", "default": 40, "min": 10, "max": 120, "step": 5, "unit": " actions",
-         "label": "Taunt time limit", "help": "A taunt ends by itself after this many monster actions on her."},
-        {"key": "lust_1", "type": "percent", "default": 100, "min": 10, "max": 100, "step": 5,
-         "label": "Lust bar needed: 1st climax of the day", "help": "How full her lust bar must be to climax. Resets when Celica sleeps."},
-        {"key": "lust_2", "type": "percent", "default": 60, "min": 10, "max": 100, "step": 5,
-         "label": "Lust bar needed: 2nd climax", "help": ""},
-        {"key": "lust_3", "type": "percent", "default": 40, "min": 10, "max": 100, "step": 5,
-         "label": "Lust bar needed: 3rd climax", "help": ""},
-        {"key": "lust_4", "type": "percent", "default": 30, "min": 10, "max": 100, "step": 5,
-         "label": "Lust bar needed: 4th climax", "help": ""},
-        {"key": "lust_5", "type": "percent", "default": 20, "min": 10, "max": 100, "step": 5,
-         "label": "Lust bar needed: 5th climax and later", "help": ""},
-        {"key": "xp_share", "type": "percent", "default": 50, "min": 0, "max": 100, "step": 10,
-         "label": "Celica's XP share (Half XP)", "help": "Only used while the Half XP sub-module is on."},
-        {"key": "influence", "type": "number", "default": 0.5, "min": 0.0, "max": 10.0, "step": 0.5,
-         "label": "Nel's body influence per climax", "help": "While she possesses Celica. The unmodded game gives 10."}
+        {
+          "key": "chance",
+          "type": "one_in",
+          "default": 16,
+          "min": 2,
+          "max": 60,
+          "step": 1,
+          "label": "Taunt chance",
+          "help": "Checked at the start of each of Nel's turns."
+        },
+        {
+          "key": "cooldown",
+          "type": "int",
+          "default": 3,
+          "min": 0,
+          "max": 15,
+          "step": 1,
+          "unit": " turns",
+          "label": "Cooldown after a taunt",
+          "help": "Nel's turns without a new taunt after one ends."
+        },
+        {
+          "key": "talk",
+          "type": "percent",
+          "default": 33,
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "label": "How often Nel talks while taunting",
+          "help": "Her teasing lines, waiting lines and reactions."
+        },
+        {
+          "key": "max_turns",
+          "type": "int",
+          "default": 40,
+          "min": 10,
+          "max": 120,
+          "step": 5,
+          "unit": " actions",
+          "label": "Taunt time limit",
+          "help": "A taunt ends by itself after this many monster actions on her."
+        },
+        {
+          "key": "lust_1",
+          "type": "percent",
+          "default": 100,
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "label": "Lust bar needed: 1st climax of the day",
+          "help": "How full her lust bar must be to climax. Resets when Celica sleeps."
+        },
+        {
+          "key": "lust_2",
+          "type": "percent",
+          "default": 60,
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "label": "Lust bar needed: 2nd climax",
+          "help": ""
+        },
+        {
+          "key": "lust_3",
+          "type": "percent",
+          "default": 40,
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "label": "Lust bar needed: 3rd climax",
+          "help": ""
+        },
+        {
+          "key": "lust_4",
+          "type": "percent",
+          "default": 30,
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "label": "Lust bar needed: 4th climax",
+          "help": ""
+        },
+        {
+          "key": "lust_5",
+          "type": "percent",
+          "default": 20,
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "label": "Lust bar needed: 5th climax and later",
+          "help": ""
+        },
+        {
+          "key": "xp_share",
+          "type": "percent",
+          "default": 50,
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "label": "Celica's XP share (Half XP)",
+          "help": "Only used while the Half XP sub-mod is on."
+        },
+        {
+          "key": "influence",
+          "type": "number",
+          "default": 0.5,
+          "min": 0.0,
+          "max": 10.0,
+          "step": 0.5,
+          "label": "Nel's body influence per climax",
+          "help": "While she possesses Celica. The unmodded game gives 10."
+        }
       ]
     },
     {
@@ -62,26 +166,49 @@
       "title": "Game Engine Stutter Fix",
       "rev": "1.1",
       "desc": "Removes the short battle freezes when a pose changes (caches the game's file searches).",
-      "files": {"stutter_fix_mod/stutter_fix.rpy": "apex_modpack/stutter_fix.rpy"}
+      "files": {
+        "stutter_fix_mod/stutter_fix.rpy": "apex_modpack/stutter_fix.rpy"
+      }
     },
     {
       "id": "appearance_unlock",
       "title": "Appearance Menu Insta Unlock",
       "rev": "1.1",
       "desc": "The Equip > Appearance tab is open from the start, on new games and old saves.",
-      "files": {"appearance_unlock_mod/appearance_unlock.rpy": "apex_modpack/appearance_unlock.rpy"}
+      "files": {
+        "appearance_unlock_mod/appearance_unlock.rpy": "apex_modpack/appearance_unlock.rpy"
+      }
     },
     {
       "id": "morning_dildo",
       "title": "Celica's Autonomy Dildo Events",
       "rev": "1.3",
       "desc": "On quiet mornings there is a {chance} chance that Celica uses the dildo by herself (Nel joins in if she's there).",
-      "files": {"morning_dildo_mod/morning_dildo.rpy": "apex_modpack/morning_dildo.rpy"},
+      "files": {
+        "morning_dildo_mod/morning_dildo.rpy": "apex_modpack/morning_dildo.rpy"
+      },
       "settings": [
-        {"key": "chance", "type": "one_in", "default": 9, "min": 1, "max": 30, "step": 1,
-         "label": "Chance each quiet morning", "help": "1 in 1 = every quiet morning."},
-        {"key": "min_lewdness", "type": "int", "default": 30, "min": 0, "max": 100, "step": 5, "unit": "",
-         "label": "Lewdness needed", "help": "The game's own rule for using the dildo is 30."}
+        {
+          "key": "chance",
+          "type": "one_in",
+          "default": 9,
+          "min": 1,
+          "max": 30,
+          "step": 1,
+          "label": "Chance each quiet morning",
+          "help": "1 in 1 = every quiet morning."
+        },
+        {
+          "key": "min_lewdness",
+          "type": "int",
+          "default": 30,
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "",
+          "label": "Lewdness needed",
+          "help": "The game's own rule for using the dildo is 30."
+        }
       ]
     },
     {
@@ -97,14 +224,46 @@
         "clothing_remover_mod/clothing_remover/helper_red.png": "clothing_remover/helper_red.png"
       },
       "settings": [
-        {"key": "remover_strength", "type": "percent", "default": 100, "min": 0, "max": 200, "step": 25,
-         "label": "Red-X items: stat strength", "help": "100% = Allure and Lewdness +25; Willpower, Cooldown, Arcane and Speed -25."},
-        {"key": "helper_green", "type": "percent", "default": 10, "min": 0, "max": 200, "step": 5,
-         "label": "Combat Helper Green strength", "help": "Percent of the Speedster's Blessing stats."},
-        {"key": "helper_orange", "type": "percent", "default": 50, "min": 0, "max": 200, "step": 5,
-         "label": "Combat Helper Orange strength", "help": "Percent of the Speedster's Blessing stats."},
-        {"key": "helper_red", "type": "percent", "default": 100, "min": 0, "max": 200, "step": 5,
-         "label": "Combat Helper Red strength", "help": "Percent of the Speedster's Blessing stats."}
+        {
+          "key": "remover_strength",
+          "type": "percent",
+          "default": 100,
+          "min": 0,
+          "max": 200,
+          "step": 25,
+          "label": "Red-X items: stat strength",
+          "help": "100% = Allure and Lewdness +25; Willpower, Cooldown, Arcane and Speed -25."
+        },
+        {
+          "key": "helper_green",
+          "type": "percent",
+          "default": 10,
+          "min": 0,
+          "max": 200,
+          "step": 5,
+          "label": "Combat Helper Green strength",
+          "help": "Percent of the Speedster's Blessing stats."
+        },
+        {
+          "key": "helper_orange",
+          "type": "percent",
+          "default": 50,
+          "min": 0,
+          "max": 200,
+          "step": 5,
+          "label": "Combat Helper Orange strength",
+          "help": "Percent of the Speedster's Blessing stats."
+        },
+        {
+          "key": "helper_red",
+          "type": "percent",
+          "default": 100,
+          "min": 0,
+          "max": 200,
+          "step": 5,
+          "label": "Combat Helper Red strength",
+          "help": "Percent of the Speedster's Blessing stats."
+        }
       ]
     },
     {
@@ -112,18 +271,56 @@
       "title": "H-Scene Idle Loop",
       "rev": "1.2",
       "desc": "Grope and H-scene animations and their sounds keep looping on your turn instead of showing a still image. Purely visual: it doesn't affect gameplay.",
-      "files": {"hscene_loop_mod/hscene_loop.rpy": "apex_modpack/hscene_loop.rpy"},
+      "files": {
+        "hscene_loop_mod/hscene_loop.rpy": "apex_modpack/hscene_loop.rpy"
+      },
       "settings": [
-        {"key": "sound", "type": "bool", "default": true,
-         "label": "Idle loop sounds", "help": "Replay the animation's sounds while the loop plays."},
-        {"key": "volume", "type": "percent", "default": 30, "min": 5, "max": 100, "step": 5,
-         "label": "Idle loop sound volume", "help": "Compared with the normal sound volume."},
-        {"key": "swap", "type": "bool", "default": true,
-         "label": "Switch between animations", "help": "With several monsters on her, switch animations every few seconds."},
-        {"key": "swap_min", "type": "int", "default": 4, "min": 2, "max": 30, "step": 1, "unit": " s",
-         "label": "Switch after at least", "help": ""},
-        {"key": "swap_max", "type": "int", "default": 8, "min": 2, "max": 60, "step": 1, "unit": " s",
-         "label": "Switch after at most", "help": ""}
+        {
+          "key": "sound",
+          "type": "bool",
+          "default": true,
+          "label": "Idle loop sounds",
+          "help": "Replay the animation's sounds while the loop plays."
+        },
+        {
+          "key": "volume",
+          "type": "percent",
+          "default": 30,
+          "min": 5,
+          "max": 100,
+          "step": 5,
+          "label": "Idle loop sound volume",
+          "help": "Compared with the normal sound volume."
+        },
+        {
+          "key": "swap",
+          "type": "bool",
+          "default": true,
+          "label": "Switch between animations",
+          "help": "With several monsters on her, switch animations every few seconds."
+        },
+        {
+          "key": "swap_min",
+          "type": "int",
+          "default": 4,
+          "min": 2,
+          "max": 30,
+          "step": 1,
+          "unit": " s",
+          "label": "Switch after at least",
+          "help": ""
+        },
+        {
+          "key": "swap_max",
+          "type": "int",
+          "default": 8,
+          "min": 2,
+          "max": 60,
+          "step": 1,
+          "unit": " s",
+          "label": "Switch after at most",
+          "help": ""
+        }
       ]
     },
     {
@@ -131,15 +328,34 @@
       "title": "HD x8 Upscale Project",
       "wip": "VERY EARLY WIP",
       "rev": "0.4",
-      "desc": "AI-upscaled HD sprites, upscaled x8 (so far: Celica, the slime fight and Nel's possession). Used when the window is bigger than 1066x600.",
+      "desc": "AI-upscaled HD pictures (x8), added a block at a time: characters and backgrounds so far (see the HD Project page). Used when the window is bigger than 1066x600. Needs the HD pack.",
       "files": {
         "hd_sprites_mod/hd_sprites.rpy": "apex_modpack/hd_sprites.rpy",
         "hd_sprites_mod/images/": "images/"
       },
       "settings": [
-        {"key": "cache_mb", "type": "int", "default": 1024, "min": 512, "max": 4096, "step": 256, "unit": " MB",
-         "label": "Picture memory", "help": "How many pictures stay loaded. Lower it if the game runs out of memory."}
+        {
+          "key": "cache_mb",
+          "type": "int",
+          "default": 1024,
+          "min": 512,
+          "max": 4096,
+          "step": 256,
+          "unit": " MB",
+          "label": "Picture memory",
+          "help": "How many pictures stay loaded. Lower it if the game runs out of memory."
+        }
       ]
     }
-  ]
+  ],
+  "repo_url": "https://github.com/Apex-AIO/Apex-Town-of-Magic-Modpack",
+  "loose": {
+    "apex_modpack_manager/apex_mods_loader.rpe.py": "game/apex_mods_loader.rpe.py"
+  },
+  "mods_folder": "apex_modpack_manager/mods_folder/",
+  "hd_archive": {
+    "name": "Apex_HD.rpa",
+    "module": "hd_sprites",
+    "folder": "hd_sprites_mod/images/"
+  }
 }

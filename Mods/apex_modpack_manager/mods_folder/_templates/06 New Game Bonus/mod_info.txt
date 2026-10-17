@@ -1,0 +1,11 @@
+# mod_info.txt - tells the Mod Manager about your mod. Lines starting with # are notes.
+name = Starting Gold
+author = Your Name
+version = 1.0
+description = Gives Celica extra gold when you start a new game.
+made_for_game = 0.77.002
+
+# Settings the player can change with the gear in the Mod Manager:
+#   setting = key | type | default | min | max | label
+#   types: on/off, number, percent, 1 in n, seconds, decimal
+setting = gold | number | 250 | 0 | 10000 | Gold at the start

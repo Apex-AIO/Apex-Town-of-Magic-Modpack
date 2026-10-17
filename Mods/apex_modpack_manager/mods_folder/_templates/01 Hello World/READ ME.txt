@@ -1,0 +1,12 @@
+HELLO WORLD
+-----------
+What it does: shows "Hello from my first mod!" when you load a save.
+
+Try it:
+1. Restart the game. The mod is listed in Apex's Modpack Manager -> Your Mods.
+2. Load a save - the message appears.
+3. Change the text in script.rpy, restart, load again.
+
+Files:
+  mod_info.txt   name, author, version, description and one setting (on/off)
+  script.rpy     the code

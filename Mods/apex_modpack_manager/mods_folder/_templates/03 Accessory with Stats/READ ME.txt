@@ -1,0 +1,7 @@
+ACCESSORY WITH STATS
+--------------------
+What it does: puts a Lucky Charm in Celica's inventory (once per save). Wear it in Equip -> Appearance.
+The player changes its bonus with the gear in the Mod Manager (settings in mod_info.txt).
+
+Make your own: copy apex_add_accessory(...) in script.rpy, give it a new id and name, change the stats.
+Stats: allure, lewdness, willpower, cooldown, arcane, speed, luck.

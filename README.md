@@ -1,41 +1,26 @@
 <div align="center">
 
-# APEX'S MODPACK AND MOD MANAGER
-### for Town of Magic v0.77.002 — 7 Mods, one file, one in-game manager, and many more mods to come.
+# ⚗️ APEX'S MODPACK & MOD MANAGER
+### for Town of Magic v0.77.002 — 7 mods · a full mod manager · room for your own mods · many more mods to come
 
-<img src="docs/images/main_menu.png" alt="Apex's Modpack Manager on the Town of Magic main menu" width="900">
+[![Latest release](https://img.shields.io/github/v/release/Apex-AIO/Apex-Town-of-Magic-Modpack?style=for-the-badge&label=latest&color=ffc94d&labelColor=1a1522)](../../releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/Apex-AIO/Apex-Town-of-Magic-Modpack/total?style=for-the-badge&color=9b6bff&labelColor=1a1522)](../../releases)
+[![Game version](https://img.shields.io/badge/Town_of_Magic-0.77.002-38d6f2?style=for-the-badge&labelColor=1a1522)](https://f95zone.to/threads/town-of-magic-v0-77-002-deimus.64257/)
+[![Support](https://img.shields.io/badge/Buy_me_a_coffee-☕-ffdd00?style=for-the-badge&labelColor=1a1522)](https://buymeacoffee.com/apex_modding)
 
-**Drag & drop · Toggle every module in-game · Tweak the settings · Safe after game updates**
+<img src="docs/images/mm_main_menu.png" alt="Apex's Modpack Manager on the Town of Magic main menu" width="900">
 
-### ⬇️ [DOWNLOAD THE LATEST RELEASE](../../releases/latest) ⬇️
+**Drag & drop · Switch every mod on or off in game · Tweak the settings · Add your own mods · Safe with game updates**
 
-</div>
+## ⬇️ [DOWNLOAD THE LATEST RELEASE](../../releases/latest)
 
----
+| Download | What's inside | Size |
+|---|---|---|
+| **Apex_Modpack** | All 7 mods + the Mod Manager + the mods folder (templates and the modding guide) | tiny |
+| **Apex_HD_Pack** | The HD pictures for the HD x8 project (add-on, needs the modpack) | big |
+| **Apex_Modpack_with_HD** | Both in one download (when GitHub's size limit allows it) | big |
 
-<div align="center">
-
-## BACKGROUND - BEFORE YOU DOWNLOAD!
-
-This is my first ever post on F95. I've been an admirer from afar of this community, but after working on this project I wanted to give back to the community that has given so much to me!
-
-I've been a long-time fan of Town of Magic and have played it a few times over with each new update, but I found myself wanting a little more in some cases: things that feel more alive and interactive, some QoL changes and, ultimately, just more porn lol. So I ended up tinkering around with the game and making my first mod.
-
-It started with the H-Scene/Groping Loop mod. After playing around with it and getting it to work, I got used to it and even found it fun to see my idea come to life and play out how I wanted it to... then that idea spread to the rest of the game as I played through it again, adding more and more mods.
-
-As of writing, there are currently 7 Mods + The Mod Manager.
-I plan to add many more as I continue to play the game and ideas come to me.
-
-**Claude was used in the making of this!**
-I know AI is a grey area right now, but it quickly became my best friend while working on this project. I initially started coding myself and got the majority of the mods fleshed out, but after a while I ran into bugs, errors and crashes and looked for help.
-Its incredible debugging knowledge gave me the tools I needed to keep going with the project, and it even made the game run way smoother and snappier, which blew my mind.
-
-This modpack has been extensively stress tested and I'm happy to say it works incredibly well.
-
-I'm having quite a lot of fun modding these games, and I'm seriously contemplating extending to other games I've played and loved in the past, to give them a lil more gooner juice, or even by popular request (which I've gotta figure out how to do lol).
-For now, if you like this project, leave a ⭐ on the repo (or a react on the F95 post) so I can gauge how much interest there might be!
-
-With all of that said, thank you all for what you've given me. It's time to start giving back to you. 💖
+<sub>Install steps are on the release page. Made for Town of Magic 0.77.002.</sub>
 
 </div>
 
@@ -43,26 +28,280 @@ With all of that said, thank you all for what you've given me. It's time to star
 
 <div align="center">
 
-## THE MODPACK MANAGER
-
-Everything is controlled from the main menu, so you never have to edit files.<br>
-**ON / OFF switch** for every module and sub-module<br>
-⚙️ **Gear** on each module: change chances, volumes, strengths and more<br>
-Shows each module's **revision**, your game version and the date of the last update<br>
-Changed something? It asks *"Restart now to apply changes?"* when you leave the manager or quit the game
-
-<img src="docs/images/manager.png" alt="Apex's Modpack Manager" width="900">
+## 📊 HD PROJECT — PROGRESS TOWARDS THE WHOLE GAME
 
 </div>
+
+<!-- PROGRESS:START -->
+<!-- written by Tools/art/progress.py - run it (or build a release) to update -->
+<div align="center">
+
+<img src="docs/images/progress.svg" alt="HD project progress" width="820">
+
+<sub>An estimate of every picture the game has (the end goal). Updated with every release - v1.2.0, 18 Oct 2026.</sub>
+
+</div>
+
+| | Area | HD done | Whole game | |
+|:-:|---|--:|--:|---|
+| 🧑‍🎨 | **Characters**<br><sub>every pose, face, outfit and animation frame of the female characters and creatures</sub> | 982 | 26,446 | 3% |
+| 🏞️ | **Backgrounds**<br><sub>locations, window views, lights, animated backgrounds and event pictures</sub> | 311 | 830 | 37% |
+| 🧭 | **Interface & icons**<br><sub>menus, item icons, map, effects — planned later</sub> | 0 | 1,559 | 0% |
+
+<details>
+<summary><b>🧑‍🎨 Characters in detail — 20 of 113 started</b></summary>
+
+| Character | HD pictures | Progress |
+|---|--:|---|
+| Celica | 740 / 19,409 | `█░░░░░░░░░░░░░░░░░░░` 3% |
+| Nel | 43 / 101 | `█████████░░░░░░░░░░░` 42% |
+| Evie | 34 / 175 | `████░░░░░░░░░░░░░░░░` 19% |
+| Slime Girl | 27 / 118 | `█████░░░░░░░░░░░░░░░` 22% |
+| Fairy | 21 / 38 | `███████████░░░░░░░░░` 55% |
+| Selena | 19 / 70 | `█████░░░░░░░░░░░░░░░` 27% |
+| Fortune Teller | 16 / 32 | `██████████░░░░░░░░░░` 50% |
+| Galiene | 13 / 252 | `█░░░░░░░░░░░░░░░░░░░` 5% |
+| Maid | 13 / 142 | `██░░░░░░░░░░░░░░░░░░` 9% |
+| Joanna | 9 / 24 | `████████░░░░░░░░░░░░` 37% |
+| Black Cat | 9 / 18 | `██████████░░░░░░░░░░` 50% |
+| Giant Hornet | 7 / 7 | `████████████████████` 100% |
+| Toy Customer | 7 / 7 | `████████████████████` 100% |
+| Electric Jellyfish | 5 / 5 | `████████████████████` 100% |
+| Giant Slime | 4 / 4 | `████████████████████` 100% |
+| Slime | 4 / 4 | `████████████████████` 100% |
+| Balloon | 3 / 3 | `████████████████████` 100% |
+| Accessory Shop Keeper | 3 / 3 | `████████████████████` 100% |
+| Magic Shop Keeper | 3 / 3 | `████████████████████` 100% |
+| Alchemy Shop Keeper | 2 / 3 | `█████████████░░░░░░░` 66% |
+
+<sub>Not started yet (93): Alraune, Bee-Girl, Bellona, Biter, Blightbloom, Booty, Busty, Capt. Ceres, Celestian, Celica (child), Celica (fairy), Celica (spirit), Cellshroom, Cephrina, Cindy, Clara, Cornel, Cyclopus, Dark Fairy, Dark Painting, Demon Sloth Blimp, Demon Sloth Dick, Demoness, Domenea, Drylia, Edgar, Eeris, Eleth Shop Keeper, Elith, Elize, Elyrana, Emma, Envy, Envy Demon, Faylen, Faylen (spirit), Fire Ray, Galiene (spirit), Genie, Genie Celica, Glace, Gluttony's Tongue, Huge Slime, Ice Armor, Inara, Kitsune, Lamia, Layla, Lena, Lena (shop keeper), Lilith, Lily, Lucina, Luna, Lust, Lust Demon, Lyra, Madame Samira, Mana Stalker, Margarilda, Marlene, Mimic, Mirania, Miriam, Nahla, Noctriel, Noctyra, Noxtar, Penelope, Phantom Pirate, Phantom Sword, Pirate, Pixella, Puppet, Queen Brynja, Rock Spitter, Saya, Shade, Succubus, Sylphie, Sylvia, Talkstone, Tentaknight, Tessa, Topi, Trixi, Umbral Groper, Valen, Velvetia, Vera, Violet, Vivi, Vivi's Panties</sub>
+
+</details>
+
+<details>
+<summary><b>🏞️ Backgrounds in detail</b></summary>
+
+| Kind | HD pictures | Progress |
+|---|--:|---|
+| Locations | 272 / 669 | `████████░░░░░░░░░░░░` 40% |
+| Animated backgrounds | 20 / 84 | `█████░░░░░░░░░░░░░░░` 23% |
+| Event pictures | 19 / 77 | `█████░░░░░░░░░░░░░░░` 24% |
+
+</details>
+
+<sub>A "picture" is one image file of the game: a pose, a face, a piece of clothing, an animation sheet or a background layer. Male characters aren't part of the HD project.</sub>
+<!-- PROGRESS:END -->
 
 ---
 
 <div align="center">
 
-## THE MODS
-### (SO FAR - BOUND TO BE A LOT MORE)
+## 🧰 THE MOD MANAGER
 
-<ins>**Rule of thumb: don't touch module settings if you don't know what they do!**</ins>
+Everything happens in one place on the main menu — no file editing needed.
+
+<img src="docs/images/mm_overview.png" alt="Mod Manager overview" width="900">
+
+</div>
+
+<details>
+<summary><b>✨ What it does</b></summary>
+<br>
+
+| | |
+|---|---|
+| **Overview** | Everything at a glance: your mods, the game version check, HD progress, and anything that needs your attention. |
+| **Apex's Mods** | Switch each of the pack's mods (and sub-mods) on or off. The ⚙️ gear changes a mod's settings. |
+| **Your Mods** | Your own mods and mods you download, from the `mods` folder — with on/off, settings, details and plain-words error reports. |
+| **HD Project** | How far the HD upscale is, per character and per area. |
+| **Mod Tools** | Create a mod from a template, check your mods for problems, export game pictures to edit, open the guide. |
+| **About & Support** | Versions, compatibility, revisions of every mod, and support links. |
+| **Restart prompt** | Changed something? It asks *"Restart now to apply changes?"* when you leave or quit. |
+
+<div align="center">
+<img src="docs/images/mm_apex.png" width="440"> <img src="docs/images/mm_settings.png" width="440">
+<img src="docs/images/mm_yours.png" width="440"> <img src="docs/images/mm_tools.png" width="440">
+</div>
+</details>
+
+<details>
+<summary><b>🛡️ Safe with game updates</b></summary>
+<br>
+
+- At start-up, every mod checks the exact game code it touches. If an update changed it, **only that mod switches itself off** and the game runs normally.
+- Game newer than the modpack? Apex's mods switch off, the main menu tells you, and **Overview → Test modpack** lets you try them anyway.
+- Green / orange / red version indicator, with a plain explanation.
+- Every start writes `game/tom_mod_report.txt` — attach it to bug reports.
+</details>
+
+<details>
+<summary><b>🧩 Your Mods — add your own (or other people's)</b></summary>
+<br>
+
+The modpack ships a **`mods`** folder next to the `game` folder. It's for everyone's own mods (Apex's mods live in `game/Apex_Modpack.rpa`).
+
+- **Drop in a mod folder → restart → it's listed under Your Mods, switched on.**
+- **Pictures replace the game's** — put a picture at the same path and name (e.g. `images/CHAR/celica/...`) and the game uses yours. No code needed.
+- **Errors never crash your game.** A mod with an error is switched off, and *Your Mods → ⓘ* explains **where** it went wrong and **what to do**, in plain words. Even a typo that stops the game from starting is caught: restart once and the faulty mod is switched off and explained.
+- **Settings for your mod** — a line in `mod_info.txt` gives your mod a ⚙️ gear in the manager.
+- **Check my mods** finds missing files, wrongly sized pictures, clashes between mods and version mismatches.
+
+<div align="center"><img src="docs/images/mm_details.png" width="700"></div>
+</details>
+
+<details>
+<summary><b>📘 How-to guides & templates for modders</b></summary>
+<br>
+
+Six ready-made templates ship in `mods/_templates` — **Mod Tools → Create a new mod** copies one for you. The full **Modding Guide** is in `mods/_guide/Modding Guide.html`.
+
+<details>
+<summary>📦 Install someone's mod</summary>
+
+1. Open your Town of Magic folder. Next to `game` is the `mods` folder.
+2. Put the mod's folder inside `mods` (one folder per mod).
+3. Start the game: it's under **Apex's Modpack Manager → Your Mods**, switched on.
+
+To remove it, switch it off or delete its folder. Saves keep working.
+</details>
+
+<details>
+<summary>🚀 Your first mod in 2 minutes</summary>
+
+1. **Apex's Modpack Manager → Mod Tools**.
+2. Type a name, pick **Hello World**, press **Create mod** — its folder opens.
+3. Edit `script.rpy` in any text editor and change the message.
+4. Restart the game and load a save.
+
+```renpy
+init python:
+    def say_hello():
+        if apex_setting("greet", True):
+            apex_notify("Hello from my first mod!")
+    apex_on_load(say_hello)
+```
+</details>
+
+<details>
+<summary>🖼️ Replace a game picture (no code)</summary>
+
+Put a picture in your mod with the **same path and name** as a game picture:
+
+```
+game:     images/CHAR/celica/celica_top_normal-530-530-1.png
+your mod: mods/My Mod/images/CHAR/celica/celica_top_normal-530-530-1.png
+```
+
+- Keep the **same size**. Names end in `-WIDTH-HEIGHT-FRAMES`: `-530-530-6` is 6 frames side by side.
+- Get the originals: **Mod Tools → Export game pictures** (copies them to `mods/_exported` with the right names).
+- Every pose is its own picture (`celica_top_normal` = standing, `celica_squat_top_normal` = squatting).
+</details>
+
+<details>
+<summary>💍 Add an accessory with stats</summary>
+
+```renpy
+init python:
+    apex_add_accessory("lucky_charm", "Lucky Charm", icon="charm.png",
+                       description="A small charm that brings luck.",
+                       stats={"luck": 10, "speed": 5}, regen=0)
+```
+
+Given once per save; worn from **Equip → Appearance**. Stats (0–100 scale): `allure`, `lewdness`, `willpower`, `cooldown`, `arcane`, `speed`, `luck`. `regen` = HP and MP back per battle turn, in %.
+</details>
+
+<details>
+<summary>👗 How to create your own custom clothing</summary>
+
+```renpy
+init python:
+    apex_add_clothing("red_top", "Red Top", area="top", picture="redtop",
+                      icon="icon_redtop.png", description="A bright red top.",
+                      stats={"allure": 5})
+```
+
+The game draws clothing as its own picture on top of Celica, **one picture per pose**:
+
+| area | word in the picture name | standing picture |
+|---|---|---|
+| top, bra | `top` | `images/CHAR/celica/celica_top_<picture>-530-530-1.png` |
+| bottom, panties | `bottom` | `images/CHAR/celica/celica_bottom_<picture>-530-530-1.png` |
+| shoes | `feet` | `images/CHAR/celica/celica_feet_<picture>-530-530-1.png` |
+
+`<picture>` is your `picture=` word (`redtop` above). Other poses: `<pose>_top_redtop-<size>.png`. Poses without your picture show Celica without that piece — nothing breaks.
+**Tip:** export `_top_normal` to get the normal top in every pose with the right names and sizes, recolor them, and rename `normal` to your word.
+</details>
+
+<details>
+<summary>🌅 Add a morning scene</summary>
+
+```renpy
+init python:
+    apex_wakeup_scene("my_scene", chance=0.2)      # 1 in 5 quiet mornings
+
+label my_scene:
+    "Celica stretches as the morning sun warms the room."
+    celica "Today feels like a good day."
+    $ apex_give_gold(10)
+    return
+```
+</details>
+
+<details>
+<summary>⚙️ Settings players can change</summary>
+
+Each line in `mod_info.txt` adds a row to your mod's ⚙️ gear:
+
+```
+setting = key | type | default | min | max | label shown to the player
+setting = chance | 1 in n | 5 | 1 | 50 | Chance each morning
+```
+
+Types: `on/off`, `number`, `percent`, `1 in n`, `seconds`, `decimal`. In your script: `apex_setting("chance", 5)`.
+</details>
+
+<details>
+<summary>🧱 All building blocks (the Apex Mod Kit)</summary>
+
+| write this | what it does |
+|---|---|
+| `apex_setting("key", default)` | the player's choice for one of your settings |
+| `apex_notify("text")` | a small message on screen |
+| `apex_log("text")` | a line in `log.txt` in your mod folder |
+| `apex_add_accessory(...)` / `apex_add_clothing(...)` | new items |
+| `apex_give("id")` / `apex_give_gold(100)` | give an item again / give gold |
+| `apex_on_new_game(f)` / `apex_on_load(f)` / `apex_on_wakeup(f)` | run your function at those moments |
+| `apex_on_label("label", f)` / `apex_every(10, f)` | when the game reaches a label / every 10 seconds |
+| `apex_wakeup_scene("label", chance)` | your scene on some quiet mornings |
+| `apex_export("name part")` | copy matching game pictures to `mods/_exported` |
+
+Your mod's name is found automatically from its folder. Advanced modders can use anything Ren'Py and the game offer — the kit is the safe, simple layer.
+</details>
+
+<details>
+<summary>🩺 When something goes wrong</summary>
+
+- **An error while playing:** the game keeps running, your mod is switched off, and **Your Mods → ⓘ** shows where and what to do. Full report: `ERROR REPORT.txt` in your mod folder.
+- **The game crashed while starting** (usually a typo): restart once — the faulty mod is switched off and explained.
+- **Mod Tools → Check my mods** finds missing files, wrongly sized pictures, clashes and version mismatches.
+
+| you see | it means |
+|---|---|
+| name 'xyz' is not defined | a spelling mistake (capitals matter), or it's used before it exists |
+| Couldn't find file | a picture or sound is missing or named differently |
+| expected ':' / invalid syntax | a line that starts a block needs `:` at the end, or a quote/bracket isn't closed |
+| unexpected indent | lines in one block must line up — use 4 spaces, not tabs |
+</details>
+</details>
+
+---
+
+<div align="center">
+
+## 🎮 THE MODS
+### (so far — bound to be a lot more)
+
+<ins>**Rule of thumb: don't touch mod settings if you don't know what they do!**</ins>
 
 </div>
 
@@ -70,7 +309,6 @@ Changed something? It asks *"Restart now to apply changes?"* when you leave the 
 <summary><b>👻 Nel's Auto Battler Sex Autonomy Mod (r1.6)</b></summary>
 <div align="center">
 
-### What it does
 When Nel possesses Celica and auto-battles, she sometimes stops fighting and **taunts the monsters**, teasing them to come and use Celica's body until she climaxes. Monsters grab, grope and tear her clothes, Nel comments on it in her own voice, then she shoos them off and goes back to fighting.
 
 **Features**<br>
@@ -79,187 +317,124 @@ When Nel possesses Celica and auto-battles, she sometimes stops fighting and **t
 Nel only talks some of the time while taunting, so it doesn't turn into spam<br>
 Celica takes no damage while Nel is taunting or climaxing<br>
 Nel only gains 0.5 body influence per climax instead of the game's 10<br>
-**Sub-modules (toggle separately)**<br>
-**Half XP:** Celica only gets 50% of the battle XP while Nel is in control (adjustable)<br>
-**Never One-Shots:** Nel's first hit leaves a monster on 1 HP, so it actually gets a turn<br>
+**Sub-mods (switch separately):** **Half XP** — Celica only gets 50% of the battle XP while Nel is in control (adjustable) · **Never One-Shots** — Nel's first hit leaves a monster on 1 HP<br>
 ⚙️ **Settings:** taunt chance, cooldown, how often she talks, taunt time limit, lust needed for climaxes 1 to 5+, XP share, body influence.
 
-<img src="docs/images/nel_settings.png" alt="Nel's settings" width="800">
+<img src="docs/images/mm_settings.png" alt="Nel's settings" width="760">
 
 </div>
-<details>
-<summary><b>How it works</b></summary>
-
-Hooks `enemy_decides` (picks Nel's custom "taunt" turn and forces the monsters' grab/molest moves), `enemy_mod_hp` (damage immunity + the 1 HP rule), `attribute_mod` (climax-ladder threshold), `body_influencelvl_mod` and `print_reward_message` (XP share). It uses the game's own animations, clothing-tear effects and climax status, so nothing is faked. Per-battle state is stored in the game's battle variables, and settings are re-applied whenever you load a save.
-</details>
 </details>
 
 <details>
 <summary><b>⚡ Game Engine Stutter Fix (r1.1)</b></summary>
 <div align="center">
 
-### What it does
-Removes the short **~0.2–0.4 s freeze** in battle whenever a character changes pose. Measured: 184 ms → 0 ms per pose change. The whole game will feel way smoother and snappier.
+Removes the short **~0.2–0.4 s freeze** in battle whenever a character changes pose. Measured: 184 ms → 0 ms per pose change. The whole game feels way smoother and snappier.
 
 </div>
-<details>
-<summary><b>How it works</b></summary>
-
-The game searches its whole file list every time it builds a pose. This module caches those searches (`list_files_match / _regex / _containing`), so each search only runs once. Results are identical; they just come back instantly.
-</details>
 </details>
 
 <details>
 <summary><b>👗 Appearance Menu Insta Unlock (r1.1)</b></summary>
 <div align="center">
 
-### What it does
 The **Equip > Appearance** tab is open from the very start, on new games and on old saves. You don't need to unlock the tailor first.
 
-<img src="docs/images/appearance_unlock.png" alt="Appearance tab unlocked on a new game" width="800">
+<img src="docs/images/appearance_unlock.png" alt="Appearance tab unlocked on a new game" width="760">
 
 </div>
-<details>
-<summary><b>How it works</b></summary>
-
-Calls the game's own unlock function (the one the tailor uses) as soon as a new game has finished setting up, and again after every load.
-</details>
 </details>
 
 <details>
 <summary><b>🌅 Celica's Autonomy Dildo Events (r1.3)</b></summary>
 <div align="center">
 
-### What it does
 On quiet mornings there's a **1 in 9 chance** that Celica uses her dildo by herself when she wakes up. If Nel is in the room, she joins in. It only happens when she owns the dildo, has 30+ Lewdness, is in her own body and nothing else is planned that morning.
 
 ⚙️ **Settings:** chance per morning (1 in 1 to 1 in 30), Lewdness needed (30 by default).
 
-<img src="docs/images/dildo_event.png" alt="Celica's morning dildo event" width="800">
+<img src="docs/images/dildo_event.png" alt="Celica's morning dildo event" width="760">
 
 </div>
-<details>
-<summary><b>How it works</b></summary>
-
-Hooks the wake-up routine. When the game hasn't picked a morning scene, the mod puts the game's own dildo scene in that slot, so it plays exactly like the vanilla one.
-</details>
 </details>
 
 <details>
 <summary><b>❌ Clothing Remover & Combat Helpers (r1.4)</b></summary>
 <div align="center">
 
-### What it does
 **Red-X Shoes / Top / Pants:** equippable "nothing" items that fully remove that clothing, including its protective combat states, so she stays exposed. Stats: Allure/Lewdness +25; Willpower, Cooldown, Arcane and Speed −25.<br>
 **Combat Helpers (Green / Orange / Red):** accessories with 10% / 50% / 100% of Speedster's Blessing stats, for when the fights get too hard.<br>
 ⚙️ **Settings:** red-X stat strength, the strength of each helper.
 
-<img src="docs/images/clothing_remover.png" alt="Clothing Remover and Combat Helper items" width="800">
+<img src="docs/images/clothing_remover.png" alt="Clothing Remover and Combat Helper items" width="760">
 
 </div>
-<details>
-<summary><b>How it works</b></summary>
-
-Adds real game items (they show up in the Appearance tab) and hooks the clothing/equip functions so the game doesn't put clothes back on her. If you change a strength, the item's stats are updated on load, including on items she's already wearing.
-</details>
 </details>
 
 <details>
 <summary><b>🔁 H-Scene Idle Loop (r1.2)</b></summary>
 <div align="center">
 
-### What it does
-On your turn, grope and H-scene animations <ins>**keep looping with their sounds and dynamically rotate between the animations of each monster currently groping her**</ins> instead of freezing on a still picture. With several monsters on her, it switches between their animations every few seconds. It's purely visual and doesn't affect gameplay.
+On your turn, grope and H-scene animations <ins>**keep looping with their sounds and rotate between the animations of each monster currently groping her**</ins> instead of freezing on a still picture. It's purely visual and doesn't affect gameplay.
 
 ⚙️ **Settings:** sounds on/off, sound volume, switching on/off, switch timing.
 
-<img src="docs/images/hscene_idle_loop.gif" alt="H-Scene Idle Loop with two slimes" width="800">
+<img src="docs/images/hscene_idle_loop.gif" alt="H-Scene Idle Loop with two slimes" width="760">
 
 </div>
-<details>
-<summary><b>How it works</b></summary>
-
-Watches for your idle turn while Celica is grabbed, replays the last molest animations from the monsters on her, and plays their frame-synced sounds quietly, one at a time. It stops the moment you act or a monster takes its turn.
-</details>
 </details>
 
 <details>
 <summary><b>🖼️ HD x8 Upscale Project (r0.4) — VERY EARLY WIP</b></summary>
 <div align="center">
 
-### What it does
-Upscaled HD sprites, used automatically when your window is bigger than 1066×600 (1080p, 1440p, 4K). Done so far: Celica, the slime fight and Nel's possession. More characters are coming.
+AI-upscaled HD pictures, used automatically when your window is bigger than 1066×600 (1080p, 1440p, 4K). Characters and backgrounds are done a block at a time — see **HD Project progress** above. Needs the **Apex_HD_Pack** download.
 
 ⚙️ **Settings:** picture memory.
 
-<img src="docs/images/hd_compare.png" alt="Original vs HD sprite" width="500">
+<img src="docs/images/hd_compare.png" alt="Original vs HD sprite" width="480">
 
 </div>
-<details>
-<summary><b>How it works</b></summary>
-
-Every frame is upscaled x8 with a fixed AI pipeline (ESRGAN-style upscale, colour matching, tile-ControlNet detailing; faces kept close to the original), then shipped as `@2` files that Ren'Py picks up natively. The game stacks body, clothes and face layers on the CPU, so the module re-stacks those layers on the GPU whenever HD files exist. It loads the full sprite sheets without stutter.
-</details>
 </details>
 
 ---
 
 <div align="center">
 
-## SAFE WITH GAME UPDATES
+## 📝 CHANGELOG & FAQ
 
-Every module checks, at start-up, the exact game code it touches. If an update changed it, **only that module switches itself off** and the game runs normally.<br>
-Game newer than the modpack? Every module switches off, the main menu tells you, and you can choose **"Test modpack?" → Yes** to try it anyway.<br>
-Green / orange / red version indicator and explanation in the manager.<br>
-Every start writes a `tom_mod_report.txt`. Post it in an issue if something breaks.
-
-<img src="docs/images/version_check.png" alt="Version check in the manager" width="900">
-
-</div>
-
----
-
-<div align="center">
-
-## DOWNLOAD
-**[Apex's Modpack — latest release](../../releases/latest)** (~181 MB, mostly HD sprites)<br>
-Game Ver: **Town of Magic 0.77.002**
-
-## INSTALL
-1. Open your Town of Magic folder (the one with `TownOfMagic.exe`).<br>
-2. Drag the `game` folder from the zip into it → **merge / replace**.<br>
-3. Start the game. **Apex's Modpack Manager** sits at the top of the main menu.
-
-## UNINSTALL
-Delete `game\Apex_Modpack.rpa`. Your saves keep working, both with and without the pack.
-
-## CHANGELOG
 </div>
 
 <details>
 <summary><b>Changelog</b></summary>
 
+**v1.2.0**
+- Brand-new Mod Manager: sidebar with Overview, Apex's Mods, Your Mods, HD Project, Mod Tools, About & Support
+- **Your Mods:** a `mods` folder for everyone's own mods — on/off, settings, details, plain-words error reports, crash recovery
+- **Apex Mod Kit + 6 templates + Modding Guide:** accessories, custom clothing, picture swaps, morning scenes, new-game bonuses
+- Mod Tools: create a mod from a template, check my mods, export game pictures
+- HD Project page and progress tracking towards the whole game
+- Split downloads: the modpack (tiny) and the HD pack
+- HD backgrounds (first block) and many more HD characters
+
 **v1.1.0**
-- Gear settings for every module that has something to tweak
-- Nel sub-modules: Half XP / Never One-Shots
+- Gear settings for every mod that has something to tweak
+- Nel sub-mods: Half XP / Never One-Shots
 - Game version check, "Test modpack" master switch
-- Scrolling module lists, many small fixes
+- Scrolling mod lists, many small fixes
 
 **v1.0.0**
-- First release: 7 modules + Apex's Modpack Manager
+- First release: 7 mods + Apex's Modpack Manager
 </details>
-
-<div align="center">
-
-## FAQ
-</div>
 
 <details>
 <summary><b>FAQ</b></summary>
 
 **Does it work with my saves?** Yes, old saves and new games. Removing the pack doesn't break saves either.<br>
-**Can I use only some modules?** Yes. Switch the rest off in the manager.<br>
-**Does it work on other versions?** It's made for 0.77.002. On newer versions it switches itself off until you choose to test it.<br>
+**Can I use only some mods?** Yes — switch the rest off in the manager.<br>
+**Do I need the HD pack?** No. Without it the game looks as usual; the HD x8 mod just has nothing to show.<br>
+**Does it work on other versions?** It's made for 0.77.002. On newer versions Apex's mods switch themselves off until you choose to test them.<br>
+**Can I share my own mods?** Yes — zip your mod's folder; others drop it into their `mods` folder.<br>
 **Android / Mac?** Only tested on Windows.
 </details>
 
@@ -272,8 +447,8 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <a href="https://buymeacoffee.com/apex_modding"><img src="docs/images/bmc_button.png" alt="Buy me a coffee" width="260"></a>
 
-Bug reports and suggestions are welcome in [Issues](../../issues). For problems, include your `tom_mod_report.txt`.
+Bug reports and suggestions are welcome in [Issues](../../issues). For problems, include your `game/tom_mod_report.txt`.
 
-<sub>For modders: module sources are in `Mods/`, `Tools/build_modpack.py` builds the one-file pack, and `Tools/upscale/` holds the HD pipeline. The workspace `README.txt` has the details.<br>Fan-made mod; not affiliated with Deimus. Town of Magic and its assets belong to their creator.</sub>
+<sub>For modders: the pack's own sources are in `Mods/`, `Tools/build_modpack.py` builds the release, `Tools/art` + `Tools/upscale` hold the HD pipeline.<br>Fan-made mod; not affiliated with Deimus. Town of Magic and its assets belong to their creator.</sub>
 
 </div>

@@ -1,0 +1,11 @@
+# mod_info.txt - tells the Mod Manager about your mod. Lines starting with # are notes.
+name = Morning Stretch
+author = Your Name
+version = 1.0
+description = A short scene that sometimes plays when Celica wakes up.
+made_for_game = 0.77.002
+
+# Settings the player can change with the gear in the Mod Manager:
+#   setting = key | type | default | min | max | label
+#   types: on/off, number, percent, 1 in n, seconds, decimal
+setting = chance | 1 in n | 5 | 1 | 50 | Chance each quiet morning

@@ -12,7 +12,7 @@ What it does
     always skipped by hd_batch.py, so nothing is ever rendered twice)
   * writes the full ledger: Upscale/hd_ledger.tsv  (every picture ever seen and its status)
 """
-import os, re, glob, shutil, time, collections
+import os, re, sys, glob, shutil, time, collections
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WS = os.path.normpath(os.path.join(HERE, "..", ".."))
@@ -104,13 +104,38 @@ def main():
         for r in sorted(rows):
             o.write("\t".join(r) + "\n")
 
+    # the to-do list = everything queued in any set that has no HD file yet (collected over every play session
+    # since the last render - a picture is never listed twice)
     count = collections.Counter(s.split(" (")[0] for _, _, s in rows)
-    print("images seen so far: %d   rendered %d  queued %d  skipped (male) %d" % (
-        len(rows), count["rendered"], count["queued"], count["skipped"]))
-    print("NEW this run: %d" % len(new))
-    by = collections.Counter(r.split("/")[2] for r in new)
-    for folder, n in by.most_common():
-        print("   %-24s %d" % (folder, n))
+    todo = [(rel, folder) for rel, folder, s in rows if s.startswith("queued")]
+    print("TO RENDER since the last ComfyUI run: %d pictures" % len(todo))
+    for folder, n in collections.Counter(f for _, f in todo).most_common():
+        added = sum(1 for r in new if r.split("/")[2] == folder)
+        print("   %-24s %4d%s" % (folder, n, ("   (%d added by this check)" % added) if added else ""))
+    print("added by this check: %d    already rendered: %d    skipped (male): %d    pictures seen in total: %d" % (
+        len(new), count["rendered"], count["skipped"], len(rows)))
+    # what the run will really do (art catalog: identical sprites are rendered once, glow/shadow/empty need no AI)
+    try:
+        sys.path.insert(0, os.path.join(WS, "Tools", "art"))
+        import artdb
+        keys, copies, no_ai, unknown = set(), 0, 0, 0
+        done = {artdb.twin_key(r) for r, _, s in rows if s == "rendered"}
+        for rel, _ in todo:
+            i = artdb.info(rel)
+            if i is None:
+                unknown += 1
+                continue
+            if i["recipe"] in ("none", "shadow"):
+                no_ai += 1
+            k = artdb.twin_key(rel)
+            if k in keys or k in done:
+                copies += 1
+            keys.add(k)
+        print("the run: %d to render + %d copied from an identical sprite; %d need no AI (glow/shadow/empty)%s"
+              % (len(todo) - copies, copies, no_ai, ("  [%d not in the art catalog - run Tools/art/catalog.py]" % unknown)
+                 if unknown else ""))
+    except Exception as e:
+        print("(art catalog not available: %s)" % e)
     print("ledger:", LEDGER)
 
 

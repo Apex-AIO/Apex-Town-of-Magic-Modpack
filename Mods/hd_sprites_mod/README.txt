@@ -6,7 +6,7 @@ What it does
   This test build covers Celica standing in her starting outfit: Bra, Panties, Tank Top, Mini Skirt,
   Ankle Boots, plus her body, face and hair.
 
-  The HD pictures were made with 4x-ReboutBlend (x8), colour-matched back to the original colours,
+  The HD pictures were made with 4x-ReboutBlend (x8), color-matched back to the original colors,
   lightly detailed with SDXL (denoise 0.28), then saved at 2x (@2) and 4x (@4).
   The game picks the right size for your window by itself:
     window up to 2x the base size (1920x1080 and smaller)  ->  @2 files

@@ -1,0 +1,12 @@
+# mod_info.txt - tells the Mod Manager about your mod. Lines starting with # are notes.
+name = Lucky Charm
+author = Your Name
+version = 1.0
+description = Adds a Lucky Charm accessory to Celica's inventory. Wear it for extra luck.
+made_for_game = 0.77.002
+
+# Settings the player can change with the gear in the Mod Manager:
+#   setting = key | type | default | min | max | label
+#   types: on/off, number, percent, 1 in n, seconds, decimal
+setting = luck | number | 10 | 0 | 100 | Luck bonus
+setting = speed | number | 0 | 0 | 100 | Speed bonus

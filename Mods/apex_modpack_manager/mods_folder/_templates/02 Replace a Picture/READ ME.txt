@@ -1,0 +1,19 @@
+REPLACE A PICTURE (no code)
+---------------------------
+What it does: Celica's normal tank top is red when she stands.
+
+How it works: any picture in your mod's folder that has the SAME path and name as a game picture is used
+instead of the game's picture.
+  game picture:  images/CHAR/celica/celica_top_normal-530-530-1.png
+  your picture:  mods/<your mod>/images/CHAR/celica/celica_top_normal-530-530-1.png
+
+Rules:
+  * Same name, same folders, same picture size (here 530 x 530). A different size looks shifted.
+  * Names end in  -WIDTH-HEIGHT-FRAMES.png : "-530-530-6" is an animation with 6 frames side by side.
+  * Every pose is its own picture: celica_top_normal-... is standing, celica_squat_top_normal-... is squatting.
+
+Get the game's pictures to edit:
+  Mod Manager -> Mod Tools -> Export game pictures, type part of a name (e.g. celica_top_normal), Export.
+  They land in mods/_exported with the right folders. Edit a copy, put it in your mod.
+
+Check your mod: Mod Tools -> Check my mods (it warns about wrong sizes).

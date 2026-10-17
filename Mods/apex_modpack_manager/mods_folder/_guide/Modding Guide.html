@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modding Guide - Apex's Modpack Manager</title>
+<style>
+:root{--bg:#0d0a12;--panel:#17121f;--panel2:#1f1829;--line:#2e2640;--text:#ece8f3;--muted:#a49bb4;--gold:#ffc94d;--purple:#9b6bff;--green:#3ddc84;--red:#ff5c6c;--cyan:#38d6f2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 "Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}
+.wrap{max-width:920px;margin:0 auto;padding:40px 22px 80px}
+header{padding:34px 30px;border:1px solid var(--line);border-radius:18px;background:radial-gradient(1200px 300px at 10% -40%,#3b2a63 0,transparent 60%),var(--panel)}
+header .kicker{color:var(--gold);font-weight:700;letter-spacing:.14em;font-size:12px}
+h1{font-size:34px;margin:6px 0 8px}
+h2{font-size:22px;margin:40px 0 10px;padding-top:6px}
+h3{font-size:17px;margin:22px 0 6px;color:var(--gold)}
+p{margin:8px 0}
+a{color:var(--cyan)}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+nav a{padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--text);text-decoration:none;font-size:13px;background:var(--panel2)}
+nav a:hover{border-color:var(--purple)}
+.card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:18px 20px;margin:12px 0}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 4px 40px;margin:6px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:3px;width:26px;height:26px;border-radius:50%;background:var(--purple);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+code{background:#251d31;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font:13px Consolas,Menlo,monospace;color:#f3e7ff}
+pre{background:#120e18;border:1px solid var(--line);border-radius:12px;padding:14px 16px;overflow:auto;font:13px/1.55 Consolas,Menlo,monospace;color:#e9e2f5}
+pre .c{color:#7f7596}
+.tip{border-left:3px solid var(--green);background:#13221a;padding:10px 14px;border-radius:0 10px 10px 0;margin:12px 0}
+.warn{border-left:3px solid var(--gold);background:#251f10;padding:10px 14px;border-radius:0 10px 10px 0;margin:12px 0}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.tree{font:13px/1.6 Consolas,Menlo,monospace;color:#e9e2f5}
+footer{margin-top:60px;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body><div class="wrap">
+
+<header>
+  <div class="kicker">APEX'S MODPACK MANAGER</div>
+  <h1>Modding Guide</h1>
+  <p>Make your own mods for Town of Magic - no programming experience needed for the simple ones. Your mods go in the
+  <code>mods</code> folder; the Mod Manager finds them, switches them on or off, and explains any problem in plain words.</p>
+  <nav>
+    <a href="#install">Install a mod</a><a href="#first">Your first mod</a><a href="#layout">Folder layout</a>
+    <a href="#info">mod_info.txt</a><a href="#settings">Settings</a><a href="#pictures">Replace pictures</a>
+    <a href="#items">Accessories</a><a href="#clothing">Custom clothing</a><a href="#scenes">Morning scenes</a>
+    <a href="#kit">All building blocks</a><a href="#problems">When something goes wrong</a>
+  </nav>
+</header>
+
+<h2 id="install">Install someone's mod</h2>
+<ol class="steps">
+  <li>Open your Town of Magic folder (the one with <code>TownOfMagic.exe</code>). Next to the <code>game</code> folder is a <code>mods</code> folder.</li>
+  <li>Put the mod's folder inside <code>mods</code> (one folder per mod).</li>
+  <li>Start the game. The mod is listed under <b>Apex's Modpack Manager &rarr; Your Mods</b>, switched on.</li>
+</ol>
+<p>To remove a mod, switch it off in the manager or delete its folder. Your saves keep working.</p>
+
+<h2 id="first">Your first mod in 2 minutes</h2>
+<ol class="steps">
+  <li>Main menu &rarr; <b>Apex's Modpack Manager &rarr; Mod Tools</b>.</li>
+  <li>Type a name, pick <b>Hello World</b>, press <b>Create mod</b>. Its folder opens.</li>
+  <li>Open <code>script.rpy</code> in any text editor (Notepad works; <a href="https://code.visualstudio.com">VS Code</a> is nicer). Change the message.</li>
+  <li>Restart the game and load a save - your message appears.</li>
+</ol>
+<div class="tip">Every template has a <code>READ ME.txt</code> that explains it line by line.</div>
+
+<h2 id="layout">What a mod folder looks like</h2>
+<div class="card tree">mods/
+&nbsp;&nbsp;My Mod/
+&nbsp;&nbsp;&nbsp;&nbsp;mod_info.txt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#7f7596">name, author, version, description, settings</span>
+&nbsp;&nbsp;&nbsp;&nbsp;script.rpy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#7f7596">your code (any name ending in .rpy, as many as you like)</span>
+&nbsp;&nbsp;&nbsp;&nbsp;icon.png&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#7f7596">your own pictures</span>
+&nbsp;&nbsp;&nbsp;&nbsp;images/CHAR/...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#7f7596">pictures that REPLACE the game's (same path and name)</span>
+&nbsp;&nbsp;_templates/&nbsp;&nbsp;_guide/&nbsp;&nbsp;_manager/&nbsp;&nbsp;_exported/&nbsp;&nbsp;<span style="color:#7f7596">folders starting with _ are not mods</span></div>
+
+<h2 id="info">mod_info.txt</h2>
+<pre>name = My Mod
+author = Your Name
+version = 1.0
+description = One sentence about what it does.
+made_for_game = 0.77.002          <span class="c"># the Mod Manager warns players with another game version</span>
+setting = chance | 1 in n | 5 | 1 | 50 | Chance each morning      <span class="c"># optional, see Settings</span></pre>
+
+<h2 id="settings">Settings the player can change</h2>
+<p>Each <code>setting =</code> line adds a row to your mod's gear in the Mod Manager:</p>
+<pre>setting = key | type | default | min | max | label shown to the player</pre>
+<table>
+<tr><th>type</th><th>shown as</th><th>example</th></tr>
+<tr><td><code>on/off</code></td><td>a switch</td><td><code>setting = sound | on/off | on | | | Play the sound</code></td></tr>
+<tr><td><code>number</code></td><td>- 10 +</td><td><code>setting = luck | number | 10 | 0 | 100 | Luck bonus</code></td></tr>
+<tr><td><code>percent</code></td><td>50% (steps of 5)</td><td><code>setting = volume | percent | 50 | 0 | 100 | Volume</code></td></tr>
+<tr><td><code>1 in n</code></td><td>1 in 5</td><td><code>setting = chance | 1 in n | 5 | 1 | 50 | Chance</code></td></tr>
+<tr><td><code>seconds</code></td><td>8 s</td><td><code>setting = delay | seconds | 8 | 1 | 60 | Delay</code></td></tr>
+<tr><td><code>decimal</code></td><td>0.5 (steps of 0.1)</td><td><code>setting = speed | decimal | 1.0 | 0.1 | 3 | Speed</code></td></tr>
+</table>
+<p>In your script: <code>apex_setting("chance", 5)</code> gives the player's choice (or the default). Changes apply after a restart.</p>
+
+<h2 id="pictures">Replace a game picture (no code)</h2>
+<p>Put a picture in your mod with the <b>same path and name</b> as a game picture - the game uses yours instead.</p>
+<pre>game:     images/CHAR/celica/celica_top_normal-530-530-1.png
+your mod: mods/My Mod/images/CHAR/celica/celica_top_normal-530-530-1.png</pre>
+<div class="warn"><b>Keep the same size.</b> Names end in <code>-WIDTH-HEIGHT-FRAMES</code>: <code>-530-530-6</code> is an animation with 6 frames side by side (3180 x 530 pixels). <b>Mod Tools &rarr; Check my mods</b> warns about wrong sizes.</div>
+<p><b>Get the originals:</b> Mod Tools &rarr; <b>Export game pictures</b>, type part of a name (e.g. <code>celica_top_normal</code>). They are copied to <code>mods/_exported</code> with the right folders and names.</p>
+<p>Every pose is its own picture: <code>celica_top_normal</code> = standing, <code>celica_squat_top_normal</code> = squatting, and so on.</p>
+
+<h2 id="items">Add an accessory with stats</h2>
+<pre>init python:
+    apex_add_accessory("lucky_charm", "Lucky Charm", icon="charm.png",
+                       description="A small charm that brings luck.",
+                       stats={"luck": 10, "speed": 5}, regen=0)</pre>
+<p>It's given to the player once per save; Celica wears it from <b>Equip &rarr; Appearance</b>. Stats use the 0-100 scale the game shows:
+<code>allure</code>, <code>lewdness</code>, <code>willpower</code>, <code>cooldown</code>, <code>arcane</code>, <code>speed</code>, <code>luck</code> (minus numbers lower them).
+<code>regen</code> = HP and MP back per battle turn, in %.</p>
+
+<h2 id="clothing">Make custom clothing</h2>
+<pre>init python:
+    apex_add_clothing("red_top", "Red Top", area="top", picture="redtop",
+                      icon="icon_redtop.png", description="A bright red top.",
+                      stats={"allure": 5})</pre>
+<p>The game draws each piece of clothing as its own picture on top of Celica, <b>one picture per pose</b>:</p>
+<table>
+<tr><th>area</th><th>word in the picture name</th><th>standing picture</th></tr>
+<tr><td>top, bra</td><td><code>top</code></td><td><code>images/CHAR/celica/celica_top_&lt;picture&gt;-530-530-1.png</code></td></tr>
+<tr><td>bottom, panties</td><td><code>bottom</code></td><td><code>images/CHAR/celica/celica_bottom_&lt;picture&gt;-530-530-1.png</code></td></tr>
+<tr><td>shoes</td><td><code>feet</code></td><td><code>images/CHAR/celica/celica_feet_&lt;picture&gt;-530-530-1.png</code></td></tr>
+</table>
+<p><code>&lt;picture&gt;</code> is your <code>picture=</code> word (<code>redtop</code> above). Other poses: <code>&lt;pose&gt;_top_redtop-&lt;size&gt;.png</code>, e.g. <code>celica_squat_top_redtop-530-530-1.png</code>. Poses without your picture show Celica without that piece - nothing breaks.</p>
+<div class="tip"><b>Fastest way to cover every pose:</b> export <code>_top_normal</code> (the normal top in every pose, right names and sizes), recolor or redraw them, and rename <code>normal</code> to your word.</div>
+
+<h2 id="scenes">Add a morning scene</h2>
+<pre>init python:
+    apex_wakeup_scene("my_scene", chance=0.2)      <span class="c"># 1 in 5 quiet mornings</span>
+
+label my_scene:
+    "Celica stretches as the morning sun warms the room."
+    celica "Today feels like a good day."
+    $ apex_give_gold(10)
+    return</pre>
+<p>A <b>label</b> is a scene. Lines in quotes are the narrator; <code>celica "..."</code> is Celica speaking; <code>$</code> runs one line of Python; <code>return</code> ends the scene. Indent with 4 spaces.</p>
+
+<h2 id="kit">All building blocks (the Apex Mod Kit)</h2>
+<table>
+<tr><th>write this</th><th>what it does</th></tr>
+<tr><td><code>apex_setting("key", default)</code></td><td>the player's choice for one of your settings</td></tr>
+<tr><td><code>apex_notify("text")</code></td><td>a small message on screen</td></tr>
+<tr><td><code>apex_log("text")</code></td><td>a line in <code>log.txt</code> in your mod folder - see what your mod did</td></tr>
+<tr><td><code>apex_add_accessory(...)</code></td><td>an accessory with stats</td></tr>
+<tr><td><code>apex_add_clothing(...)</code></td><td>a new piece of clothing</td></tr>
+<tr><td><code>apex_give("id")</code></td><td>give one of your items again</td></tr>
+<tr><td><code>apex_give_gold(100)</code></td><td>give gold</td></tr>
+<tr><td><code>apex_on_new_game(func)</code></td><td>run your function once when a new game starts</td></tr>
+<tr><td><code>apex_on_load(func)</code></td><td>run it every time a save is loaded</td></tr>
+<tr><td><code>apex_on_wakeup(func)</code></td><td>run it every morning</td></tr>
+<tr><td><code>apex_on_label("label", func)</code></td><td>run it when the game reaches one of its labels</td></tr>
+<tr><td><code>apex_every(10, func)</code></td><td>run it every 10 seconds while playing</td></tr>
+<tr><td><code>apex_wakeup_scene("label", chance)</code></td><td>play your scene on some quiet mornings</td></tr>
+<tr><td><code>apex_export("name part")</code></td><td>copy matching game pictures to <code>mods/_exported</code></td></tr>
+<tr><td><code>apex_game_version()</code></td><td>the game's version, e.g. "0.77.002"</td></tr>
+</table>
+<p>Your mod's name is found automatically from its folder - you never type it. Advanced modders can use anything Ren'Py and the game offer; the kit is just the safe, simple layer.</p>
+
+<h2 id="problems">When something goes wrong</h2>
+<div class="card">
+<p><b>An error while playing:</b> the game keeps running, your mod is switched off, and you get a message. <b>Your Mods &rarr; (i)</b> shows where it happened and what to do, in plain words. The full report is <code>ERROR REPORT.txt</code> in your mod folder.</p>
+<p><b>The game crashed while starting</b> (usually a typo in a script): restart once - the Mod Manager finds the mod that caused it, switches it off and explains the error.</p>
+<p><b>Check my mods</b> (Mod Tools) looks for missing files, wrongly sized pictures, clashes between mods and version mismatches.</p>
+<p>After fixing, switch the mod back on and restart.</p>
+</div>
+<h3>Common errors in plain words</h3>
+<table>
+<tr><th>you see</th><th>it means</th></tr>
+<tr><td>name 'xyz' is not defined</td><td>A spelling mistake (capitals matter), or it's used before it exists.</td></tr>
+<tr><td>Couldn't find file</td><td>A picture or sound is missing or named differently.</td></tr>
+<tr><td>expected ':' / invalid syntax</td><td>A line that starts a block needs <code>:</code> at the end, or a quote/bracket isn't closed.</td></tr>
+<tr><td>unexpected indent</td><td>Lines in one block must line up - use 4 spaces, not tabs.</td></tr>
+</table>
+
+<footer>Apex's Modpack Manager &middot; please support the game's developer, Deimus, first &middot;
+<a href="https://github.com/Apex-AIO/Apex-Town-of-Magic-Modpack">GitHub</a></footer>
+</div></body></html>

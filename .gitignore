@@ -11,3 +11,5 @@ __pycache__/
 *.rpyc
 *.log
 /Tools/scripts/build_last.log
+/Catalog/
+/Claudes Cheat Sheet And Project Blueprints.md

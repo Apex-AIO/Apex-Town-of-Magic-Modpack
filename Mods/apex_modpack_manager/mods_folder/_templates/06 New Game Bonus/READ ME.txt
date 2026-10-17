@@ -1,0 +1,9 @@
+NEW GAME BONUS
+--------------
+What it does: gives extra gold once, when a new game starts. The amount is a setting (gear in the Mod Manager).
+
+Other things you can do the same way, inside the function:
+  apex_give_gold(100)             gold
+  apex_give("my_item_id")         one of your own items again
+  apex_notify("text")             a small message on screen
+  apex_log("text")                a line in log.txt (to see what your mod did)

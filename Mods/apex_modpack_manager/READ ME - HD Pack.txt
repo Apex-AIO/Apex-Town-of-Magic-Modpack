@@ -1,0 +1,12 @@
+APEX'S HD PACK for Town of Magic (made for game version 0.77.002)
+==================================================================
+
+The AI-upscaled HD pictures for the "HD x8 Upscale Project" mod (very early work in progress).
+You need Apex's Modpack installed too.
+
+INSTALL
+  Drag the "game" folder from this zip into your Town of Magic folder (merge / replace).
+  In Apex's Modpack Manager, HD x8 must be on. HD pictures show when the window is bigger than 1066x600.
+
+UNINSTALL
+  Delete Town of Magic\game\Apex_HD.rpa.

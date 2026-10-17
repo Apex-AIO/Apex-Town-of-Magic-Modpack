@@ -1,0 +1,6 @@
+# mod_info.txt - tells the Mod Manager about your mod. Lines starting with # are notes.
+name = Red Tank Top (picture swap)
+author = Your Name
+version = 1.0
+description = Replaces the picture of Celica's tank top when she stands. No code needed.
+made_for_game = 0.77.002

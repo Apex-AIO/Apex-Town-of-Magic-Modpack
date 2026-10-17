@@ -1,0 +1,9 @@
+MORNING SCENE
+-------------
+What it does: on quiet mornings, 1 in 5 by default, plays a short scene and gives 10 gold.
+
+Write your own: change the lines under "label morning_stretch_scene:". Every line is indented by 4 spaces.
+  "text"            the narrator says it
+  celica "text"     Celica says it
+  $ apex_give_gold(10)   a line of Python (gives gold)
+  return            the scene ends (always keep it last)

@@ -1,0 +1,15 @@
+THE MODS FOLDER - for YOUR mods (and mods you download from others)
+=====================================================================
+
+* One folder per mod, right here. Restart the game and it shows up in
+  Apex's Modpack Manager -> Your Mods (main menu), switched on.
+* Make your own: Apex's Modpack Manager -> Mod Tools -> Create a new mod.
+* Full help: _guide/Modding Guide.html (open it in your browser).
+
+Folders starting with _ are not mods:
+  _templates   examples to start from
+  _guide       the Modding Guide
+  _manager     the Mod Manager's own notes (on/off, settings, logs) - don't edit
+  _exported    game pictures you exported to edit (Mod Tools -> Export game pictures)
+
+Apex's own mods are not in here: they're in game\Apex_Modpack.rpa.
