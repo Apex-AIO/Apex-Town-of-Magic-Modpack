@@ -14,12 +14,18 @@
 
 ## ⬇️ [DOWNLOAD THE LATEST RELEASE](../../releases/latest)
 
-| Download | What's inside | Size |
-|---|---|---|
-| **Apex_Modpack** | All 9 mods + the Mod Manager + the mods folder (templates and the modding guide) | tiny |
-| **Apex_HD_Pack** (part 1, part 2, ...) | The HD pictures for the HD x8 project (add-on, needs the modpack). Install every part. | big |
+| Download | What's inside | Last updated | Version | Size |
+|---|---|:-:|:-:|--:|
+| **Apex_Modpack** | All 9 mods + the Mod Manager + the mods folder (templates and the modding guide) | 2026-10-18 | v1.3.0 | 0.3 MB |
+| **Apex_HD_Pack** part 1 of 2 | HD pictures for the HD x8 project (add-on, needs the modpack) | 2026-10-18 | v1.3.0 | 1.8 GB |
+| **Apex_HD_Pack** part 2 of 2 | HD pictures, continued. Install both parts. | 2026-10-18 | v1.3.0 | 1.0 GB |
 
 <sub>Install steps are on the release page. Made for Town of Magic 0.77.002.</sub>
+
+### ☕ Enjoying it?
+Please support the game's developer, Deimus, first. If you'd still like to support the modpack's future development:
+
+<a href="https://buymeacoffee.com/apex_modding"><img src="docs/images/bmc_button.png" alt="Buy me a coffee" width="260"></a>
 
 </div>
 
@@ -35,60 +41,96 @@
 <!-- written by Tools/art/progress.py - run it (or build a release) to update -->
 <div align="center">
 
+#### ALL GAME ASSETS TO SCALE
+
 <img src="docs/images/progress.svg" alt="HD project progress" width="820">
 
-<sub>An estimate of every picture the game has (the end goal). Updated with every release - v1.3.0, 18 Oct 2026.</sub>
+<sub>An estimate of every game asset (the end goal). Updated with every release.</sub>
+
+#### CHARACTERS
+<sub>every pose, face, outfit and animation frame of the female characters and creatures</sub>
+
+<img src="docs/images/progress_characters.svg" alt="Characters" width="820">
+
+#### BACKGROUNDS
+<sub>locations, window views, lights, animated backgrounds and event pictures</sub>
+
+<img src="docs/images/progress_backgrounds.svg" alt="Backgrounds" width="820">
+
+#### INTERFACE & ICONS
+<sub>menus, item icons, map, effects — planned later</sub>
+
+<img src="docs/images/progress_interface.svg" alt="Interface & icons" width="820">
 
 </div>
 
-| | Area | HD done | Whole game | |
-|:-:|---|--:|--:|---|
-| 🧑‍🎨 | **Characters**<br><sub>every pose, face, outfit and animation frame of the female characters and creatures</sub> | 982 | 26,446 | 3% |
-| 🏞️ | **Backgrounds**<br><sub>locations, window views, lights, animated backgrounds and event pictures</sub> | 830 | 830 | 100% |
-| 🧭 | **Interface & icons**<br><sub>menus, item icons, map, effects — planned later</sub> | 0 | 1,559 | 0% |
-
 <details>
-<summary><b>🧑‍🎨 Characters in detail — 20 of 113 started</b></summary>
+<summary><b>🧑‍🎨 Characters in detail — currently encountered in my own save (20 of 113 characters)</b></summary>
 
-| Character | HD pictures | Progress |
-|---|--:|---|
-| Celica | 740 / 19,409 | `█░░░░░░░░░░░░░░░░░░░` 3% |
-| Nel | 43 / 101 | `█████████░░░░░░░░░░░` 42% |
-| Evie | 34 / 175 | `████░░░░░░░░░░░░░░░░` 19% |
-| Slime Girl | 27 / 118 | `█████░░░░░░░░░░░░░░░` 22% |
-| Fairy | 21 / 38 | `███████████░░░░░░░░░` 55% |
-| Selena | 19 / 70 | `█████░░░░░░░░░░░░░░░` 27% |
-| Fortune Teller | 16 / 32 | `██████████░░░░░░░░░░` 50% |
-| Galiene | 13 / 252 | `█░░░░░░░░░░░░░░░░░░░` 5% |
-| Maid | 13 / 142 | `██░░░░░░░░░░░░░░░░░░` 9% |
-| Joanna | 9 / 24 | `████████░░░░░░░░░░░░` 37% |
-| Black Cat | 9 / 18 | `██████████░░░░░░░░░░` 50% |
-| Giant Hornet | 7 / 7 | `████████████████████` 100% |
-| Toy Customer | 7 / 7 | `████████████████████` 100% |
-| Electric Jellyfish | 5 / 5 | `████████████████████` 100% |
-| Giant Slime | 4 / 4 | `████████████████████` 100% |
-| Slime | 4 / 4 | `████████████████████` 100% |
-| Balloon | 3 / 3 | `████████████████████` 100% |
-| Accessory Shop Keeper | 3 / 3 | `████████████████████` 100% |
-| Magic Shop Keeper | 3 / 3 | `████████████████████` 100% |
-| Alchemy Shop Keeper | 2 / 3 | `█████████████░░░░░░░` 66% |
+<div align="center">
 
-<sub>Not started yet (93): Alraune, Bee-Girl, Bellona, Biter, Blightbloom, Booty, Busty, Capt. Ceres, Celestian, Celica (child), Celica (fairy), Celica (spirit), Cellshroom, Cephrina, Cindy, Clara, Cornel, Cyclopus, Dark Fairy, Dark Painting, Demon Sloth Blimp, Demon Sloth Dick, Demoness, Domenea, Drylia, Edgar, Eeris, Eleth Shop Keeper, Elith, Elize, Elyrana, Emma, Envy, Envy Demon, Faylen, Faylen (spirit), Fire Ray, Galiene (spirit), Genie, Genie Celica, Glace, Gluttony's Tongue, Huge Slime, Ice Armor, Inara, Kitsune, Lamia, Layla, Lena, Lena (shop keeper), Lilith, Lily, Lucina, Luna, Lust, Lust Demon, Lyra, Madame Samira, Mana Stalker, Margarilda, Marlene, Mimic, Mirania, Miriam, Nahla, Noctriel, Noctyra, Noxtar, Penelope, Phantom Pirate, Phantom Sword, Pirate, Pixella, Puppet, Queen Brynja, Rock Spitter, Saya, Shade, Succubus, Sylphie, Sylvia, Talkstone, Tentaknight, Tessa, Topi, Trixi, Umbral Groper, Valen, Velvetia, Vera, Violet, Vivi, Vivi's Panties</sub>
+<img src="docs/images/progress/characters_celica.svg" alt="Celica" width="700">
+
+<img src="docs/images/progress/characters_nel.svg" alt="Nel" width="700">
+
+<img src="docs/images/progress/characters_evie.svg" alt="Evie" width="700">
+
+<img src="docs/images/progress/characters_slime_girl.svg" alt="Slime Girl" width="700">
+
+<img src="docs/images/progress/characters_fairy.svg" alt="Fairy" width="700">
+
+<img src="docs/images/progress/characters_selena.svg" alt="Selena" width="700">
+
+<img src="docs/images/progress/characters_fortune_teller.svg" alt="Fortune Teller" width="700">
+
+<img src="docs/images/progress/characters_galiene.svg" alt="Galiene" width="700">
+
+<img src="docs/images/progress/characters_maid.svg" alt="Maid" width="700">
+
+<img src="docs/images/progress/characters_joanna.svg" alt="Joanna" width="700">
+
+<img src="docs/images/progress/characters_black_cat.svg" alt="Black Cat" width="700">
+
+<img src="docs/images/progress/characters_giant_hornet.svg" alt="Giant Hornet" width="700">
+
+<img src="docs/images/progress/characters_toy_customer.svg" alt="Toy Customer" width="700">
+
+<img src="docs/images/progress/characters_electric_jellyfish.svg" alt="Electric Jellyfish" width="700">
+
+<img src="docs/images/progress/characters_giant_slime.svg" alt="Giant Slime" width="700">
+
+<img src="docs/images/progress/characters_slime.svg" alt="Slime" width="700">
+
+<img src="docs/images/progress/characters_balloon.svg" alt="Balloon" width="700">
+
+<img src="docs/images/progress/characters_accessory_shop_keeper.svg" alt="Accessory Shop Keeper" width="700">
+
+<img src="docs/images/progress/characters_magic_shop_keeper.svg" alt="Magic Shop Keeper" width="700">
+
+<img src="docs/images/progress/characters_alchemy_shop_keeper.svg" alt="Alchemy Shop Keeper" width="700">
+
+</div>
+
+<sub>Not encountered yet (93): Alraune, Bee-Girl, Bellona, Biter, Blightbloom, Booty, Busty, Capt. Ceres, Celestian, Celica (child), Celica (fairy), Celica (spirit), Cellshroom, Cephrina, Cindy, Clara, Cornel, Cyclopus, Dark Fairy, Dark Painting, Demon Sloth Blimp, Demon Sloth Dick, Demoness, Domenea, Drylia, Edgar, Eeris, Eleth Shop Keeper, Elith, Elize, Elyrana, Emma, Envy, Envy Demon, Faylen, Faylen (spirit), Fire Ray, Galiene (spirit), Genie, Genie Celica, Glace, Gluttony's Tongue, Huge Slime, Ice Armor, Inara, Kitsune, Lamia, Layla, Lena, Lena (shop keeper), Lilith, Lily, Lucina, Luna, Lust, Lust Demon, Lyra, Madame Samira, Mana Stalker, Margarilda, Marlene, Mimic, Mirania, Miriam, Nahla, Noctriel, Noctyra, Noxtar, Penelope, Phantom Pirate, Phantom Sword, Pirate, Pixella, Puppet, Queen Brynja, Rock Spitter, Saya, Shade, Succubus, Sylphie, Sylvia, Talkstone, Tentaknight, Tessa, Topi, Trixi, Umbral Groper, Valen, Velvetia, Vera, Violet, Vivi, Vivi's Panties</sub>
 
 </details>
 
 <details>
 <summary><b>🏞️ Backgrounds in detail</b></summary>
 
-| Kind | HD pictures | Progress |
-|---|--:|---|
-| Locations | 669 / 669 | `████████████████████` 100% |
-| Animated backgrounds | 84 / 84 | `████████████████████` 100% |
-| Event pictures | 77 / 77 | `████████████████████` 100% |
+<div align="center">
+
+<img src="docs/images/progress/backgrounds_locations.svg" alt="Locations" width="700">
+
+<img src="docs/images/progress/backgrounds_animated_backgrounds.svg" alt="Animated backgrounds" width="700">
+
+<img src="docs/images/progress/backgrounds_event_pictures.svg" alt="Event pictures" width="700">
+
+</div>
 
 </details>
 
-<sub>A "picture" is one image file of the game: a pose, a face, a piece of clothing, an animation sheet or a background layer. Male characters aren't part of the HD project.</sub>
+<sub>A game asset is one image file of the game: a pose, a face, a piece of clothing, an animation sheet or a background layer. Male characters aren't part of the HD project.</sub>
 <!-- PROGRESS:END -->
 
 ---
@@ -305,41 +347,23 @@ Your mod's name is found automatically from its folder. Advanced modders can use
 </div>
 
 <details>
-<summary><b>👻 Nel's Auto Battler Sex Autonomy Mod (r1.6)</b></summary>
-<div align="center">
-
-When Nel possesses Celica and auto-battles, she sometimes stops fighting and **taunts the monsters**, teasing them to come and use Celica's body until she climaxes. Monsters grab, grope and tear her clothes, Nel comments on it in her own voice, then she shoos them off and goes back to fighting.
-
-**Features**<br>
-1 in 16 chance at the start of each of her turns (adjustable)<br>
-**Climax ladder:** each climax in the same day needs less lust (100% → 60% → 40% → 30% → 20%). It resets when Celica sleeps.<br>
-Nel only talks some of the time while taunting, so it doesn't turn into spam<br>
-Celica takes no damage while Nel is taunting or climaxing<br>
-Nel only gains 0.5 body influence per climax instead of the game's 10<br>
-**Sub-mods (switch separately):** **Half XP** — Celica only gets 50% of the battle XP while Nel is in control (adjustable) · **Never One-Shots** — Nel's first hit leaves a monster on 1 HP<br>
-⚙️ **Settings:** taunt chance, cooldown, how often she talks, taunt time limit, lust needed for climaxes 1 to 5+, XP share, body influence.
-
-<img src="docs/images/mm_settings.png" alt="Nel's settings" width="760">
-
-</div>
-</details>
-
-<details>
-<summary><b>⚡ Game Engine Stutter Fix (r1.1)</b></summary>
-<div align="center">
-
-Removes the short **~0.2–0.4 s freeze** in battle whenever a character changes pose. Measured: 184 ms → 0 ms per pose change. The whole game feels way smoother and snappier.
-
-</div>
-</details>
-
-<details>
 <summary><b>👗 Appearance Menu Insta Unlock (r1.1)</b></summary>
 <div align="center">
 
 The **Equip > Appearance** tab is open from the very start, on new games and on old saves. You don't need to unlock the tailor first.
 
 <img src="docs/images/appearance_unlock.png" alt="Appearance tab unlocked on a new game" width="760">
+
+</div>
+</details>
+
+<details>
+<summary><b>👚 Appearance/Accessories Scroll Mod (r1.0)</b></summary>
+<div align="center">
+
+In **Equip**, the **Appearance** and **Accessories** grids scroll with the mouse wheel and grow as you collect more.
+
+**Sub-mod: Movable Equip Clothing/Accessories Mod** — drag clothes and accessories onto another square to sort them. Only squares of the same grid accept a drop: nothing can be dragged onto the worn or equipped slots.
 
 </div>
 </details>
@@ -366,6 +390,29 @@ On quiet mornings there's a **1 in 9 chance** that Celica uses her dildo by hers
 ⚙️ **Settings:** red-X stat strength, the strength of each helper.
 
 <img src="docs/images/clothing_remover.png" alt="Clothing Remover and Combat Helper items" width="760">
+
+</div>
+</details>
+
+<details>
+<summary><b>⚡ Game Engine Stutter Fix (r1.1)</b></summary>
+<div align="center">
+
+Removes the short **~0.2–0.4 s freeze** in battle whenever a character changes pose. Measured: 184 ms → 0 ms per pose change. The whole game feels way smoother and snappier.
+
+</div>
+</details>
+
+<details>
+<summary><b>🖼️ HD x8 Upscale Project (r0.5) — VERY EARLY WIP</b></summary>
+<div align="center">
+
+AI-upscaled HD pictures, used automatically when your window is bigger than 1066×600 (1080p, 1440p, 4K). Characters and backgrounds are done a block at a time — see **HD Project progress** above. Needs the **Apex_HD_Pack** download.
+
+**HD Toggle:** press **F8** or click the **HD Toggle** button under Health and Magic to switch every HD picture back to the original and back again, instantly.<br>
+⚙️ **Settings:** picture memory.
+
+<img src="docs/images/hd_compare.png" alt="Original vs HD sprite" width="480">
 
 </div>
 </details>
@@ -400,26 +447,21 @@ While another window is open (Equip, a shop, the map, a question), the inventory
 </details>
 
 <details>
-<summary><b>👚 Appearance/Accessories Scroll Mod (r1.0)</b></summary>
+<summary><b>👻 Nel's Auto Battler Sex Autonomy Mod (r1.6)</b></summary>
 <div align="center">
 
-In **Equip**, the **Appearance** and **Accessories** grids scroll with the mouse wheel and grow as you collect more.
+When Nel possesses Celica and auto-battles, she sometimes stops fighting and **taunts the monsters**, teasing them to come and use Celica's body until she climaxes. Monsters grab, grope and tear her clothes, Nel comments on it in her own voice, then she shoos them off and goes back to fighting.
 
-**Sub-mod: Movable Equip Clothing/Accessories Mod** — drag clothes and accessories onto another square to sort them. Only squares of the same grid accept a drop: nothing can be dragged onto the worn or equipped slots.
+**Features**<br>
+1 in 16 chance at the start of each of her turns (adjustable)<br>
+**Climax ladder:** each climax in the same day needs less lust (100% → 60% → 40% → 30% → 20%). It resets when Celica sleeps.<br>
+Nel only talks some of the time while taunting, so it doesn't turn into spam<br>
+Celica takes no damage while Nel is taunting or climaxing<br>
+Nel only gains 0.5 body influence per climax instead of the game's 10<br>
+**Sub-mods (switch separately):** **Half XP** — Celica only gets 50% of the battle XP while Nel is in control (adjustable) · **Never One-Shots** — Nel's first hit leaves a monster on 1 HP<br>
+⚙️ **Settings:** taunt chance, cooldown, how often she talks, taunt time limit, lust needed for climaxes 1 to 5+, XP share, body influence.
 
-</div>
-</details>
-
-<details>
-<summary><b>🖼️ HD x8 Upscale Project (r0.5) — VERY EARLY WIP</b></summary>
-<div align="center">
-
-AI-upscaled HD pictures, used automatically when your window is bigger than 1066×600 (1080p, 1440p, 4K). Characters and backgrounds are done a block at a time — see **HD Project progress** above. Needs the **Apex_HD_Pack** download.
-
-**HD Toggle:** press **F8** or click the **HD Toggle** button under Health and Magic to switch every HD picture back to the original and back again, instantly.<br>
-⚙️ **Settings:** picture memory.
-
-<img src="docs/images/hd_compare.png" alt="Original vs HD sprite" width="480">
+<img src="docs/images/mm_settings.png" alt="Nel's settings" width="760">
 
 </div>
 </details>
@@ -475,11 +517,6 @@ AI-upscaled HD pictures, used automatically when your window is bigger than 1066
 ---
 
 <div align="center">
-
-### ☕ Enjoying it?
-Please support the game's developer, Deimus, first. If you'd still like to support the modpack's future development:
-
-<a href="https://buymeacoffee.com/apex_modding"><img src="docs/images/bmc_button.png" alt="Buy me a coffee" width="260"></a>
 
 Bug reports and suggestions are welcome in [Issues](../../issues). For problems, include your `game/tom_mod_report.txt`.
 

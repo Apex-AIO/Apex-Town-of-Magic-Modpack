@@ -98,22 +98,35 @@ def bar_svg(path, pct, label, w=820, h=44, color="#9b6bff"):
     open(path, "w", encoding="utf8").write(svg)
 
 
+def _slug(s):
+    import re
+    return re.sub(r"[^a-z0-9]+", "_", s.lower()).strip("_")
+
+
+def _pct(done, total):
+    return round(100.0 * done / total, 1) if total else 0.0
+
+
 def write_outputs(p):
-    os.makedirs(os.path.join(WS, "docs", "images"), exist_ok=True)
+    """every bar in the README is an SVG like the main one: docs/images/progress*.svg (+ progress/ for details)"""
+    img = os.path.join(WS, "docs", "images")
+    det = os.path.join(img, "progress")
+    os.makedirs(det, exist_ok=True)
+    for fn in os.listdir(det):                                          # characters can drop out of the list
+        os.remove(os.path.join(det, fn))
     json.dump(p, open(os.path.join(CAT, "progress.json"), "w", encoding="utf8"), indent=1)
-    bar_svg(os.path.join(WS, "docs", "images", "progress.svg"), p["overall_pct"],
-            "HD project: %s%%  -  %s of %s pictures" % (p["overall_pct"], format(p["done"], ","), format(p["total"], ",")))
+    lab = lambda name, d, t: "%s: %s%%  -  %s of %s" % (name, _pct(d, t), format(d, ","), format(t, ","))
+    bar_svg(os.path.join(img, "progress.svg"), p["overall_pct"], lab("HD Project", p["done"], p["total"]) + " game assets")
+    colors = {"characters": "#9b6bff", "backgrounds": "#38d6f2"}
     for c in p["categories"]:
         slug = c["name"].split()[0].lower()
-        bar_svg(os.path.join(WS, "docs", "images", "progress_%s.svg" % slug), c["pct"],
-                "%s: %d%%  (%s / %s)" % (c["name"], c["pct"], format(c["done"], ","), format(c["total"], ",")),
-                w=820, h=30, color={"characters": "#9b6bff", "backgrounds": "#38d6f2"}.get(slug, "#6d6580"))
-
-
-
-def _tbar(done, total, n=20):
-    k = int(round(n * done / total)) if total else 0
-    return "█" * k + "░" * (n - k)
+        bar_svg(os.path.join(img, "progress_%s.svg" % slug), _pct(c["done"], c["total"]),
+                lab(c["name"], c["done"], c["total"]), color=colors.get(slug, "#6d6580"))
+        for r in c["rows"]:
+            if c["name"] == "Characters" and not r["done"]:
+                continue
+            bar_svg(os.path.join(det, "%s_%s.svg" % (slug, _slug(r["name"]))), _pct(r["done"], r["total"]),
+                    lab(r["name"], r["done"], r["total"]), h=30, color=colors.get(slug, "#6d6580"))
 
 
 def update_readme(p, version="", date=""):
@@ -126,44 +139,43 @@ def update_readme(p, version="", date=""):
     if a not in t or b not in t:
         return False
     chars, bgs, ui = p["categories"]
-    L = ["<!-- written by Tools/art/progress.py - run it (or build a release) to update -->", "<div align=\"center\">", "",
-         '<img src="docs/images/progress.svg" alt="HD project progress" width="820">', "",
-         "<sub>An estimate of every picture the game has (the end goal). Updated with every release%s.</sub>"
-         % ((" - v%s, %s" % (version, date)) if version else ""), "", "</div>", "",
-         "| | Area | HD done | Whole game | |", "|:-:|---|--:|--:|---|"]
-    icons = {"Characters": "🧑‍🎨", "Backgrounds": "🏞️", "Interface & icons": "🧭"}
+    bar = lambda src, alt, w=820: '<img src="%s" alt="%s" width="%d">' % (src, alt, w)
+    L = ["<!-- written by Tools/art/progress.py - run it (or build a release) to update -->", '<div align="center">', "",
+         "#### ALL GAME ASSETS TO SCALE", "", bar("docs/images/progress.svg", "HD project progress"), "",
+         "<sub>An estimate of every game asset (the end goal). Updated with every release%s.</sub>"
+         % ((" - v%s, %s" % (version, date)) if version else ""), ""]
+    titles = {"Characters": "CHARACTERS", "Backgrounds": "BACKGROUNDS", "Interface & icons": "INTERFACE & ICONS"}
     for c in p["categories"]:
         slug = c["name"].split()[0].lower()
-        L.append("| %s | **%s**<br><sub>%s</sub> | %s | %s | %d%% |" % (
-            icons.get(c["name"], ""), c["name"], c["note"], format(c["done"], ","), format(c["total"], ","), c["pct"]))
-    L += ["", "<details>", "<summary><b>🧑‍🎨 Characters in detail — %d of %d started</b></summary>" % (
-        p["characters_started"], p["characters_total"]), "", "| Character | HD pictures | Progress |", "|---|--:|---|"]
+        L += ["#### %s" % titles.get(c["name"], c["name"].upper()), "<sub>%s</sub>" % c["note"], "",
+              bar("docs/images/progress_%s.svg" % slug, c["name"]), ""]
+    L += ["</div>", "", "<details>",
+          "<summary><b>🧑‍🎨 Characters in detail — currently encountered in my own save (%d of %d characters)</b></summary>"
+          % (p["characters_started"], p["characters_total"]), "", '<div align="center">', ""]
     for r in chars["rows"]:
         if r["done"]:
-            L.append("| %s | %s / %s | `%s` %d%% |" % (r["name"], format(r["done"], ","), format(r["total"], ","),
-                                                     _tbar(r["done"], r["total"]), int(100 * r["done"] / r["total"])))
+            L += [bar("docs/images/progress/characters_%s.svg" % _slug(r["name"]), r["name"], 700), ""]
+    L += ["</div>", ""]
     rest = [r for r in chars["rows"] if not r["done"]]
     if rest:
-        L.append("")
-        L.append("<sub>Not started yet (%d): %s</sub>" % (len(rest), ", ".join(sorted(r["name"] for r in rest))))
-    L += ["", "</details>", "", "<details>", "<summary><b>🏞️ Backgrounds in detail</b></summary>", "",
-          "| Kind | HD pictures | Progress |", "|---|--:|---|"]
+        L += ["<sub>Not encountered yet (%d): %s</sub>" % (len(rest), ", ".join(sorted(r["name"] for r in rest))), ""]
+    L += ["</details>", "", "<details>", "<summary><b>🏞️ Backgrounds in detail</b></summary>", "", '<div align="center">', ""]
     for r in bgs["rows"]:
-        L.append("| %s | %s / %s | `%s` %d%% |" % (r["name"], format(r["done"], ","), format(r["total"], ","),
-                                                 _tbar(r["done"], r["total"]), int(100 * r["done"] / r["total"]) if r["total"] else 0))
-    L += ["", "</details>", "",
-          "<sub>A \"picture\" is one image file of the game: a pose, a face, a piece of clothing, an animation sheet or a "
+        L += [bar("docs/images/progress/backgrounds_%s.svg" % _slug(r["name"]), r["name"], 700), ""]
+    L += ["</div>", "", "</details>", "",
+          "<sub>A game asset is one image file of the game: a pose, a face, a piece of clothing, an animation sheet or a "
           "background layer. Male characters aren't part of the HD project.</sub>"]
     nl = "\n"
     t = t[:t.index(a) + len(a)] + nl + nl.join(L) + nl + t[t.index(b):]
     open(path, "w", encoding="utf8").write(t)
     return True
 
+
 if __name__ == "__main__":
     p = compute()
     write_outputs(p)
     print("README progress block updated" if update_readme(p) else "(README has no progress markers)")
-    print("HD project: %s%%  (%d of %d pictures)" % (p["overall_pct"], p["done"], p["total"]))
+    print("HD project: %s%%  (%d of %d game assets)" % (p["overall_pct"], p["done"], p["total"]))
     for c in p["categories"]:
         print("  %-20s %6d / %-6d %3d%%" % (c["name"], c["done"], c["total"], c["pct"]))
     print("  characters started: %d of %d (male left out: %d)" % (p["characters_started"], p["characters_total"], p["male_left_out"]))
