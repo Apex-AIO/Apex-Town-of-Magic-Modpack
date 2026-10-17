@@ -1,0 +1,15 @@
+images/CHAR/balloon/balloon-530-530-1.png
+images/CHAR/balloon/balloon_face_normal-530-530-1.png
+images/CHAR/balloon/balloon_face_normal_normalpanties-530-530-1.png
+images/CHAR/balloon/balloon_face_normal_talk-530-530-1.png
+images/CHAR/giantslime/giantslime-530-530-4.png
+images/CHAR/giantslime/giantslime_bash-530-530-2.png
+images/CHAR/giantslime/giantslime_hurt-530-530-1.png
+images/CHAR/giantslime/giantslime_split-530-530-4.png
+images/CHAR/hornet/hornet-530-530-2.png
+images/CHAR/hornet/hornet_grasp-530-530-6.png
+images/CHAR/hornet/hornet_hurt-530-530-2.png
+images/CHAR/hornet/hornet_pincer_attack-530-530-4.png
+images/CHAR/hornet/hornet_sting-530-530-4.png
+images/CHAR/hornet/hornet_strike_bottom-530-530-7.png
+images/CHAR/hornet/hornet_strike_top-530-530-7.png

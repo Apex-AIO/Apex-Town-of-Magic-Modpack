@@ -1,0 +1,13 @@
+/Extracted/
+/Upscale/
+/Dist/
+/Tools/debug/
+/Tools/unrpyc/
+/Tools/UnRen*
+/Tools/fonts/
+/Mods/hd_sprites_mod/images/
+__pycache__/
+*.pyc
+*.rpyc
+*.log
+/Tools/scripts/build_last.log
