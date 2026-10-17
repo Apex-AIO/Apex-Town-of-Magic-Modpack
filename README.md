@@ -1,7 +1,7 @@
 <div align="center">
 
 # APEX'S MODPACK AND MOD MANAGER
-### for Town of Magic v0.77.002 — 7 Mods, one file, one in-game manager
+### for Town of Magic v0.77.002 — 7 Mods, one file, one in-game manager, and many more mods to come.
 
 <img src="docs/images/main_menu.png" alt="Apex's Modpack Manager on the Town of Magic main menu" width="900">
 
