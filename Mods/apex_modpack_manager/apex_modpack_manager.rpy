@@ -19,7 +19,13 @@ init 1 python:
     import builtins as _apex_b      # dict/list here are Ren'Py's own types: check against the real ones
 
     def apex_mm_modules():
-        return (APEX_BUILD or {}).get("modules", [])
+        # alphabetical, A to Z (ignoring "The", capitals and punctuation)
+        return sorted((APEX_BUILD or {}).get("modules", []), key=lambda m: _apex_sort_key(m.get("title", m.get("id", ""))))
+
+    def _apex_sort_key(s):
+        import re as _re
+        s = _re.sub(r"[^a-z0-9 ]", "", str(s).lower()).strip()
+        return s[4:] if s.startswith("the ") else s
 
     def apex_mm_off_now():
         off = persistent.apex_mm_off
@@ -237,7 +243,7 @@ init 999 python:
 
     # ================= Your mods (the mods folder) =================
     def apex_um_list():
-        return APEX_MODS.get("mods", [])
+        return sorted(APEX_MODS.get("mods", []), key=lambda m: _apex_sort_key(m.get("name") or m.get("id", "")))
 
     def _apex_um_s():
         return APEX_MODS.setdefault("settings", {"enabled": {}, "values": {}, "auto_off": {}})

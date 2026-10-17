@@ -6,8 +6,10 @@
 # Only when she has the dildo, it is her own body (not possessed), her Lewdness is at least 30 (the game's own
 # rule for using it) and she hasn't used it yet today.
 #
-# How: the game picks morning scenes in label wake_up (wakeup_event_pick).  When the normal wake-up starts and the
-# game picked nothing, this mod may put the dildo scene in that slot - the game then plays it like its own.
+# Order: the day-change text -> the dildo scene -> Celica gets up and stretches with her wake-up line -> control.
+# How: when the normal wake-up starts and the game picked no morning scene (wakeup_event_pick), the mod decides;
+# the scene then starts from the wake-up's first "scene_prepare" (still black, before the stretch) and the game's
+# wake-up carries on by itself afterwards.
 #
 # Settings: MD_CHANCE, MD_MIN_LEWDNESS.   Debug log: MD_LOG = True -> game/morning_dildo_log.txt
 
@@ -25,12 +27,14 @@ init 999 python:
         MD_CHANCE = 1.0 / tom_setting('morning_dildo', 'chance', 9)
         MD_MIN_LEWDNESS = tom_setting('morning_dildo', 'min_lewdness', 30)
         MD_LOG = False
+        _MD = {"pending": False}
         _MD_DEFAULTS = dict(MD_CHANCE=MD_CHANCE, MD_MIN_LEWDNESS=MD_MIN_LEWDNESS, MD_LOG=MD_LOG)
 
         def _md_restore_settings():
             # settings always come from this file, never from a save (a value changed while testing must not stick)
             for k, v in _MD_DEFAULTS.items():
                 setattr(store, k, v)
+            _MD["pending"] = False             # a wake-up interrupted by loading a save must not start the scene later
 
         if _md_restore_settings not in config.after_load_callbacks:
             config.after_load_callbacks.append(_md_restore_settings)
@@ -66,9 +70,19 @@ init 999 python:
                 return "a possession event is scheduled"
             return None
 
+        # Order of a morning with the scene: the day-change text -> the dildo scene -> Celica gets up and stretches
+        # with her wake-up line -> the player has control.  The decision is made when the normal wake-up starts;
+        # the scene is started from the first "scene_prepare" call of that wake-up (right after the day-change text,
+        # before the stretch), and the game's wake-up carries on by itself when the scene returns.
         def _md_on_label(name, abnormal):
+            if name == "scene_prepare" and _MD["pending"]:
+                _MD["pending"] = False
+                _md_log("morning: playing the scene before the stretch")
+                renpy.call("tom_morning_dildo_before_stretch")      # returns into the wake-up
+                return
             if name != "wake_up.normal_wakeup":
                 return
+            _MD["pending"] = False
             try:
                 if getattr(store, "wakeup_event_pick", "") != "":
                     _md_log("morning: the game already has a scene (%s)" % store.wakeup_event_pick)
@@ -78,19 +92,30 @@ init 999 python:
                     _md_log("morning: no (%s)" % why)
                     return
                 if _md_random.random() < MD_CHANCE:
-                    store.wakeup_event_pick = "afterwakeup_tom_morning_dildo"     # the game calls events_tom_morning_dildo
+                    _MD["pending"] = True
                     _md_log("morning: dildo scene!")
                 else:
                     _md_log("morning: not today (1 in %d)" % int(round(1 / MD_CHANCE)))
             except Exception as e:
                 _md_log("error %r" % (e,))
 
-        if all(renpy.has_label(l) for l in MD_LABELS):
+        if all(renpy.has_label(l) for l in MD_LABELS + ("scene_prepare",)):
             if _md_on_label not in config.label_callbacks:
                 config.label_callbacks.append(_md_on_label)
         else:
             tom_mod_status["morning_dildo"] = "off: game labels changed"
 
+
+# called at the start of the wake-up (screen still black after the day-change text): the scene, then back to
+# the wake-up, which fades in on Celica getting up and stretching
+label tom_morning_dildo_before_stretch:
+    show screen blackout
+    hide screen fullblackout
+    call events_tom_morning_dildo
+    show screen fullblackout
+    hide screen blackout
+    call disable_menu
+    return
 
 # the game's own dildo scene; with Nel if she is in the room (same rule as using the item)
 label events_tom_morning_dildo:

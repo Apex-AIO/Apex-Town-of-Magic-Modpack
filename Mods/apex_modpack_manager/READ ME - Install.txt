@@ -4,7 +4,7 @@ APEX'S MODPACK for Town of Magic  (made for game version 0.77.002)
 INSTALL (drag and drop)
   1. Open your Town of Magic folder (the one with TownOfMagic.exe in it).
   2. Drag the "game" and "mods" folders from this zip into it. If Windows asks, choose to merge / replace.
-     For HD pictures, also install the HD Pack (Apex_HD_Pack zip) the same way.
+     For HD pictures, also install the HD Pack (every Apex_HD_Pack zip part) the same way.
   3. Start the game. "Apex's Modpack Manager" is at the top of the main menu.
 
 APEX'S MODPACK MANAGER (main menu)
@@ -19,17 +19,23 @@ MODS
                                          Sub-mods: Half XP and Never One-Shots (balancing).
   Game Engine Stutter Fix               Removes the short freezes in battle when a pose changes.
   Appearance Menu Insta Unlock          Equip > Appearance is open from the start.
-  Celica's Autonomy Dildo Events        On quiet mornings Celica sometimes uses the dildo by herself (1 in 9).
+  Celica's Autonomy Dildo Events        On quiet mornings Celica sometimes uses the dildo by herself as she wakes (1 in 9).
   Clothing Remover & Combat Helpers     Red-X Shoes / Top / Pants items and Combat Helper accessories.
   H-Scene Idle Loop                     Grope and H-scene animations keep looping on your turn.
-  HD x8 Upscale Project (VERY EARLY WIP) HD sprites when the window is bigger than 1066x600.
+  HD x8 Upscale Project (VERY EARLY WIP) HD pictures when the window is bigger than 1066x600. F8 or the HD Toggle
+                                         button (under Health/Magic) switches them on and off.
+  Inventory Scroll Mod                  ITEMS and SPELLS scroll with the mouse wheel and grow as you get more.
+                                         Sub-mod: Movable Inventory Items (drag an item onto another square).
+                                         Inventory backups: the small button under the scroll bar.
+  Appearance/Accessories Scroll Mod     The same in Equip > Appearance and Accessories.
+                                         Sub-mod: Movable Equip Clothing/Accessories Mod.
 
 YOUR OWN MODS
   The "mods" folder is for your own mods and mods you download from others. Make one in the manager:
   Mod Tools -> Create a new mod. Full help: mods\_guide\Modding Guide.html.
 
 UNINSTALL
-  Delete Town of Magic\game\Apex_Modpack.rpa, game\Apex_HD.rpa and game\apex_mods_loader.rpe.py.
+  Delete Town of Magic\game\Apex_Modpack.rpa, game\Apex_HD*.rpa and game\apex_mods_loader.rpe.py.
   The mods folder can stay. Your saves keep working.
 
 GAME UPDATES

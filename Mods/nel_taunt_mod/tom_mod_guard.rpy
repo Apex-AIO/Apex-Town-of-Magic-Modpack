@@ -30,6 +30,8 @@ init 0 python:
 
     # function name -> fingerprint on 0.77.002 (filled in from a recorded run)
     TOM_FINGERPRINTS = {
+        "update_inventory_frame_items": "fe49107e27cb",    # procedures.rpy:1885
+        "equipment_are_empty": "d869cfd4a960",    # procedures.rpy:2071
         "image_add_composite_path": "1f6d4a36b344",    # animations.rpy:421
         "list_files_match": "e80339dd6427",    # procedures.rpy:2865
         "list_files_regex": "69d593230ea8",    # procedures.rpy:2845

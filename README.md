@@ -1,7 +1,7 @@
 <div align="center">
 
 # ⚗️ APEX'S MODPACK & MOD MANAGER
-### for Town of Magic v0.77.002 — 7 mods · a full mod manager · room for your own mods · many more mods to come
+### for Town of Magic v0.77.002 — 9 mods · a full mod manager · room for your own mods · many more mods to come
 
 [![Latest release](https://img.shields.io/github/v/release/Apex-AIO/Apex-Town-of-Magic-Modpack?style=for-the-badge&label=latest&color=ffc94d&labelColor=1a1522)](../../releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Apex-AIO/Apex-Town-of-Magic-Modpack/total?style=for-the-badge&color=9b6bff&labelColor=1a1522)](../../releases)
@@ -16,9 +16,8 @@
 
 | Download | What's inside | Size |
 |---|---|---|
-| **Apex_Modpack** | All 7 mods + the Mod Manager + the mods folder (templates and the modding guide) | tiny |
-| **Apex_HD_Pack** | The HD pictures for the HD x8 project (add-on, needs the modpack) | big |
-| **Apex_Modpack_with_HD** | Both in one download (when GitHub's size limit allows it) | big |
+| **Apex_Modpack** | All 9 mods + the Mod Manager + the mods folder (templates and the modding guide) | tiny |
+| **Apex_HD_Pack** (part 1, part 2, ...) | The HD pictures for the HD x8 project (add-on, needs the modpack). Install every part. | big |
 
 <sub>Install steps are on the release page. Made for Town of Magic 0.77.002.</sub>
 
@@ -38,14 +37,14 @@
 
 <img src="docs/images/progress.svg" alt="HD project progress" width="820">
 
-<sub>An estimate of every picture the game has (the end goal). Updated with every release - v1.2.0, 18 Oct 2026.</sub>
+<sub>An estimate of every picture the game has (the end goal). Updated with every release - v1.3.0, 18 Oct 2026.</sub>
 
 </div>
 
 | | Area | HD done | Whole game | |
 |:-:|---|--:|--:|---|
 | 🧑‍🎨 | **Characters**<br><sub>every pose, face, outfit and animation frame of the female characters and creatures</sub> | 982 | 26,446 | 3% |
-| 🏞️ | **Backgrounds**<br><sub>locations, window views, lights, animated backgrounds and event pictures</sub> | 311 | 830 | 37% |
+| 🏞️ | **Backgrounds**<br><sub>locations, window views, lights, animated backgrounds and event pictures</sub> | 830 | 830 | 100% |
 | 🧭 | **Interface & icons**<br><sub>menus, item icons, map, effects — planned later</sub> | 0 | 1,559 | 0% |
 
 <details>
@@ -83,9 +82,9 @@
 
 | Kind | HD pictures | Progress |
 |---|--:|---|
-| Locations | 272 / 669 | `████████░░░░░░░░░░░░` 40% |
-| Animated backgrounds | 20 / 84 | `█████░░░░░░░░░░░░░░░` 23% |
-| Event pictures | 19 / 77 | `█████░░░░░░░░░░░░░░░` 24% |
+| Locations | 669 / 669 | `████████████████████` 100% |
+| Animated backgrounds | 84 / 84 | `████████████████████` 100% |
+| Event pictures | 77 / 77 | `████████████████████` 100% |
 
 </details>
 
@@ -346,10 +345,10 @@ The **Equip > Appearance** tab is open from the very start, on new games and on 
 </details>
 
 <details>
-<summary><b>🌅 Celica's Autonomy Dildo Events (r1.3)</b></summary>
+<summary><b>🌅 Celica's Autonomy Dildo Events (r1.4)</b></summary>
 <div align="center">
 
-On quiet mornings there's a **1 in 9 chance** that Celica uses her dildo by herself when she wakes up. If Nel is in the room, she joins in. It only happens when she owns the dildo, has 30+ Lewdness, is in her own body and nothing else is planned that morning.
+On quiet mornings there's a **1 in 9 chance** that Celica uses her dildo by herself as soon as she wakes up, before she gets out of bed and stretches. If Nel is in the room, she joins in. It only happens when she owns the dildo, has 30+ Lewdness, is in her own body and nothing else is planned that morning.
 
 ⚙️ **Settings:** chance per morning (1 in 1 to 1 in 30), Lewdness needed (30 by default).
 
@@ -385,11 +384,39 @@ On your turn, grope and H-scene animations <ins>**keep looping with their sounds
 </details>
 
 <details>
-<summary><b>🖼️ HD x8 Upscale Project (r0.4) — VERY EARLY WIP</b></summary>
+<summary><b>🎒 Inventory Scroll Mod (r1.0)</b></summary>
+<div align="center">
+
+The **ITEMS** and **SPELLS** grid scrolls with the **mouse wheel** instead of paging with arrows, and grows a new row whenever it's nearly full (7 of 9 squares, 10 of 12, ...).
+
+**Sub-mod: Movable Inventory Items** — hold the left mouse button on an item, drag it onto another square and let go: the two swap places. While you drag, a faded copy stays in the original square; let go anywhere that isn't a square and nothing moves.<br>
+**Item safety:** the mod only remembers *where* each item is drawn — it never adds, removes or moves the game's items. Every item is always shown exactly once (stress-tested with 180,000 random inventory changes).<br>
+**Inventory backups:** each time you arrive somewhere new, a backup of your items and gold is kept (the last 5 places). The small ↺ button under the scroll bar puts one back, with a list of exactly what changes.<br>
+While another window is open (Equip, a shop, the map, a question), the inventory doesn't react — just like the game's own.
+
+⚙️ **Settings:** how many backups to keep (0 = off).
+
+</div>
+</details>
+
+<details>
+<summary><b>👚 Appearance/Accessories Scroll Mod (r1.0)</b></summary>
+<div align="center">
+
+In **Equip**, the **Appearance** and **Accessories** grids scroll with the mouse wheel and grow as you collect more.
+
+**Sub-mod: Movable Equip Clothing/Accessories Mod** — drag clothes and accessories onto another square to sort them. Only squares of the same grid accept a drop: nothing can be dragged onto the worn or equipped slots.
+
+</div>
+</details>
+
+<details>
+<summary><b>🖼️ HD x8 Upscale Project (r0.5) — VERY EARLY WIP</b></summary>
 <div align="center">
 
 AI-upscaled HD pictures, used automatically when your window is bigger than 1066×600 (1080p, 1440p, 4K). Characters and backgrounds are done a block at a time — see **HD Project progress** above. Needs the **Apex_HD_Pack** download.
 
+**HD Toggle:** press **F8** or click the **HD Toggle** button under Health and Magic to switch every HD picture back to the original and back again, instantly.<br>
 ⚙️ **Settings:** picture memory.
 
 <img src="docs/images/hd_compare.png" alt="Original vs HD sprite" width="480">
@@ -407,6 +434,13 @@ AI-upscaled HD pictures, used automatically when your window is bigger than 1066
 
 <details>
 <summary><b>Changelog</b></summary>
+
+**v1.3.0**
+- New: **Inventory Scroll Mod** + Movable Inventory Items, with inventory backups
+- New: **Appearance/Accessories Scroll Mod** + Movable Equip Clothing/Accessories Mod
+- HD x8: **HD Toggle** button and **F8** to switch HD on and off instantly
+- Celica's Autonomy Dildo Events: the scene now plays as she wakes, before she gets up and stretches
+- Mod Manager: mods are listed alphabetically
 
 **v1.2.0**
 - Brand-new Mod Manager: sidebar with Overview, Apex's Mods, Your Mods, HD Project, Mod Tools, About & Support

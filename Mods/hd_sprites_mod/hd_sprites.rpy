@@ -74,3 +74,36 @@ init 5 python:
         _hd_improxy.__dict__.update(_hd_im.__dict__)
         _hd_improxy.Composite = _hd_composite
         im = _hd_improxy
+
+        # ---- HD on/off: F8 or the "HD Toggle" button under Health/Magic (remembered between sessions) ----
+        # Ren'Py picks the @2/@4 file each time a picture is drawn, so switching automatic_oversampling takes effect
+        # on the very next frame for every picture: characters, backgrounds, everything upscaled.
+        if persistent.apex_hd_off:
+            config.automatic_oversampling = None
+
+        def apex_hd_is_on():
+            return not persistent.apex_hd_off
+
+        def apex_hd_toggle():
+            persistent.apex_hd_off = not persistent.apex_hd_off
+            config.automatic_oversampling = None if persistent.apex_hd_off else 4
+            try:
+                renpy.free_memory()                # drop the pictures already loaded in the other quality
+            except Exception:
+                pass
+            renpy.notify("HD pictures %s" % ("OFF (original pictures)" if persistent.apex_hd_off else "ON"))
+            renpy.restart_interaction()
+
+        config.underlay.append(renpy.Keymap(K_F8=apex_hd_toggle))
+        if "apex_hd_toggle" not in config.overlay_screens:
+            config.overlay_screens.append("apex_hd_toggle")
+
+
+# the "HD Toggle" button: right end of the strip under Health and Magic, drawn like the game's Equip button
+screen apex_hd_toggle():
+    zorder -17
+    if hasattr(store, "apex_hd_toggle") and not _menu and not main_menu and renpy.get_screen("action_frame") is not None and not flag_list.has("enable_event_viewer"):
+        frame area (156, 74, 75, 25) padding 0,0 background Solid("#000"):
+            imagebutton idle CustomBox(color=ColorMain1, xsize=75, ysize=25) hover CustomBox(color=light_color(ColorMain1), xsize=75, ysize=25) action Function(apex_hd_toggle) tooltip ("HD pictures: " + ("ON" if apex_hd_is_on() else "OFF (original pictures)") + "\nClick or press F8 to switch.")
+            add CustomBox(color=ColorClick, xsize=74, ysize=24, shapestyle=1, line_size=1)
+            text ("HD Toggle" if apex_hd_is_on() else "{alpha=0.6}HD Toggle{/alpha}") outlines [(absolute(0), "#000", absolute(1), absolute(1))] xalign 0.5 yalign 0.5 size 14

@@ -19,6 +19,7 @@ ROOT = os.path.normpath(os.path.join(WS, ".."))
 GAME = os.path.join(ROOT, "game")
 MODS = os.path.join(WS, "Mods")
 DIST = os.path.join(WS, "Dist")
+HD_PART_MAX = 1800 * 1000 * 1000                                     # bytes per HD archive
 RPA_NAME = "Apex_Modpack.rpa"
 STAGE = "apex_modpack"                     # folder (in game/ while compiling, and inside the archive)
 PY = os.path.join(ROOT, "lib", "py3-windows-x86_64", "python.exe")
@@ -100,6 +101,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-install", action="store_true")
     ap.add_argument("--no-hd", action="store_true", help="skip the HD archive (fast test builds)")
+    ap.add_argument("--dev", action="store_true", help="test build: no zips, HD archive left as installed")
     a = ap.parse_args()
     if "TownOfMagic.exe" in subprocess.run(["tasklist"], capture_output=True, text=True).stdout:
         sys.exit("Close Town of Magic first (the game keeps its archives open).")
@@ -183,10 +185,26 @@ def main():
     os.makedirs(os.path.join(out, "game"))
     rpa = os.path.join(out, "game", RPA_NAME)
     write_rpa(rpa, entries)
+    # HD pictures: split into archives under HD_PART_MAX bytes each (GitHub allows 2 GB per release file).
+    # Part 1 keeps the old name Apex_HD.rpa, then Apex_HD_2.rpa, ... - Ren'Py loads every archive in game/.
     hd_name = man["hd_archive"]["name"]
-    hd_rpa = os.path.join(out, "game", hd_name)
+    hd_parts = []                                                       # (archive path, name, files)
     if hd_files and not a.no_hd:
-        write_rpa(hd_rpa, [(dst, src) for src, dst in hd_files])
+        groups, cur, size = [], [], 0
+        for src, dst in sorted(hd_files, key=lambda f: f[1]):
+            s = os.path.getsize(src)
+            if cur and size + s > HD_PART_MAX:
+                groups.append(cur)
+                cur, size = [], 0
+            cur.append((src, dst))
+            size += s
+        if cur:
+            groups.append(cur)
+        for i, g in enumerate(groups):
+            name = hd_name if i == 0 else hd_name.replace(".rpa", "_%d.rpa" % (i + 1))
+            path = os.path.join(out, "game", name)
+            write_rpa(path, [(dst, src) for src, dst in g])
+            hd_parts.append((path, name, g))
     loose = [(os.path.join(MODS, s), d) for s, d in man.get("loose", {}).items()]
     mods_dir = os.path.join(MODS, man["mods_folder"])
     mods_files = []
@@ -209,20 +227,28 @@ def main():
     base = [(readme, "READ ME - Install.txt"), (rpa, "game/" + RPA_NAME)] + [(s, d) for s, d in loose] + mods_files
     zips = []
     zl = os.path.join(DIST, "Apex_Modpack_v%s.zip" % v)
-    zips.append((zl, zipit(zl, base)))
-    if os.path.exists(hd_rpa):
-        zh = os.path.join(DIST, "Apex_HD_Pack_v%s.zip" % v)
-        zips.append((zh, zipit(zh, [(readme_hd, "READ ME - HD Pack.txt"), (hd_rpa, "game/" + hd_name)])))
-        if os.path.getsize(rpa) + os.path.getsize(hd_rpa) < 1.9e9:
+    if not a.dev:
+        zips.append((zl, zipit(zl, base)))
+    if hd_parts and not a.dev:
+        n = len(hd_parts)
+        for i, (path, name, _) in enumerate(hd_parts):
+            zh = os.path.join(DIST, "Apex_HD_Pack_v%s%s.zip" % (v, "" if n == 1 else "_part%dof%d" % (i + 1, n)))
+            zips.append((zh, zipit(zh, [(readme_hd, "READ ME - HD Pack.txt"), (path, "game/" + name)])))
+        if n == 1 and os.path.getsize(rpa) + os.path.getsize(hd_parts[0][0]) < 1.9e9:
             zf = os.path.join(DIST, "Apex_Modpack_v%s_with_HD.zip" % v)
-            zips.append((zf, zipit(zf, base + [(readme_hd, "READ ME - HD Pack.txt"), (hd_rpa, "game/" + hd_name)])))
+            zips.append((zf, zipit(zf, base + [(readme_hd, "READ ME - HD Pack.txt"), (hd_parts[0][0], "game/" + hd_name)])))
 
     # --- install into this game (never touches anyone's own mods: only _templates, _guide and the read-me)
     old = os.path.join(GAME, RPA_NAME + ".old")
     if not a.no_install:
         shutil.copy2(rpa, os.path.join(GAME, RPA_NAME))
-        if os.path.exists(hd_rpa):
-            shutil.copy2(hd_rpa, os.path.join(GAME, hd_name))
+        if hd_parts and not a.dev:
+            names = set(name for _, name, _ in hd_parts)
+            for fn in os.listdir(GAME):                                 # parts left over from a bigger build
+                if fn.startswith(hd_name[:-4] + "_") and fn.endswith(".rpa") and fn not in names:
+                    os.remove(os.path.join(GAME, fn))
+            for path, name, _ in hd_parts:
+                shutil.copy2(path, os.path.join(GAME, name))
         for s, d in loose:
             shutil.copy2(s, os.path.join(ROOT, d))
         for s, d in mods_files:
@@ -236,8 +262,8 @@ def main():
 
     n_scripts = sum(1 for n, _ in entries if n.endswith(".rpyc"))
     print("modpack archive: %d files (%d scripts), %.1f MB" % (len(entries), n_scripts, os.path.getsize(rpa) / 1e6))
-    if os.path.exists(hd_rpa):
-        print("HD archive: %d pictures, %.1f MB" % (len(hd_files), os.path.getsize(hd_rpa) / 1e6))
+    for path, name, g in hd_parts:
+        print("HD archive %s: %d pictures, %.1f MB" % (name, len(g), os.path.getsize(path) / 1e6))
     shutil.rmtree(out)                                                  # the zips are the deliverables
     print("last updated:", build["date"])
     for m in build["modules"]:
