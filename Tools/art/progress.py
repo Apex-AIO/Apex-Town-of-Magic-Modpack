@@ -140,7 +140,14 @@ def update_readme(p, version="", date=""):
     if a not in t or b not in t:
         return False
     chars, bgs, ui = p["categories"]
-    bar = lambda src, alt, w=820: '<img src="%s" alt="%s" width="%d">' % (src, alt, w)
+    def bar(src, alt, w=820):
+        # ?v=<content hash>: a changed bar gets a new address, so GitHub's image cache can't show an old one
+        import hashlib
+        try:
+            v = hashlib.md5(open(os.path.join(WS, src), "rb").read()).hexdigest()[:8]
+        except OSError:
+            v = "0"
+        return '<img src="%s?v=%s" alt="%s" width="%d">' % (src, v, alt.replace("&", "and"), w)
     L = ["<!-- written by Tools/art/progress.py - run it (or build a release) to update -->", '<div align="center">', "",
          "#### ALL GAME ASSETS TO SCALE", "", bar("docs/images/progress.svg", "HD project progress"), "",
          "<sub>An estimate of every game asset (the end goal). Updated with every release%s.</sub>"

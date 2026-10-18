@@ -43,24 +43,24 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 #### ALL GAME ASSETS TO SCALE
 
-<img src="docs/images/progress.svg" alt="HD project progress" width="820">
+<img src="docs/images/progress.svg?v=ce947119" alt="HD project progress" width="820">
 
 <sub>An estimate of every game asset (the end goal). Updated with every release.</sub>
 
 #### CHARACTERS
 <sub>every pose, face, outfit and animation frame of the female characters and creatures</sub>
 
-<img src="docs/images/progress_characters.svg" alt="Characters" width="820">
+<img src="docs/images/progress_characters.svg?v=776d348e" alt="Characters" width="820">
 
 #### BACKGROUNDS
 <sub>locations, window views, lights, animated backgrounds and event pictures</sub>
 
-<img src="docs/images/progress_backgrounds.svg" alt="Backgrounds" width="820">
+<img src="docs/images/progress_backgrounds.svg?v=e19d6c43" alt="Backgrounds" width="820">
 
 #### INTERFACE & ICONS
 <sub>menus, item icons, map, effects — planned later</sub>
 
-<img src="docs/images/progress_interface.svg" alt="Interface & icons" width="820">
+<img src="docs/images/progress_interface.svg?v=4083441d" alt="Interface and icons" width="820">
 
 </div>
 
@@ -69,45 +69,45 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <div align="center">
 
-<img src="docs/images/progress/characters_celica.svg" alt="Celica" width="700">
+<img src="docs/images/progress/characters_celica.svg?v=6ea60537" alt="Celica" width="700">
 
-<img src="docs/images/progress/characters_nel.svg" alt="Nel" width="700">
+<img src="docs/images/progress/characters_nel.svg?v=1fbf11cb" alt="Nel" width="700">
 
-<img src="docs/images/progress/characters_evie.svg" alt="Evie" width="700">
+<img src="docs/images/progress/characters_evie.svg?v=8b65954f" alt="Evie" width="700">
 
-<img src="docs/images/progress/characters_slime_girl.svg" alt="Slime Girl" width="700">
+<img src="docs/images/progress/characters_slime_girl.svg?v=1625f04b" alt="Slime Girl" width="700">
 
-<img src="docs/images/progress/characters_fairy.svg" alt="Fairy" width="700">
+<img src="docs/images/progress/characters_fairy.svg?v=e6bcc7bf" alt="Fairy" width="700">
 
-<img src="docs/images/progress/characters_selena.svg" alt="Selena" width="700">
+<img src="docs/images/progress/characters_selena.svg?v=f600fc32" alt="Selena" width="700">
 
-<img src="docs/images/progress/characters_fortune_teller.svg" alt="Fortune Teller" width="700">
+<img src="docs/images/progress/characters_fortune_teller.svg?v=9decb029" alt="Fortune Teller" width="700">
 
-<img src="docs/images/progress/characters_galiene.svg" alt="Galiene" width="700">
+<img src="docs/images/progress/characters_galiene.svg?v=1a8100d0" alt="Galiene" width="700">
 
-<img src="docs/images/progress/characters_maid.svg" alt="Maid" width="700">
+<img src="docs/images/progress/characters_maid.svg?v=eeac3fd2" alt="Maid" width="700">
 
-<img src="docs/images/progress/characters_joanna.svg" alt="Joanna" width="700">
+<img src="docs/images/progress/characters_joanna.svg?v=d900dd4f" alt="Joanna" width="700">
 
-<img src="docs/images/progress/characters_black_cat.svg" alt="Black Cat" width="700">
+<img src="docs/images/progress/characters_black_cat.svg?v=d4e5dbb3" alt="Black Cat" width="700">
 
-<img src="docs/images/progress/characters_giant_hornet.svg" alt="Giant Hornet" width="700">
+<img src="docs/images/progress/characters_giant_hornet.svg?v=74e44d83" alt="Giant Hornet" width="700">
 
-<img src="docs/images/progress/characters_toy_customer.svg" alt="Toy Customer" width="700">
+<img src="docs/images/progress/characters_toy_customer.svg?v=0a55a094" alt="Toy Customer" width="700">
 
-<img src="docs/images/progress/characters_electric_jellyfish.svg" alt="Electric Jellyfish" width="700">
+<img src="docs/images/progress/characters_electric_jellyfish.svg?v=e8c80b28" alt="Electric Jellyfish" width="700">
 
-<img src="docs/images/progress/characters_giant_slime.svg" alt="Giant Slime" width="700">
+<img src="docs/images/progress/characters_giant_slime.svg?v=b968ab44" alt="Giant Slime" width="700">
 
-<img src="docs/images/progress/characters_slime.svg" alt="Slime" width="700">
+<img src="docs/images/progress/characters_slime.svg?v=3b9812ed" alt="Slime" width="700">
 
-<img src="docs/images/progress/characters_balloon.svg" alt="Balloon" width="700">
+<img src="docs/images/progress/characters_balloon.svg?v=9750c696" alt="Balloon" width="700">
 
-<img src="docs/images/progress/characters_accessory_shop_keeper.svg" alt="Accessory Shop Keeper" width="700">
+<img src="docs/images/progress/characters_accessory_shop_keeper.svg?v=4ac65a45" alt="Accessory Shop Keeper" width="700">
 
-<img src="docs/images/progress/characters_magic_shop_keeper.svg" alt="Magic Shop Keeper" width="700">
+<img src="docs/images/progress/characters_magic_shop_keeper.svg?v=d9ed28d8" alt="Magic Shop Keeper" width="700">
 
-<img src="docs/images/progress/characters_alchemy_shop_keeper.svg" alt="Alchemy Shop Keeper" width="700">
+<img src="docs/images/progress/characters_alchemy_shop_keeper.svg?v=5ab1ad96" alt="Alchemy Shop Keeper" width="700">
 
 </div>
 
@@ -120,11 +120,11 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <div align="center">
 
-<img src="docs/images/progress/backgrounds_locations.svg" alt="Locations" width="700">
+<img src="docs/images/progress/backgrounds_locations.svg?v=6c2508c3" alt="Locations" width="700">
 
-<img src="docs/images/progress/backgrounds_animated_backgrounds.svg" alt="Animated backgrounds" width="700">
+<img src="docs/images/progress/backgrounds_animated_backgrounds.svg?v=b1d14f2a" alt="Animated backgrounds" width="700">
 
-<img src="docs/images/progress/backgrounds_event_pictures.svg" alt="Event pictures" width="700">
+<img src="docs/images/progress/backgrounds_event_pictures.svg?v=f06c9d5f" alt="Event pictures" width="700">
 
 </div>
 
