@@ -88,6 +88,7 @@ def compute():
 
 
 def bar_svg(path, pct, label, w=820, h=44, color="#9b6bff"):
+    label = label.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")      # SVG is XML
     fill = max(0.0, min(1.0, pct / 100.0)) * (w - 4)
     svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">
   <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#ffc94d"/><stop offset="1" stop-color="{color}"/></linearGradient></defs>
