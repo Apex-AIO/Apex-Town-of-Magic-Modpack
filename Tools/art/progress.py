@@ -130,11 +130,30 @@ def write_outputs(p):
                     lab(r["name"], r["done"], r["total"]), h=30, color=colors.get(slug, "#6d6580"))
 
 
+def _update_badges(path, version):
+    """The Latest / Downloads badges are static: shields.io's live GitHub badges show 'unable to select next GitHub
+    token from pool' whenever its token pool is exhausted. The build writes the current version and download count."""
+    import re, subprocess
+    t = open(path, encoding="utf8").read()
+    style = "?style=for-the-badge&labelColor=1a1522"
+    if version:
+        t = re.sub(r"\[!\[Latest release\]\([^)]*\)\]", "[![Latest release](https://img.shields.io/badge/latest-v%s-ffc94d%s)]" % (version, style), t, count=1)
+    try:
+        env = dict(os.environ, PATH=os.environ.get("PATH", "") + os.pathsep + r"C:\Program Files\GitHub CLI")
+        out = subprocess.run(["gh", "api", "repos/Apex-AIO/Apex-Town-of-Magic-Modpack/releases", "--jq", "[.[].assets[].download_count]|add"],
+                             capture_output=True, text=True, timeout=30, env=env).stdout.strip()
+        t = re.sub(r"\[!\[Downloads\]\([^)]*\)\]", "[![Downloads](https://img.shields.io/badge/downloads-%s-9b6bff%s)]" % (format(int(out), ","), style), t, count=1)
+    except Exception:
+        pass
+    open(path, "w", encoding="utf8").write(t)
+
+
 def update_readme(p, version="", date=""):
     """rewrite the HD progress block of the repository README (between the PROGRESS markers)"""
     path = os.path.join(WS, "README.md")
     if not os.path.exists(path):
         return False
+    _update_badges(path, version)
     t = open(path, encoding="utf8").read()
     a, b = "<!-- PROGRESS:START -->", "<!-- PROGRESS:END -->"
     if a not in t or b not in t:
@@ -182,7 +201,7 @@ def update_readme(p, version="", date=""):
 if __name__ == "__main__":
     p = compute()
     write_outputs(p)
-    print("README progress block updated" if update_readme(p) else "(README has no progress markers)")
+    print("README progress block updated" if update_readme(p, "1.3.0") else "(README has no progress markers)")
     print("HD project: %s%%  (%d of %d game assets)" % (p["overall_pct"], p["done"], p["total"]))
     for c in p["categories"]:
         print("  %-20s %6d / %-6d %3d%%" % (c["name"], c["done"], c["total"], c["pct"]))

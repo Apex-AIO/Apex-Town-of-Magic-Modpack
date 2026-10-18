@@ -3,8 +3,8 @@
 # ⚗️ APEX'S MODPACK & MOD MANAGER
 ### for Town of Magic v0.77.002 — 9 mods · a full mod manager · room for your own mods · many more mods to come
 
-[![Latest release](https://img.shields.io/github/v/release/Apex-AIO/Apex-Town-of-Magic-Modpack?style=for-the-badge&label=latest&color=ffc94d&labelColor=1a1522)](../../releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/Apex-AIO/Apex-Town-of-Magic-Modpack/total?style=for-the-badge&color=9b6bff&labelColor=1a1522)](../../releases)
+[![Latest release](https://img.shields.io/badge/latest-v1.3.0-ffc94d?style=for-the-badge&labelColor=1a1522)](../../releases/latest)
+[![Downloads](https://img.shields.io/badge/downloads-13-9b6bff?style=for-the-badge&labelColor=1a1522)](../../releases)
 [![Game version](https://img.shields.io/badge/Town_of_Magic-0.77.002-38d6f2?style=for-the-badge&labelColor=1a1522)](https://f95zone.to/threads/town-of-magic-v0-77-002-deimus.64257/)
 [![Support](https://img.shields.io/badge/Buy_me_a_coffee-☕-ffdd00?style=for-the-badge&labelColor=1a1522)](https://buymeacoffee.com/apex_modding)
 
@@ -45,7 +45,7 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <img src="docs/images/progress.svg?v=ce947119" alt="HD project progress" width="820">
 
-<sub>An estimate of every game asset (the end goal). Updated with every release.</sub>
+<sub>An estimate of every game asset (the end goal). Updated with every release - v1.3.0, .</sub>
 
 #### CHARACTERS
 <sub>every pose, face, outfit and animation frame of the female characters and creatures</sub>
