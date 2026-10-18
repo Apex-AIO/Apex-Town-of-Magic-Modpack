@@ -27,8 +27,8 @@ init 999 python:
                     tl.add("EQUIPMENT", "root")
                     tl.add("Appearance", "EQUIPMENT")
                     tl.add("Accessories", "EQUIPMENT")
-            except Exception:
-                pass
+            except Exception as e:
+                tom_mod_error("appearance_unlock", "unlocking the Appearance tab", e)
 
         _au_next = [0.0]
 

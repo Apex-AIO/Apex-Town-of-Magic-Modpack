@@ -4,11 +4,11 @@
     from progress import compute  (the build embeds it in the Mod Manager and the README)
 
 Counted from the art catalog (catalog.py, roles.py, bg_catalog.py) and the HD files that exist right now:
-  Characters   every sprite file of every non-male character (empty files left out); per character also its
+  Characters   every sprite file of every character (empty files left out); per character also its
                poses (a pose is done when all its pictures are)
   Backgrounds  every location picture, window view, light overlay, animation frame and event picture
   Interface    menus, icons, map, effects - planned later, counted so the end goal is honest
-Male characters are not part of the HD project (not counted).
+Every character counts, male characters too (since 2026-10-19).
 """
 import os, sys, json, sqlite3, collections
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -48,8 +48,6 @@ def compute():
     per = collections.defaultdict(lambda: {"total": 0, "done": 0, "folders": set(),
                                            "poses": collections.defaultdict(lambda: [0, 0])})
     for rel, folder, pose, role in rows:
-        if folder in male:
-            continue
         d = per[pretty(folder, names)]          # folders with the same name (mask, child, big...) count as one character
         done = _hd(rel)
         d["total"] += 1
@@ -71,16 +69,25 @@ def compute():
         bg_by[folder][1] += _hd(rel)
     label = {"BG": "Locations", "BGANIM": "Animated backgrounds", "EVENT": "Event pictures"}
     bg_rows = [dict(name=label.get(f, f), total=t, done=dn) for f, (t, dn) in sorted(bg_by.items())]
-    ui_total = 0
+    ui_by = collections.defaultdict(lambda: [0, 0])
+    ui_label = {"images/GUI/": "Menus and frames", "images/ICON/": "Item icons and symbols", "images/MAP/": "World map",
+                "images/FX/": "Effects", "images/BOOK/": "Book pages", "images/LANG/": "Language flags", "gui/": "Main menu and interface"}
+    seen_ui = set()
     for a in ARCHIVES:
-        ui_total += sum(1 for k in read_index(a) if k.startswith(UI_FOLDERS) and k.endswith(".png"))
+        for k in read_index(a):
+            if k.startswith(UI_FOLDERS) and k.endswith(".png") and "@" not in k and k not in seen_ui:
+                seen_ui.add(k)
+                f = [x for x in UI_FOLDERS if k.startswith(x)][0]
+                ui_by[f][0] += 1
+                ui_by[f][1] += _hd(k)
+    ui_rows = [dict(name=ui_label[f], total=t, done=dn) for f, (t, dn) in sorted(ui_by.items(), key=lambda kv: -kv[1][0])]
 
     def cat(name, rows_, note=""):
         t, dn = sum(r["total"] for r in rows_), sum(r["done"] for r in rows_)
         return dict(name=name, total=t, done=dn, pct=int(100 * dn / t) if t else 0, rows=rows_, note=note)
-    cats = [cat("Characters", char_rows, "every pose, face, outfit and animation frame of the female characters and creatures"),
+    cats = [cat("Characters", char_rows, "every pose, face, outfit and animation frame of every character and creature"),
             cat("Backgrounds", bg_rows, "locations, window views, lights, animated backgrounds and event pictures"),
-            dict(name="Interface & icons", total=ui_total, done=0, pct=0, rows=[], note="menus, item icons, map, effects — planned later")]
+            cat("Interface & icons", ui_rows, "main menu art, world map, menus, item icons, symbols, effects and book pages")]
     total, done = sum(c["total"] for c in cats), sum(c["done"] for c in cats)
     return dict(total=total, done=done, overall_pct=round(100.0 * done / total, 1) if total else 0, categories=cats,
                 characters_started=sum(1 for r in char_rows if r["done"]), characters_total=len(char_rows),
@@ -189,9 +196,12 @@ def update_readme(p, version="", date=""):
     L += ["</details>", "", "<details>", "<summary><b>🏞️ Backgrounds in detail</b></summary>", "", '<div align="center">', ""]
     for r in bgs["rows"]:
         L += [bar("docs/images/progress/backgrounds_%s.svg" % _slug(r["name"]), r["name"], 700), ""]
+    L += ["</div>", "", "</details>", "", "<details>", "<summary><b>🧭 Interface &amp; icons in detail</b></summary>", "", '<div align="center">', ""]
+    for r in ui["rows"]:
+        L += [bar("docs/images/progress/interface_%s.svg" % _slug(r["name"]), r["name"], 700), ""]
     L += ["</div>", "", "</details>", "",
           "<sub>A game asset is one image file of the game: a pose, a face, a piece of clothing, an animation sheet or a "
-          "background layer. Male characters aren't part of the HD project.</sub>"]
+          "background layer.</sub>"]
     nl = "\n"
     t = t[:t.index(a) + len(a)] + nl + nl.join(L) + nl + t[t.index(b):]
     open(path, "w", encoding="utf8").write(t)

@@ -30,6 +30,9 @@ init 0 python:
 
     # function name -> fingerprint on 0.77.002 (filled in from a recorded run)
     TOM_FINGERPRINTS = {
+        "inventory_add": "1f7655163de8",    # inventory.rpy:260
+        "add_to_reward_dict": "ad91d22a66d6",    # procedures.rpy:1536
+        "battle_ally_get_win_reward": "f19d97742d45",    # renpy_battle.rpy:8695
         "update_inventory_frame_items": "fe49107e27cb",    # procedures.rpy:1885
         "equipment_are_empty": "d869cfd4a960",    # procedures.rpy:2071
         "image_add_composite_path": "1f6d4a36b344",    # animations.rpy:421
@@ -56,6 +59,38 @@ init 0 python:
 
     tom_mod_status = {}            # mod -> "on" / "off: <reason>"
     _tg_lines = []
+
+    # ---- errors a mod caught and carried on from: never silent.  Each different error is written once (with its
+    # traceback) to game/apex_mod_errors.txt, then only counted; TOM_MOD_ERRORS feeds the Mod Manager.
+    TOM_MOD_ERRORS = {}            # (mod, what, error text) -> {"count", "first", "last"}
+
+    def tom_mod_error(mod, what, exc=None):
+        import traceback as _tb, time as _t
+        try:
+            err = ("%s: %s" % (type(exc).__name__, exc)) if exc is not None else ""
+            key = (mod, what, err)
+            now = _t.strftime("%Y-%m-%d %H:%M:%S")
+            e = TOM_MOD_ERRORS.get(key)
+            if e is None:
+                TOM_MOD_ERRORS[key] = {"count": 1, "first": now, "last": now}
+                tb = _tb.format_exc() if exc is not None else "".join(_tb.format_stack(limit=8))
+                with _tg_io.open(_tg_path("apex_mod_errors.txt"), "a", encoding="utf8") as f:
+                    f.write(u"==== %s  [%s] %s\n%s\n%s\n" % (now, mod, what, err, tb.rstrip()))
+            else:
+                e["count"] += 1
+                e["last"] = now
+                if e["count"] in (10, 100, 1000):
+                    with _tg_io.open(_tg_path("apex_mod_errors.txt"), "a", encoding="utf8") as f:
+                        f.write(u"==== %s  [%s] %s - happened %d times now (%s)\n" % (now, mod, what, e["count"], err))
+        except Exception:
+            pass
+
+    def tom_mod_log_check(mod, msg):
+        """a mod's own debug log line: if it reports a problem, record it even when that mod's log is switched off"""
+        m = str(msg)
+        low = m.lower()
+        if "error" in low or "failed" in low or "exception" in low or "traceback" in low:
+            tom_mod_error(mod, m[:300])
 
     def _tg_path(name):
         return _tg_os.path.join(config.basedir, "game", name)

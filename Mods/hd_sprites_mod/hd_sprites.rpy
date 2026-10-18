@@ -31,6 +31,8 @@ init 5 python:
             config.image_cache_size_mb = HD_IMAGE_CACHE_MB
 
         def _hd_log(msg):
+
+            tom_mod_log_check('hd_sprites', msg)
             if not HD_LOG:
                 return
             try:
@@ -87,10 +89,7 @@ init 5 python:
         def apex_hd_toggle():
             persistent.apex_hd_off = not persistent.apex_hd_off
             config.automatic_oversampling = None if persistent.apex_hd_off else 4
-            try:
-                renpy.free_memory()                # drop the pictures already loaded in the other quality
-            except Exception:
-                pass
+            # no memory wipe: the pictures of the other quality simply age out of Ren'Py's picture memory
             renpy.notify("HD pictures %s" % ("OFF (original pictures)" if persistent.apex_hd_off else "ON"))
             renpy.restart_interaction()
 
@@ -102,7 +101,7 @@ init 5 python:
 # the "HD Toggle" button: right end of the strip under Health and Magic, drawn like the game's Equip button
 screen apex_hd_toggle():
     zorder -17
-    if hasattr(store, "apex_hd_toggle") and not _menu and not main_menu and renpy.get_screen("action_frame") is not None and not flag_list.has("enable_event_viewer"):
+    if hasattr(store, "apex_hd_toggle") and not _menu and not main_menu and renpy.get_screen("action_frame") is not None and not flag_list.has("enable_event_viewer") and not (hasattr(store, "apex_ui_blocked") and apex_ui_blocked()):
         frame area (156, 74, 75, 25) padding 0,0 background Solid("#000"):
             imagebutton idle CustomBox(color=ColorMain1, xsize=75, ysize=25) hover CustomBox(color=light_color(ColorMain1), xsize=75, ysize=25) action Function(apex_hd_toggle) tooltip ("HD pictures: " + ("ON" if apex_hd_is_on() else "OFF (original pictures)") + "\nClick or press F8 to switch.")
             add CustomBox(color=ColorClick, xsize=74, ysize=24, shapestyle=1, line_size=1)

@@ -1,10 +1,10 @@
 {
  "name": "Apex's Modpack",
- "version": "1.4.0",
+ "version": "1.5.0",
  "made_for_game": "0.77.002",
  "tip_url": "https://buymeacoffee.com/apex_modding",
  "core": {
-  "rev": "2.2",
+  "rev": "2.3",
   "files": {
    "_shared/tom_mod_guard.rpy": "apex_modpack/tom_mod_guard.rpy",
    "apex_modpack_manager/apex_modpack_manager.rpy": "apex_modpack/apex_modpack_manager.rpy",
@@ -28,7 +28,7 @@
    "title": "Nel's Auto Battler Sex Autonomy Mod",
    "category": "Characters",
    "group": "Nel",
-   "rev": "1.6",
+   "rev": "1.7",
    "desc": "At the start of each of her turns, Nel has a {chance} chance to taunt the monsters, teasing them to come and fuck her until she orgasms.",
    "files": {
     "nel_taunt_mod/nel_taunt.rpy": "apex_modpack/nel_taunt.rpy"
@@ -168,8 +168,8 @@
    "id": "stutter_fix",
    "title": "Game Engine Stutter Fix",
    "category": "Engine",
-   "rev": "1.1",
-   "desc": "Removes the short battle freezes when a pose changes (caches the game's file searches).",
+   "rev": "1.3",
+   "desc": "Removes the short battle freezes: when a pose changes (caches the game's file searches), after battles and at wake-up (skips the game's picture-memory wipe) and the periodic 0.1-0.3 s freeze from Python's memory sweep.",
    "files": {
     "stutter_fix_mod/stutter_fix.rpy": "apex_modpack/stutter_fix.rpy"
    }
@@ -308,11 +308,12 @@
    "title": "HD x8 Upscale Project",
    "category": "Engine",
    "wip": "VERY EARLY WIP",
-   "rev": "0.5",
+   "rev": "0.6",
    "desc": "AI-upscaled HD pictures (x8), added a block at a time: characters and backgrounds so far (see the HD Project page). Used when the window is bigger than 1066x600. Needs the HD pack. Switch HD on or off in game with F8 or the HD Toggle button.",
    "files": {
     "hd_sprites_mod/hd_sprites.rpy": "apex_modpack/hd_sprites.rpy",
-    "hd_sprites_mod/images/": "images/"
+    "hd_sprites_mod/images/": "images/",
+    "hd_sprites_mod/gui/": "gui/"
    },
    "settings": [
     {
@@ -410,6 +411,27 @@
      "help": "One backup each time you arrive somewhere new. 0 = no backups."
     }
    ]
+  },
+  {
+   "id": "fuse_catalog",
+   "title": "Morden's Lab Craftable Catalog",
+   "category": "UI",
+   "rev": "1.0",
+   "desc": "In Morden's Lab, a CATALOG button between the glass capsules lists the upgrades you can make right now; click one to put both items in, then FUSE.",
+   "files": {
+    "fuse_catalog_mod/fuse_catalog.rpy": "apex_modpack/fuse_catalog.rpy"
+   }
+  },
+  {
+   "id": "nel_report",
+   "title": "Nel's Battle Report",
+   "category": "Characters",
+   "group": "Nel",
+   "rev": "1.0",
+   "desc": "When Nel leaves Celica's body after auto-battling, a report shows the monsters she defeated, items (rarest first), XP, skill XP, gold, taunts, climaxes and how long it took.",
+   "files": {
+    "nel_report_mod/nel_report.rpy": "apex_modpack/nel_report.rpy"
+   }
   }
  ],
  "repo_url": "https://github.com/Apex-AIO/Apex-Town-of-Magic-Modpack",
@@ -420,6 +442,6 @@
  "hd_archive": {
   "name": "Apex_HD.rpa",
   "module": "hd_sprites",
-  "folder": "hd_sprites_mod/images/"
+  "folder": "hd_sprites_mod/"
  }
 }

@@ -20,6 +20,7 @@ MODS (each one has its own switch in the manager)
     H-Scene Idle Loop                   Grope and H-scene animations keep looping on your turn.
     Nel's Auto Battler Sex Autonomy Mod Nel teases monsters during her auto-battles, with a climax ladder.
                                         Balancing options: Half XP and Never One-Shots.
+    Nel's Battle Report                 A report sheet when Nel leaves: monsters, items, XP, gold, taunts, time.
   CLOTHING
     Appearance Menu Insta Unlock        Equip > Appearance is open from the start.
     Clothing Remover                    Red-X Shoes / Top / Pants items.
@@ -31,6 +32,7 @@ MODS (each one has its own switch in the manager)
   UI
     Inventory Scroll Mod                Every item grid (ITEMS, SPELLS, Appearance, Accessories) scrolls with the
                                         mouse wheel and grows as you get more.
+    Morden's Lab Craftable Catalog      A CATALOG button in Morden's Lab lists the upgrades you can make now.
     Movable Inventory Items             Drag an item onto another square to swap them (needs Inventory Scroll Mod).
     Inventory Backups                   A backup of your items at each new place; the small button under the
                                         inventory puts one back.

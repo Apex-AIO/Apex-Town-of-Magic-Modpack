@@ -68,3 +68,52 @@ init 5 python:
                 fl, low = _sf_list(common)
                 _sf_cache[key] = [f for f in fl if text in f]
             return list(_sf_cache[key])
+
+        # ---- 2: the game empties ALL picture memory after battles and at wake-up (renpy.free_memory, 8 places):
+        # every texture is thrown away and reloaded on the next frame, plus a full Python memory sweep, so the screen
+        # freezes for 0.25 s (0.55 s with HD pictures).  Ren'Py's picture memory already limits itself (oldest
+        # pictures go first), so while it is less than 80% full the wipe is skipped.  When it is fuller, the game's
+        # own call runs as before.
+        import renpy.display.im as _sf_im
+        _sf_orig_free_memory = renpy.free_memory
+
+        def _sf_free_memory():
+            try:
+                c = _sf_im.cache
+                if c.cache_limit and c.cache_size < 0.8 * c.cache_limit:
+                    return
+            except Exception as e:
+                tom_mod_error("stutter_fix", "checking picture memory", e)
+            return _sf_orig_free_memory()
+
+        renpy.free_memory = _sf_free_memory
+
+        # ---- 3: Python's full garbage sweep.  The game keeps ~575,000 objects alive (items, enemies, settings...), so
+        # every full sweep, which Ren'Py starts now and then at idle moments, freezes the game for ~120 ms - the
+        # 250-300 ms hitches in battles.  gc.freeze() moves everything that exists right now out of the sweep (the
+        # sweep then only looks at new objects: ~0 ms).  Each start and load first sweeps the old objects once
+        # (unfreeze + collect), then freezes the new state, so nothing leaks from one save to the next.
+        import gc as _sf_gc
+
+        def _sf_refreeze():
+            try:
+                _sf_gc.unfreeze()
+                _sf_gc.collect(2)
+                _sf_gc.freeze()
+            except Exception as e:
+                tom_mod_error("stutter_fix", "freezing long-lived objects", e)
+
+        _SF_FROZEN = [False]
+
+        def _sf_first_freeze():
+            # once, a moment after the game has started (init is finished): the main menu is showing
+            if not _SF_FROZEN[0] and renpy.get_screen("main_menu") is not None:
+                _SF_FROZEN[0] = True
+                _sf_refreeze()
+
+        if _sf_refreeze not in config.after_load_callbacks:
+            config.after_load_callbacks.append(_sf_refreeze)
+        if _sf_refreeze not in config.start_callbacks:
+            config.start_callbacks.append(_sf_refreeze)
+        if _sf_first_freeze not in config.periodic_callbacks:
+            config.periodic_callbacks.append(_sf_first_freeze)

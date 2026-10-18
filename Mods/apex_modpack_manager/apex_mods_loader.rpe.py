@@ -235,6 +235,14 @@ def _apex_exception_handler(short, full, traceback_fn=None):
     """Ren'Py calls this for any error while the game runs.  Errors from a mod in the mods folder are recorded,
     that mod is switched off for the next start, and the game carries on.  Everything else: Ren'Py as usual."""
     try:
+        if "apex_modpack/" in full:
+            # an error inside one of Apex's own mods: keep a copy next to the game's own traceback.txt
+            with io.open(os.path.join(renpy.config.gamedir, "apex_mod_errors.txt"), "a", encoding="utf8") as f:
+                f.write(u"==== %s  UNCAUGHT ERROR in Apex's mods (the game showed its error screen)\n%s\n"
+                        % (time.strftime("%Y-%m-%d %H:%M:%S"), full.rstrip()))
+    except Exception:
+        pass
+    try:
         st = getattr(renpy, "apex_mods", None)
         mod = _apex_mod_of(full)
         if not st or not mod or mod.startswith("_"):

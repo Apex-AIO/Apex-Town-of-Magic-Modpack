@@ -114,6 +114,8 @@ init 999 python:
             item.equip_attribure_dict = new
 
         def _xr_log(msg):
+
+            tom_mod_log_check('clothing_remover', msg)
             if not XR_LOG:
                 return
             try:

@@ -41,6 +41,8 @@ init 999 python:
         MD_LABELS = ("wake_up", "wake_up.normal_wakeup", "event_use_dildo", "event_use_dildo_with_nel")
 
         def _md_log(msg):
+
+            tom_mod_log_check('morning_dildo', msg)
             if not MD_LOG:
                 return
             try:

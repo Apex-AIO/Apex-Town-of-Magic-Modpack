@@ -2,6 +2,7 @@
 rem Renders EVERYTHING that is queued and not rendered yet.
 rem   1. sets\redo.txt (if there is one): files the art catalog found were rendered with the wrong context/recipe
 rem   2. the queued lists: forest monsters, town women, everything collected while playing (pending)
+rem   3. the interface: main menu, world map, menus, icons, symbols, effects (ui_batch.py)
 rem Needs ComfyUI running. Safe to stop and restart: finished files are skipped (the redo list is only retired
 rem once it has run through completely).
 cd /d "%~dp0"
@@ -12,5 +13,7 @@ if exist sets\redo.txt (
 )
 %PY% hd_batch.py --set monsters_forest2 --no-open
 %PY% hd_batch.py --set town_women --no-open
-%PY% hd_batch.py --set pending
+%PY% hd_batch.py --set pending --no-open
+rem 3. everything else: main menu art, world map, menus, icons, symbols, effects (upscale only, no ComfyUI needed)
+%PY% ui_batch.py
 pause

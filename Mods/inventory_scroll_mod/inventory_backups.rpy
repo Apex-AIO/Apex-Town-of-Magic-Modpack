@@ -106,7 +106,8 @@ init 6 python:
 
 screen apex_inv_backup_btn():
     zorder -16
-    if apex_inv_backup_btn_visible():
+    # a save can bring this overlay back while the mod is switched off: then draw nothing
+    if hasattr(store, "apex_inv_backup_btn_visible") and apex_inv_backup_btn_visible():
         # small button under the inventory
         frame area (1036, 360, 14, 14) padding 0,0 background None:
             imagebutton idle CustomBox(color=ColorMain1, xsize=14, ysize=14) hover CustomBox(color=light_color(ColorMain1), xsize=14, ysize=14) action Show("apex_inv_backups") tooltip "Inventory backups\nPut your items back to how they were at one of the last places you visited."

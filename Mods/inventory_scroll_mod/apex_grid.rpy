@@ -26,6 +26,8 @@ init -5 python:
     APEX_GRID_LOG = []                # problems found by the checks (newest last), shown in game/apex_grid_log.txt
 
     def apex_grid_log(msg):
+        if "restored" not in msg:
+            tom_mod_error("inventory", msg)        # every grid problem is also an error report
         APEX_GRID_LOG.append(msg)
         del APEX_GRID_LOG[:-50]
         try:

@@ -4,7 +4,7 @@ Run after playing (the recorder in claude_debug.rpy writes game/claude_debug/use
     python hd_queue.py
 What it does
   * reads every image the game loaded (game/claude_debug/used_images.txt + saved copies in Tools/debug/logs)
-  * character pictures only (images/CHAR/...); male characters are skipped (the game tags them "Male");
+  * character pictures only (images/CHAR/...); male characters are included since 2026-10-19 (INCLUDE_MALE);
     Celica, women and monsters/creatures are kept
   * status of each picture:  rendered (an @2 file exists in the HD mod) / queued (in a sets/*.txt list) /
     skipped (male) / NEW
@@ -65,6 +65,7 @@ def main():
         shutil.copy2(USED, os.path.join(LOGS, "used_images_%s.txt" % time.strftime("%Y%m%d_%H%M")))
 
     male = genders()
+    INCLUDE_MALE = True            # 2026-10-19: male characters are part of the HD project now (every sprite)
     in_sets = {}
     for sf in glob.glob(os.path.join(SETS, "*.txt")):
         name = os.path.splitext(os.path.basename(sf))[0]
@@ -72,13 +73,24 @@ def main():
             if l.strip():
                 in_sets.setdefault(norm(l), name)
 
+    # only the game's own pictures (a picture from a mod in the mods folder is not upscaled)
+    game_files = set()
+    try:
+        sys.path.insert(0, os.path.join(WS, "Tools", "art"))
+        from catalog import read_index, ARCHIVES
+        for arch in ARCHIVES:
+            game_files.update(read_index(arch))
+    except Exception as e:
+        print("(could not read the game archives: %r - every picture is kept)" % (e,))
     rows, new = [], []
     for rel in seen:
+        if game_files and rel not in game_files:
+            continue
         folder = rel.split("/")[2]
         rendered = os.path.exists(os.path.join(MOD, rel.replace("/", os.sep))[:-4] + "@2.png")
         if rendered:
             status = "rendered"
-        elif male.get(folder, False):
+        elif male.get(folder, False) and not INCLUDE_MALE:
             status = "skipped (male)"
         elif rel in in_sets:
             status = "queued (%s)" % in_sets[rel]

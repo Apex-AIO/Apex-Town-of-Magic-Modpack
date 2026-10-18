@@ -1,7 +1,7 @@
 <div align="center">
 
 # ⚗️ APEX'S MODPACK & MOD MANAGER
-### for Town of Magic v0.77.002 — 11 mods · a full mod manager · room for your own mods · many more mods to come
+### for Town of Magic v0.77.002 — 13 mods · a full mod manager · room for your own mods · many more mods to come
 
 [![Latest release](https://img.shields.io/github/v/release/Apex-AIO/Apex-Town-of-Magic-Modpack?style=for-the-badge&label=latest&color=ffc94d&labelColor=1a1522)](../../releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Apex-AIO/Apex-Town-of-Magic-Modpack/total?style=for-the-badge&color=9b6bff&labelColor=1a1522)](../../releases)
@@ -16,9 +16,9 @@
 
 | Download | What's inside | Last updated | Version | Size |
 |---|---|:-:|:-:|--:|
-| **Apex_Modpack** | All 11 mods + the Mod Manager + the mods folder (templates and the modding guide) | 2026-10-18 | v1.4.0 | 0.3 MB |
-| **Apex_HD_Pack** part 1 of 2 | HD pictures for the HD x8 project (add-on, needs the modpack) | 2026-10-18 | v1.4.0 | 1.8 GB |
-| **Apex_HD_Pack** part 2 of 2 | HD pictures, continued. Install both parts. | 2026-10-18 | v1.4.0 | 1.0 GB |
+| **Apex_Modpack** | All 13 mods + the Mod Manager + the mods folder (templates and the modding guide) | 2026-10-19 | v1.5.0 | 0.4 MB |
+| **Apex_HD_Pack** part 1 of 2 | HD pictures for the HD x8 project (add-on, needs the modpack) | 2026-10-19 | v1.5.0 | 1.9 GB |
+| **Apex_HD_Pack** part 2 of 2 | HD pictures, continued. Install both parts. | 2026-10-19 | v1.5.0 | 1.7 GB |
 
 <sub>Install steps are on the release page. Made for Town of Magic 0.77.002.</sub>
 
@@ -43,14 +43,14 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 #### ALL GAME ASSETS TO SCALE
 
-<img src="docs/images/progress.svg?v=ce947119" alt="HD project progress" width="820">
+<img src="docs/images/progress.svg?v=c7ae712d" alt="HD project progress" width="820">
 
-<sub>An estimate of every game asset (the end goal). Updated with every release - v1.4.0, 18 Oct 2026.</sub>
+<sub>An estimate of every game asset (the end goal). Updated with every release - v1.5.0, 19 Oct 2026.</sub>
 
 #### CHARACTERS
-<sub>every pose, face, outfit and animation frame of the female characters and creatures</sub>
+<sub>every pose, face, outfit and animation frame of every character and creature</sub>
 
-<img src="docs/images/progress_characters.svg?v=776d348e" alt="Characters" width="820">
+<img src="docs/images/progress_characters.svg?v=c3423472" alt="Characters" width="820">
 
 #### BACKGROUNDS
 <sub>locations, window views, lights, animated backgrounds and event pictures</sub>
@@ -58,38 +58,64 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 <img src="docs/images/progress_backgrounds.svg?v=e19d6c43" alt="Backgrounds" width="820">
 
 #### INTERFACE & ICONS
-<sub>menus, item icons, map, effects — planned later</sub>
+<sub>main menu art, world map, menus, item icons, symbols, effects and book pages</sub>
 
-<img src="docs/images/progress_interface.svg?v=4083441d" alt="Interface and icons" width="820">
+<img src="docs/images/progress_interface.svg?v=ce9410a2" alt="Interface and icons" width="820">
 
 </div>
 
 <details>
-<summary><b>🧑‍🎨 Characters in detail — currently encountered in my own save (20 of 113 characters)</b></summary>
+<summary><b>🧑‍🎨 Characters in detail — currently encountered in my own save (39 of 183 characters)</b></summary>
 
 <div align="center">
 
-<img src="docs/images/progress/characters_celica.svg?v=6ea60537" alt="Celica" width="700">
+<img src="docs/images/progress/characters_celica.svg?v=5159870e" alt="Celica" width="700">
+
+<img src="docs/images/progress/characters_demoness.svg?v=377eb54b" alt="Demoness" width="700">
 
 <img src="docs/images/progress/characters_nel.svg?v=1fbf11cb" alt="Nel" width="700">
 
-<img src="docs/images/progress/characters_evie.svg?v=8b65954f" alt="Evie" width="700">
+<img src="docs/images/progress/characters_evie.svg?v=1d1cd3c1" alt="Evie" width="700">
 
-<img src="docs/images/progress/characters_slime_girl.svg?v=1625f04b" alt="Slime Girl" width="700">
+<img src="docs/images/progress/characters_slime_girl.svg?v=2d0bda82" alt="Slime Girl" width="700">
 
 <img src="docs/images/progress/characters_fairy.svg?v=e6bcc7bf" alt="Fairy" width="700">
 
+<img src="docs/images/progress/characters_galiene.svg?v=7e23c724" alt="Galiene" width="700">
+
 <img src="docs/images/progress/characters_selena.svg?v=f600fc32" alt="Selena" width="700">
+
+<img src="docs/images/progress/characters_lucan.svg?v=1f700fd2" alt="Lucan" width="700">
 
 <img src="docs/images/progress/characters_fortune_teller.svg?v=9decb029" alt="Fortune Teller" width="700">
 
-<img src="docs/images/progress/characters_galiene.svg?v=1a8100d0" alt="Galiene" width="700">
+<img src="docs/images/progress/characters_cornel.svg?v=a031c470" alt="Cornel" width="700">
 
 <img src="docs/images/progress/characters_maid.svg?v=eeac3fd2" alt="Maid" width="700">
+
+<img src="docs/images/progress/characters_edgar.svg?v=b82f61f1" alt="Edgar" width="700">
+
+<img src="docs/images/progress/characters_jack.svg?v=4dd5e54a" alt="Jack" width="700">
+
+<img src="docs/images/progress/characters_morden.svg?v=7e2b3eae" alt="Morden" width="700">
+
+<img src="docs/images/progress/characters_barkeeper.svg?v=442734a9" alt="Barkeeper" width="700">
+
+<img src="docs/images/progress/characters_liam.svg?v=6e1043a5" alt="Liam" width="700">
+
+<img src="docs/images/progress/characters_bert.svg?v=962b1a3c" alt="Bert" width="700">
+
+<img src="docs/images/progress/characters_phineas_pholly.svg?v=f65538c7" alt="Phineas Pholly" width="700">
 
 <img src="docs/images/progress/characters_joanna.svg?v=d900dd4f" alt="Joanna" width="700">
 
 <img src="docs/images/progress/characters_black_cat.svg?v=d4e5dbb3" alt="Black Cat" width="700">
+
+<img src="docs/images/progress/characters_godrin.svg?v=8e03c29c" alt="Godrin" width="700">
+
+<img src="docs/images/progress/characters_gary.svg?v=4bfef1be" alt="Gary" width="700">
+
+<img src="docs/images/progress/characters_jake.svg?v=bee8e2dc" alt="Jake" width="700">
 
 <img src="docs/images/progress/characters_giant_hornet.svg?v=74e44d83" alt="Giant Hornet" width="700">
 
@@ -97,21 +123,33 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <img src="docs/images/progress/characters_electric_jellyfish.svg?v=e8c80b28" alt="Electric Jellyfish" width="700">
 
+<img src="docs/images/progress/characters_fisherman.svg?v=a30fc733" alt="Fisherman" width="700">
+
+<img src="docs/images/progress/characters_dark_fairy.svg?v=feb14e5c" alt="Dark Fairy" width="700">
+
 <img src="docs/images/progress/characters_giant_slime.svg?v=b968ab44" alt="Giant Slime" width="700">
+
+<img src="docs/images/progress/characters_rock_spitter.svg?v=dff5e1b5" alt="Rock Spitter" width="700">
 
 <img src="docs/images/progress/characters_slime.svg?v=3b9812ed" alt="Slime" width="700">
 
+<img src="docs/images/progress/characters_pawn_shop_keeper.svg?v=5d3ab069" alt="Pawn Shop Keeper" width="700">
+
 <img src="docs/images/progress/characters_balloon.svg?v=9750c696" alt="Balloon" width="700">
+
+<img src="docs/images/progress/characters_alchemy_shop_keeper.svg?v=2064bf08" alt="Alchemy Shop Keeper" width="700">
 
 <img src="docs/images/progress/characters_accessory_shop_keeper.svg?v=4ac65a45" alt="Accessory Shop Keeper" width="700">
 
 <img src="docs/images/progress/characters_magic_shop_keeper.svg?v=d9ed28d8" alt="Magic Shop Keeper" width="700">
 
-<img src="docs/images/progress/characters_alchemy_shop_keeper.svg?v=5ab1ad96" alt="Alchemy Shop Keeper" width="700">
+<img src="docs/images/progress/characters_traveler.svg?v=6ffd9de9" alt="Traveler" width="700">
+
+<img src="docs/images/progress/characters_walter_turner.svg?v=3cd33961" alt="Walter Turner" width="700">
 
 </div>
 
-<sub>Not encountered yet (93): Alraune, Bee-Girl, Bellona, Biter, Blightbloom, Booty, Busty, Capt. Ceres, Celestian, Celica (child), Celica (fairy), Celica (spirit), Cellshroom, Cephrina, Cindy, Clara, Cornel, Cyclopus, Dark Fairy, Dark Painting, Demon Sloth Blimp, Demon Sloth Dick, Demoness, Domenea, Drylia, Edgar, Eeris, Eleth Shop Keeper, Elith, Elize, Elyrana, Emma, Envy, Envy Demon, Faylen, Faylen (spirit), Fire Ray, Galiene (spirit), Genie, Genie Celica, Glace, Gluttony's Tongue, Huge Slime, Ice Armor, Inara, Kitsune, Lamia, Layla, Lena, Lena (shop keeper), Lilith, Lily, Lucina, Luna, Lust, Lust Demon, Lyra, Madame Samira, Mana Stalker, Margarilda, Marlene, Mimic, Mirania, Miriam, Nahla, Noctriel, Noctyra, Noxtar, Penelope, Phantom Pirate, Phantom Sword, Pirate, Pixella, Puppet, Queen Brynja, Rock Spitter, Saya, Shade, Succubus, Sylphie, Sylvia, Talkstone, Tentaknight, Tessa, Topi, Trixi, Umbral Groper, Valen, Velvetia, Vera, Violet, Vivi, Vivi's Panties</sub>
+<sub>Not encountered yet (144): Alraune, Anubis Warrior, Avalloc, Baron Everard, Bee-Girl, Bellona, Biter, Blightbloom, Booty, Busty, Capt. Ceres, Cedric, Celestian, Celica (child), Celica (fairy), Celica (spirit), Cellshroom, Cephrina, Cindy, Clara, Cozzy, Cyclopus, Dark Cape, Dark Knight, Dark Painting, Demon Sloth Blimp, Demon Sloth Dick, Domenea, Drylia, Dwarf Guard, Dwarf Watch, Eeris, Elandorr, Elaran, Eleth Shop Keeper, Elith, Elize, Elyrana, Emma, Envy, Envy Demon, Fargrim, Faylen, Faylen (spirit), Fire Golem, Fire Ray, Fire Wyvern, Forest Hermit, Gaius, Galgatin, Galiene (spirit), Gavin, Genie, Genie Celica, Giant Spider, Glace, Gluttony Demon, Gluttony's Tongue, Golem, Gorgroth, Graham, Greed Demon, Grimm, Grimmerock, Huge Slime, Ice Armor, Ice Golem, Inara, Kael, King Therbin, Kitsune, Lamia, Layla, Lena, Lena (shop keeper), Leraie, Liamspirit, Lilith, Lily, Lucina, Luna, Lust, Lust Demon, Lyra, Lysander, Madame Samira, Mana Stalker, Manfred, Margarilda, Marlene, Masked Dwarf, Mimic, Mindflayer, Mirania, Miriam, Nahla, Noctriel, Noctyra, Noxtar, Oberon, Penelope, Phantom Pirate, Phantom Sword, Pirate, Pixella, Pride Demon, Prince Rajak, Puck, Puppet, Queen Brynja, Richard, Roderick, Rurik, Rusty, Saya, Shade, Silgri, Skull Imp, Sloth Demon, Succubus, Sylphie, Sylvia, Taenaran, Talkstone, Tentaknight, Tessa, Topi, Trixi, Umbral Groper, Undead, Vaerandor, Valen, Velvetia, Vera, Violet, Vivi, Vivi's Panties, Voidgazer, Vorath, Warden, Wrath Demon, Xantherus, Yaiba, Zaid</sub>
 
 </details>
 
@@ -130,7 +168,30 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 </details>
 
-<sub>A game asset is one image file of the game: a pose, a face, a piece of clothing, an animation sheet or a background layer. Male characters aren't part of the HD project.</sub>
+<details>
+<summary><b>🧭 Interface &amp; icons in detail</b></summary>
+
+<div align="center">
+
+<img src="docs/images/progress/interface_world_map.svg?v=3973b778" alt="World map" width="700">
+
+<img src="docs/images/progress/interface_item_icons_and_symbols.svg?v=5f275012" alt="Item icons and symbols" width="700">
+
+<img src="docs/images/progress/interface_menus_and_frames.svg?v=dcf86217" alt="Menus and frames" width="700">
+
+<img src="docs/images/progress/interface_effects.svg?v=938f1142" alt="Effects" width="700">
+
+<img src="docs/images/progress/interface_main_menu_and_interface.svg?v=488434d7" alt="Main menu and interface" width="700">
+
+<img src="docs/images/progress/interface_book_pages.svg?v=af416dfd" alt="Book pages" width="700">
+
+<img src="docs/images/progress/interface_language_flags.svg?v=c837c87b" alt="Language flags" width="700">
+
+</div>
+
+</details>
+
+<sub>A game asset is one image file of the game: a pose, a face, a piece of clothing, an animation sheet or a background layer.</sub>
 <!-- PROGRESS:END -->
 
 ---
@@ -155,6 +216,7 @@ Everything happens in one place on the main menu — no file editing needed.
 | **Apex's Mods** | Switch each of the pack's mods (and sub-mods) on or off. The ⚙️ gear changes a mod's settings. |
 | **Your Mods** | Your own mods and mods you download, from the `mods` folder — with on/off, settings, details and plain-words error reports. |
 | **HD Project** | How far the HD upscale is, per character and per area. |
+| **Updates** | Bottom left: checks GitHub for a newer version (also once when the game starts) and offers **Download** / **No**. Switch the start-up check off with *Check at start*. |
 | **Mod Tools** | Create a mod from a template, check your mods for problems, export game pictures to edit, open the guide. |
 | **About & Support** | Versions, compatibility, revisions of every mod, and support links. |
 | **Restart prompt** | Changed something? It asks *"Restart now to apply changes?"* when you leave or quit. |
@@ -389,7 +451,7 @@ On your turn, grope and H-scene animations <ins>**keep looping with their sounds
 <blockquote>
 
 <details>
-<summary><b>👻 Nel's Auto Battler Sex Autonomy Mod (r1.6)</b></summary>
+<summary><b>👻 Nel's Auto Battler Sex Autonomy Mod (r1.7)</b></summary>
 <div align="center">
 
 When Nel possesses Celica and auto-battles, she sometimes stops fighting and **taunts the monsters**, teasing them to come and use Celica's body until she climaxes. Monsters grab, grope and tear her clothes, Nel comments on it in her own voice, then she shoos them off and goes back to fighting.
@@ -404,6 +466,18 @@ Nel only gains 0.5 body influence per climax instead of the game's 10<br>
 ⚙️ **Settings:** taunt chance, cooldown, how often she talks, taunt time limit, lust needed for climaxes 1 to 5+, XP share, body influence.
 
 <img src="docs/images/mm_settings.png" alt="Nel's settings" width="760">
+
+</div>
+</details>
+
+<details>
+<summary><b>📋 Nel's Battle Report (r1.0)</b></summary>
+<div align="center">
+
+When Nel leaves Celica's body after an auto-battle ("Bye…!"), a **report sheet** shows everything she did while she was in control:<br>
+the **monsters** she defeated (with their pictures), **battle XP and skill XP** added up, **gold**, how many times she **invited the monsters**, her climaxes, the number of battles and how long it all took. **Items** run along the bottom, rarest first, in frames that get fancier with rarity (epic items pulse, legendary ones shine).
+
+<img src="docs/images/nel_report.png" alt="Nel's Battle Report (sample numbers)" width="760">
 
 </div>
 </details>
@@ -462,10 +536,10 @@ The **Equip > Appearance** tab is open from the very start, on new games and on 
 <blockquote>
 
 <details>
-<summary><b>⚡ Game Engine Stutter Fix (r1.1)</b></summary>
+<summary><b>⚡ Game Engine Stutter Fix (r1.3)</b></summary>
 <div align="center">
 
-Removes the short **~0.2–0.4 s freeze** in battle whenever a character changes pose. The whole game feels way smoother and snappier.
+Removes the short **~0.2–0.4 s freezes** in battle: when a character changes pose, after a battle ends or you wake up, and the periodic freeze from Python's memory clean-up. The whole game feels way smoother and snappier.
 
 <img src="docs/images/stutter_fix.png" alt="Freeze per pose change: 184 ms without the mod, 0 ms with it" width="760">
 
@@ -473,10 +547,10 @@ Removes the short **~0.2–0.4 s freeze** in battle whenever a character changes
 </details>
 
 <details>
-<summary><b>🖼️ HD x8 Upscale Project (r0.5) — VERY EARLY WIP</b></summary>
+<summary><b>🖼️ HD x8 Upscale Project (r0.6) — VERY EARLY WIP</b></summary>
 <div align="center">
 
-AI-upscaled HD pictures, used automatically when your window is bigger than 1066×600 (1080p, 1440p, 4K). Characters and backgrounds are done a block at a time — see **HD Project progress** above. Needs the **Apex_HD_Pack** download.
+AI-upscaled HD pictures, used automatically when your window is bigger than 1066×600 (1080p, 1440p, 4K). All backgrounds and **all menus, icons, symbols, the main menu and the world map** are done; characters are done a block at a time — see **HD Project progress** above. Needs the **Apex_HD_Pack** download.
 
 **HD Toggle:** press **F8** or click the **HD Toggle** button under Health and Magic to switch every HD picture back to the original and back again, instantly.<br>
 ⚙️ **Settings:** picture memory.
@@ -500,6 +574,17 @@ AI-upscaled HD pictures, used automatically when your window is bigger than 1066
 Every item grid scrolls with the **mouse wheel** instead of paging with arrows, and grows a new row whenever it's nearly full (7 of 9 squares, 10 of 12, ...): **ITEMS** and **SPELLS**, and **Appearance** and **Accessories** in Equip.
 
 <img src="docs/images/inventory_scroll.gif" alt="Scrolling the ITEMS grid" width="330"> <img src="docs/images/inventory_scroll_equip.gif" alt="Scrolling the Appearance grid in Equip" width="460">
+
+</div>
+</details>
+
+<details>
+<summary><b>🧪 Morden's Lab Craftable Catalog (r1.0)</b></summary>
+<div align="center">
+
+In Morden's Lab, a **CATALOG** button appears between the two glass capsules. It lists **only the upgrades you can make right now** (both ingredients owned and usable). Click one and both items are put in Item 1 and Item 2 — then press **FUSE** as usual. Each ingredient says where it is ("Equip > Accessories", "worn"). The recipes come straight from the game, so they're always exact, even after game updates.
+
+<img src="docs/images/fuse_catalog.png" alt="The CATALOG button between the capsules" width="380"> <img src="docs/images/fuse_catalog_list.png" alt="The list of upgrades you can make" width="380">
 
 </div>
 </details>
@@ -542,6 +627,15 @@ Each time you arrive somewhere new, a backup of your items and gold is kept (the
 
 <details>
 <summary><b>Changelog</b></summary>
+
+**v1.5.0**
+- New: **Update checker** in the Mod Manager (start-up check with a Download / No prompt, plus a manual button above Game Version)
+- New: **Nel's Battle Report** and **Morden's Lab Craftable Catalog**
+- HD: **every menu, icon, symbol, the main menu and the world map** are now HD (upscale only, so text and symbols stay exact); HD pack is now 2 parts
+- Fixed: Celica had **no face** during some of Nel's taunts
+- Stutter Fix 1.3: removes the periodic memory-clean-up freeze
+- Inventory: the game's own grid is used while a shop, Equip or a question is open, so dialogs always cover it
+- Every problem a mod catches is now written to `game/apex_mod_errors.txt`
 
 **v1.4.0**
 - **The Mods** and the Mod Manager are grouped by category: Characters (Celica, Nel), Clothing, Engine, UI

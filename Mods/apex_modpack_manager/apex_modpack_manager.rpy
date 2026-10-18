@@ -564,6 +564,11 @@ init 999 python:
                             % apex_mm_module(mid).get("title", mid)))
         if apex_mm_is_on("hd_sprites") and not apex_hd_installed():
             out.append((APEX_WARN, "sparkle", "HD x8 is on, but the HD pictures aren't installed (download the HD pack)."))
+        errs = globals().get("TOM_MOD_ERRORS") or {}
+        if errs:
+            mods = sorted(set(k[0] for k in errs))
+            out.append((APEX_WARN, "warn", "%d problem%s caught and handled this session (%s). Details: game/apex_mod_errors.txt."
+                        % (len(errs), "" if len(errs) == 1 else "s", ", ".join(mods))))
         return out
 
     def apex_mm_restart():
@@ -592,6 +597,99 @@ init 999 python:
 
     if APEX_BUILD is not None and "apex_mm_menu_button" not in config.always_shown_screens:
         config.always_shown_screens.append("apex_mm_menu_button")
+
+    # ================= update check (GitHub releases) =================
+    # One anonymous read of the public "latest release" page of the modpack's repository (api.github.com, nothing
+    # about the player is sent).  Runs in a background thread with a short timeout, so the game never waits for it;
+    # any problem (offline, rate limit) just shows "couldn't check".  At game start it asks once per new version;
+    # "No" is remembered for that version (the manual check always works).  The start-up check can be switched off
+    # in the Mod Manager ("Check at start").
+    import threading as _apex_threading, json as _apex_json
+    APEX_UPD = {"state": "idle", "latest": "", "url": "", "name": "", "asked": False, "error": ""}
+
+    def _apex_ver(s):
+        import re as _re
+        return tuple(int(x) for x in (_re.findall(r"\d+", str(s))[:4] or [0]))
+
+    def apex_upd_current():
+        return str((APEX_BUILD or {}).get("version", "0"))
+
+    def _apex_upd_repo():
+        r = (APEX_BUILD or {}).get("repo_url", "") or "https://github.com/Apex-AIO/Apex-Town-of-Magic-Modpack"
+        return r.rstrip("/").replace("https://github.com/", "")
+
+    def _apex_upd_done(state, **kw):
+        APEX_UPD.update(state=state, **kw)
+        try:
+            renpy.invoke_in_main_thread(renpy.restart_interaction)
+        except Exception:
+            pass
+
+    def _apex_upd_worker():
+        try:
+            import urllib.request as _ur, ssl as _ssl
+            ctx = _ssl.create_default_context()
+            try:                                        # Ren'Py's Python has no certificate list of its own: use the one the game ships
+                import certifi as _certifi
+                ctx.load_verify_locations(_certifi.where())
+            except Exception:
+                _cp = _apex_os.path.join(config.basedir, "lib", "python3.12", "certifi", "cacert.pem")
+                if _apex_os.path.exists(_cp):
+                    ctx.load_verify_locations(_cp)
+            req = _ur.Request("https://api.github.com/repos/%s/releases/latest" % _apex_upd_repo(),
+                              headers={"User-Agent": "ApexModpackManager", "Accept": "application/vnd.github+json"})
+            with _ur.urlopen(req, timeout=8, context=ctx) as r:
+                d = _apex_json.loads(r.read().decode("utf8"))
+            tag = str(d.get("tag_name", ""))
+            url = str(d.get("html_url", ""))
+            if not tag or not url.startswith("https://github.com/"):
+                raise ValueError("unexpected answer from GitHub")
+            if _apex_ver(tag) > _apex_ver(apex_upd_current()):
+                _apex_upd_done("new", latest=tag.lstrip("vV"), url=url, name=str(d.get("name", "")))
+            else:
+                _apex_upd_done("latest", latest=tag.lstrip("vV"), url=url)
+        except Exception as e:
+            _apex_upd_done("error", error=str(e)[:120])
+
+    def apex_upd_check(manual=True):
+        if APEX_BUILD is None or APEX_UPD["state"] == "checking":
+            return
+        APEX_UPD["state"] = "checking"
+        if manual:
+            APEX_UPD["asked"] = True                    # a manual result shows in the panel, no pop-up
+        _apex_threading.Thread(target=_apex_upd_worker, daemon=True).start()
+        renpy.restart_interaction()
+
+    def apex_upd_auto():
+        return persistent.apex_upd_auto is not False
+
+    def apex_upd_toggle_auto():
+        persistent.apex_upd_auto = not apex_upd_auto()
+        renpy.restart_interaction()
+
+    def apex_upd_decline():
+        persistent.apex_upd_declined = APEX_UPD["latest"]
+        APEX_UPD["asked"] = True
+
+    def apex_upd_should_ask():
+        return (APEX_UPD["state"] == "new" and not APEX_UPD["asked"] and persistent.apex_upd_declined != APEX_UPD["latest"]
+                and bool(renpy.get_screen("main_menu")) and not renpy.get_screen("apex_modpack_manager"))
+
+    def apex_upd_label():
+        s = APEX_UPD["state"]
+        if s == "checking":
+            return ("Checking for updates...", APEX_C["muted"])
+        if s == "new":
+            return ("Update available: v%s" % APEX_UPD["latest"], APEX_C["gold"])
+        if s == "latest":
+            return ("Up to date (v%s)" % apex_upd_current(), APEX_OK)
+        if s == "error":
+            return ("Couldn't check (offline?)", APEX_WARN)
+        return ("v%s" % apex_upd_current(), APEX_C["muted"])
+
+    # at game start, once, in the background
+    if APEX_BUILD is not None and persistent.apex_upd_auto is not False and APEX_UPD["state"] == "idle":
+        apex_upd_check(manual=False)
 
     # ================= look: tinted, rounded pieces from apex_modpack/ui =================
     _apex_ui_cache = {}
@@ -653,6 +751,8 @@ transform apex_rise:
 # ================================================================ main menu button
 screen apex_mm_menu_button():
     zorder 50
+    if apex_upd_should_ask():
+        timer 0.2 action [SetDict(APEX_UPD, "asked", True), Show("apex_update_prompt")]
     if main_menu and renpy.get_screen("main_menu") and not renpy.get_screen("apex_modpack_manager"):
         $ vi = apex_mm_version()
         $ total, running, bad = apex_um_counts()
@@ -785,6 +885,24 @@ screen apex_modpack_manager():
                                 text badge size 9 bold True color bcol
         vbox:
             xpos 18 yalign 1.0 yoffset -18 xsize 180 spacing 10
+            frame:
+                xfill True padding (12, 8)
+                background apex_ui("panel", APEX_C["panel"])
+                vbox:
+                    spacing 4
+                    text "UPDATES" size 9 color APEX_C["dim"] kerning 1.5
+                    $ _ul, _uc = apex_upd_label()
+                    text _ul size 12 bold True color _uc
+                    if APEX_UPD["state"] == "new":
+                        use apex_btn("Download v" + APEX_UPD["latest"], OpenURL(APEX_UPD["url"]), "star", "primary", 156)
+                    else:
+                        use apex_btn("Check for updates", Function(apex_upd_check), "restart", "secondary", 156)
+                    textbutton ("Check at start: " + ("On" if apex_upd_auto() else "Off")):
+                        text_size 10
+                        text_color APEX_C["muted"]
+                        text_hover_color "#ffffff"
+                        padding (0, 0)
+                        action Function(apex_upd_toggle_auto)
             frame:
                 xfill True padding (12, 10)
                 background apex_ui("panel", APEX_C["panel"])
@@ -1454,6 +1572,27 @@ screen apex_mm_outdated_warning():
 
 # ---------------------------------------------------------------- "Restart now to apply changes?"
 # quitting=True: shown while the game is closing; returns True = restart
+screen apex_update_prompt():
+    modal True
+    zorder 310
+    style_prefix "apex_mm"
+    add Solid("#000000b0")
+    frame:
+        xalign 0.5 yalign 0.5 xsize 500 padding (26, 22)
+        background apex_ui("panel", APEX_C["panel2"])
+        at apex_rise
+        vbox:
+            spacing 14 xfill True
+            add apex_ui("ic_star", APEX_C["gold"]) zoom 1.5 xalign 0.5
+            text "A new version is out!" size 20 bold True color APEX_C["gold"] xalign 0.5
+            text apex_mm_safe("Apex's Modpack v%s is available (you have v%s)." % (APEX_UPD["latest"], apex_upd_current())) size 14 color APEX_C["text"] text_align 0.5 xalign 0.5
+            text "Download opens the release page in your browser. Install it the same way as before: drag the game and mods folders into your Town of Magic folder." size 12 color APEX_C["muted"] text_align 0.5 xalign 0.5
+            hbox:
+                xalign 0.5 spacing 12
+                use apex_btn("Download", [OpenURL(APEX_UPD["url"]), Function(apex_upd_decline), Hide("apex_update_prompt")], "star", "primary")
+                use apex_btn("No", [Function(apex_upd_decline), Hide("apex_update_prompt")])
+
+
 screen apex_mm_restart_prompt(quitting=False):
     modal True
     zorder 300

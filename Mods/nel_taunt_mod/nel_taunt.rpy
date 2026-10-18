@@ -78,6 +78,8 @@ init 999 python:
         NT_RELEASE_LINE = "That's enough…"
 
         def _nt_log(msg):
+
+            tom_mod_log_check('nel_taunt', msg)
             if not NT_LOG:
                 return
             try:
@@ -316,6 +318,26 @@ init 999 python:
                 _nt_log("XP share error %r" % (e,))
             return _nt_orig_print_reward_message(in_dictionary, in_bonus_dictionary)
 
+        def _nt_mood(pose, want):
+            """a mood whose face picture exists for this pose.  While Nel has the body the game looks for
+            <pose>_nelpossessed_face_<mood> (only 'normal' exists for most poses) and, unlike other faces, does not
+            fall back to 'normal' by itself - a missing one draws her with no face at all"""
+            try:
+                prefix = ""
+                try:
+                    prefix = str(s_possessionnel.extra.get("prefixstr", "")) if enemy_has_status(e_celica, s_possessionnel) else ""
+                except Exception:
+                    prefix = "_nelpossessed"
+                files = [f for f in list_files_containing("/" + pose + prefix + "_face_") if f.startswith("images/CHAR/")]
+                for m in (want, "normal"):
+                    if any(("%s_face_%s-" % (prefix, m)) in f or ("%s_face_%s_talk-" % (prefix, m)) in f for f in files):
+                        if m != want:
+                            tom_mod_error("nel_taunt", "no '%s' face for %s%s - using normal" % (want, pose, prefix))
+                        return m
+            except Exception as e:
+                tom_mod_error("nel_taunt", "checking the face for " + pose, e)
+            return "normal"
+
         def nt_force_next():
             """console helper: her next possible turn is a taunt (kept until it happens, across battles)"""
             main_vars["tom_nel_taunt_force"] = True
@@ -323,13 +345,20 @@ init 999 python:
                 _nt_state()["cooldown"] = 0
             return "Nel will taunt on her next turn where a monster can grab her"
 
+        def _nt_report(event):
+            f = getattr(store, "apex_nr_event", None)       # Nel's Battle Report, when it is on
+            if f is not None:
+                f(event)
+
         def _nt_begin():
+            _nt_report("taunt")
             st = _nt_state()
             st.update(phase="taunt", turns=0, climaxed=False)
 
         def _nt_end():
             st = _nt_state()
             if st.get("climaxed"):
+                _nt_report("climax")
                 _nt_day()["orgasms"] += 1
                 _nt_log("orgasms today: %d -> next climax at %d%% lust" % (_nt_day()["orgasms"], _nt_threshold()))
             st.update(phase="idle", cooldown=NT_COOLDOWN, turns=0, climaxed=False)
@@ -355,14 +384,14 @@ label tom_nel_taunt:
     $ nt_who = e_celica.get_extra("battlesay")
     if nt_pose == "back":
         $ enemimage(e_celica, "celica_back")
-        $ scene("mood", e_celica, "merry")
+        $ scene("mood", e_celica, _nt_mood("celica_back", "grin"))
         $ wait(timeunit(4))
         $ enemimage(e_celica, "celica_back_asstouch")
     elif nt_pose == "liftskirt":
-        $ scene("mood", e_celica, "blush")
+        $ scene("mood", e_celica, _nt_mood("celica_liftskirt", "liftskirtgrin"))
         $ enemimage(e_celica, "celica_liftskirt")
     else:
-        $ scene("mood", e_celica, "aroused")
+        $ scene("mood", e_celica, _nt_mood("celica_selffondlebreasts", "aroused"))
         $ enemimage(e_celica, "celica_selffondlebreasts", delay=110)
     $ nt_text = _nt_taunt_line(nt_pose)
     if nt_text:

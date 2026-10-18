@@ -41,6 +41,8 @@ init 998 python:
         _hl_log_count = [0]
 
         def _hl_log(msg):
+
+            tom_mod_log_check('hscene_loop', msg)
             if not HL_LOG or _hl_log_count[0] > 1500:
                 return
             try:

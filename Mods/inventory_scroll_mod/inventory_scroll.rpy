@@ -36,7 +36,30 @@ init 6 python:
                 return True
             if tab == "SPELLS" and flag_list.has("enable_playable_battleevents") and len(print_battle_event_move_list()):
                 return True
+            if apex_ui_blocked():
+                # a shop, Equip, the map or a question is open: the game's own grid is used, so that window covers
+                # it exactly like in the unmodded game (an overlay would be drawn on top of that window)
+                return True
             return False
+
+        _IS_BLOCKED = [None]
+
+        def _is_watch_windows():
+            # switch between the game's grid and ours when a window opens or closes
+            try:
+                b = apex_ui_blocked()
+                if b != _IS_BLOCKED[0]:
+                    _IS_BLOCKED[0] = b
+                    if getattr(store, "main_vars", None) is not None and renpy.get_screen("action_frame") is not None:
+                        update_inventory_frame_items()
+                        renpy.restart_interaction()
+            except Exception as e:
+                tom_mod_error("inventory_scroll", "switching grids when a window opens", e)
+
+        if _is_watch_windows not in config.interact_callbacks:
+            config.interact_callbacks.append(_is_watch_windows)
+        if _is_watch_windows not in config.periodic_callbacks:
+            config.periodic_callbacks.append(_is_watch_windows)
 
         def update_inventory_frame_items():
             tab = store.inventory_tab_selected_name
@@ -135,6 +158,9 @@ init 6 python:
             """'acc' / 'app' while Equip shows a grid this mod handles, else None"""
             if not is_setup_frame_active() or store._menu or store.main_menu:
                 return None
+            sd = renpy.get_screen("setup_frame")
+            if sd is None or tuple(getattr(sd, "screen_name", ("setup_frame",)))[0] != "setup_frame":
+                return None                        # the shop and the fuse screen use the same tag: not Equip
             sel = getattr(store, "setup_frame_select", None)
             if sel in ("EQUIPMENT", "Accessories"):
                 return "acc"
@@ -146,7 +172,7 @@ init 6 python:
 
         def equipment_are_empty():
             real = _es_orig_empty()
-            if not real and _es_kind() is not None:
+            if not real and _es_kind() is not None and not apex_ui_blocked(allow=("setup_frame",)):
                 return True                        # the game's grid stays empty; ours is drawn on top
             return real
 
@@ -173,8 +199,8 @@ init 6 python:
         def apex_equip_view():
             """build the squares for the grid Equip is showing (None when this mod draws nothing)"""
             kind = _es_kind()
-            if kind is None:
-                return None
+            if kind is None or apex_ui_blocked(allow=("setup_frame",)):
+                return None                        # a question over Equip: the game's own grid, under it
             if _es_orig_empty():
                 items = []
             elif kind == "acc":
@@ -203,7 +229,8 @@ init 6 python:
 
 screen apex_inv_hud():
     zorder -17
-    if apex_inv_hud_visible():
+    # a save can bring this overlay back while the mod is switched off: then draw nothing
+    if hasattr(store, "apex_inv_hud_visible") and apex_inv_hud_visible():
         $ _v = APEX_INV_VIEW
         $ _slots = apex_inv_slots()
         $ _blocked = apex_ui_blocked()
@@ -212,7 +239,7 @@ screen apex_inv_hud():
 
 screen apex_equip_grid():
     zorder -17
-    $ _v = apex_equip_view()
+    $ _v = apex_equip_view() if hasattr(store, "apex_equip_view") else None
     if _v is not None:
         $ _slots = apex_grid_slots(_v["grid"], _v["keys"])
         $ _blocked = apex_ui_blocked(allow=("setup_frame",))
