@@ -126,7 +126,7 @@ def main():
     build = dict(name=man["name"], version=man["version"], made_for_game=man["made_for_game"], tip_url=man["tip_url"],
                  repo_url=man.get("repo_url", ""), core_rev=man["core"]["rev"], date=newest(every),
                  built=time.strftime("%Y-%m-%d %H:%M"), hd_progress=prog,
-                 modules=[dict(id=m["id"], title=m["title"], rev=m["rev"], desc=m["desc"], wip=m.get("wip", ""),
+                 modules=[dict(id=m["id"], title=m["title"], rev=m["rev"], desc=m["desc"], wip=m.get("wip", ""), category=m.get("category", ""), group=m.get("group", ""),
                                settings=m.get("settings", []), subs=m.get("subs", []),
                                date=newest([p for p, _ in fl])) for m, fl in mods])
     info = ("# written by Tools/build_modpack.py - do not edit\ninit -20 python:\n    APEX_BUILD = %r\n" % (build,))

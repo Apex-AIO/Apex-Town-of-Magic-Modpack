@@ -1,10 +1,10 @@
 {
  "name": "Apex's Modpack",
- "version": "1.3.0",
+ "version": "1.4.0",
  "made_for_game": "0.77.002",
  "tip_url": "https://buymeacoffee.com/apex_modding",
  "core": {
-  "rev": "2.1",
+  "rev": "2.2",
   "files": {
    "_shared/tom_mod_guard.rpy": "apex_modpack/tom_mod_guard.rpy",
    "apex_modpack_manager/apex_modpack_manager.rpy": "apex_modpack/apex_modpack_manager.rpy",
@@ -17,7 +17,8 @@
    "apex_modpack_manager/gear_hover.png": "apex_modpack/gear_hover.png",
    "apex_modpack_manager/gear_hover@2.png": "apex_modpack/gear_hover@2.png",
    "apex_modpack_manager/apex_modkit.rpy": "apex_modpack/apex_modkit.rpy",
-   "apex_modpack_manager/ui/": "apex_modpack/ui/"
+   "apex_modpack_manager/ui/": "apex_modpack/ui/",
+   "inventory_scroll_mod/apex_grid.rpy": "apex_modpack/apex_grid.rpy"
   }
  },
  "_settings_help": "type: one_in (shown '1 in N'), percent (N%), int (N + unit), number (decimals), bool (On/Off). {key} in a desc shows that setting's current value.",
@@ -25,6 +26,8 @@
   {
    "id": "nel_taunt",
    "title": "Nel's Auto Battler Sex Autonomy Mod",
+   "category": "Characters",
+   "group": "Nel",
    "rev": "1.6",
    "desc": "At the start of each of her turns, Nel has a {chance} chance to taunt the monsters, teasing them to come and fuck her until she orgasms.",
    "files": {
@@ -164,6 +167,7 @@
   {
    "id": "stutter_fix",
    "title": "Game Engine Stutter Fix",
+   "category": "Engine",
    "rev": "1.1",
    "desc": "Removes the short battle freezes when a pose changes (caches the game's file searches).",
    "files": {
@@ -173,6 +177,7 @@
   {
    "id": "appearance_unlock",
    "title": "Appearance Menu Insta Unlock",
+   "category": "Clothing",
    "rev": "1.1",
    "desc": "The Equip > Appearance tab is open from the start, on new games and old saves.",
    "files": {
@@ -182,6 +187,8 @@
   {
    "id": "morning_dildo",
    "title": "Celica's Autonomy Dildo Events",
+   "category": "Characters",
+   "group": "Celica",
    "rev": "1.4",
    "desc": "On quiet mornings there is a {chance} chance that Celica uses the dildo by herself as soon as she wakes, before she gets up (Nel joins in if she's there).",
    "files": {
@@ -213,9 +220,10 @@
   },
   {
    "id": "clothing_remover",
-   "title": "Clothing Remover & Combat Helpers",
-   "rev": "1.4",
-   "desc": "Custom equippable items fully remove her shoes, top and pants, including their protective combat states, so she stays exposed. Also adds Green / Orange / Red Combat Helper accessories.",
+   "title": "Clothing Remover",
+   "category": "Clothing",
+   "rev": "1.5",
+   "desc": "Red-X Shoes / Top / Pants items fully remove that clothing, including its protective combat states, so she stays exposed.",
    "files": {
     "clothing_remover_mod/clothing_remover/clothing_remover.rpy": "apex_modpack/clothing_remover.rpy",
     "clothing_remover_mod/clothing_remover/xr_icon.png": "clothing_remover/xr_icon.png",
@@ -233,42 +241,14 @@
      "step": 25,
      "label": "Red-X items: stat strength",
      "help": "100% = Allure and Lewdness +25; Willpower, Cooldown, Arcane and Speed -25."
-    },
-    {
-     "key": "helper_green",
-     "type": "percent",
-     "default": 10,
-     "min": 0,
-     "max": 200,
-     "step": 5,
-     "label": "Combat Helper Green strength",
-     "help": "Percent of the Speedster's Blessing stats."
-    },
-    {
-     "key": "helper_orange",
-     "type": "percent",
-     "default": 50,
-     "min": 0,
-     "max": 200,
-     "step": 5,
-     "label": "Combat Helper Orange strength",
-     "help": "Percent of the Speedster's Blessing stats."
-    },
-    {
-     "key": "helper_red",
-     "type": "percent",
-     "default": 100,
-     "min": 0,
-     "max": 200,
-     "step": 5,
-     "label": "Combat Helper Red strength",
-     "help": "Percent of the Speedster's Blessing stats."
     }
    ]
   },
   {
    "id": "hscene_loop",
    "title": "H-Scene Idle Loop",
+   "category": "Characters",
+   "group": "Celica",
    "rev": "1.2",
    "desc": "Grope and H-scene animations and their sounds keep looping on your turn instead of showing a still image. Purely visual: it doesn't affect gameplay.",
    "files": {
@@ -326,6 +306,7 @@
   {
    "id": "hd_sprites",
    "title": "HD x8 Upscale Project",
+   "category": "Engine",
    "wip": "VERY EARLY WIP",
    "rev": "0.5",
    "desc": "AI-upscaled HD pictures (x8), added a block at a time: characters and backgrounds so far (see the HD Project page). Used when the window is bigger than 1066x600. Needs the HD pack. Switch HD on or off in game with F8 or the HD Toggle button.",
@@ -350,21 +331,72 @@
   {
    "id": "inventory_scroll",
    "title": "Inventory Scroll Mod",
-   "rev": "1.0",
-   "desc": "The ITEMS and SPELLS grid scrolls with the mouse wheel, grows a row when it is nearly full, and keeps an inventory backup at each new place (the last {backups}).",
+   "category": "UI",
+   "rev": "1.1",
+   "desc": "Every item grid scrolls with the mouse wheel and grows a row when it is nearly full: ITEMS and SPELLS, and Appearance and Accessories in Equip.",
    "files": {
-    "inventory_scroll_mod/apex_grid.rpy": "apex_modpack/apex_grid.rpy",
     "inventory_scroll_mod/inventory_scroll.rpy": "apex_modpack/inventory_scroll.rpy"
-   },
-   "subs": [
+   }
+  },
+  {
+   "id": "combat_helpers",
+   "title": "Combat Helpers",
+   "category": "Clothing",
+   "rev": "1.0",
+   "desc": "Green / Orange / Red accessories with 10% / 50% / 100% of Speedster's Blessing stats, for when the fights get too hard.",
+   "files": {},
+   "settings": [
     {
-     "key": "movable",
-     "type": "bool",
-     "default": true,
-     "title": "Movable Inventory Items",
-     "desc": "Hold the left mouse button on an item, drag it onto another square and let go to swap them."
+     "key": "helper_green",
+     "type": "percent",
+     "default": 10,
+     "min": 0,
+     "max": 200,
+     "step": 5,
+     "label": "Combat Helper Green strength",
+     "help": "Percent of the Speedster's Blessing stats."
+    },
+    {
+     "key": "helper_orange",
+     "type": "percent",
+     "default": 50,
+     "min": 0,
+     "max": 200,
+     "step": 5,
+     "label": "Combat Helper Orange strength",
+     "help": "Percent of the Speedster's Blessing stats."
+    },
+    {
+     "key": "helper_red",
+     "type": "percent",
+     "default": 100,
+     "min": 0,
+     "max": 200,
+     "step": 5,
+     "label": "Combat Helper Red strength",
+     "help": "Percent of the Speedster's Blessing stats."
     }
-   ],
+   ]
+  },
+  {
+   "id": "inventory_move",
+   "title": "Movable Inventory Items",
+   "category": "UI",
+   "rev": "1.0",
+   "desc": "Hold the left mouse button on an item, drag it onto another square and let go to swap them. Works in every grid of the Inventory Scroll Mod (needs it on).",
+   "files": {
+    "inventory_scroll_mod/inventory_move.rpy": "apex_modpack/inventory_move.rpy"
+   }
+  },
+  {
+   "id": "inventory_backups",
+   "title": "Inventory Backups",
+   "category": "UI",
+   "rev": "1.0",
+   "desc": "Keeps a backup of your items and gold each time you arrive somewhere new (the last {backups}); the ↺ button under the inventory puts one back.",
+   "files": {
+    "inventory_scroll_mod/inventory_backups.rpy": "apex_modpack/inventory_backups.rpy"
+   },
    "settings": [
     {
      "key": "backups",
@@ -376,24 +408,6 @@
      "unit": " places",
      "label": "Inventory backups kept",
      "help": "One backup each time you arrive somewhere new. 0 = no backups."
-    }
-   ]
-  },
-  {
-   "id": "equip_scroll",
-   "title": "Appearance/Accessories Scroll Mod",
-   "rev": "1.0",
-   "desc": "In Equip, the Appearance and Accessories grids scroll with the mouse wheel and grow a row when they are nearly full.",
-   "files": {
-    "inventory_scroll_mod/equip_scroll.rpy": "apex_modpack/equip_scroll.rpy"
-   },
-   "subs": [
-    {
-     "key": "movable",
-     "type": "bool",
-     "default": true,
-     "title": "Movable Equip Clothing/Accessories Mod",
-     "desc": "Drag clothes and accessories onto another square to swap them."
     }
    ]
   }

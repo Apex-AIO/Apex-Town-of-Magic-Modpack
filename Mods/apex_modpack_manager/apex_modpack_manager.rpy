@@ -197,6 +197,8 @@ init 999 python:
             if want_on and apex_mm_test_wanted():
                 return ("On after restart (testing)", APEX_WARN)
             return ("Off: outdated modpack", APEX_INFO)
+        if st.startswith("off: needs"):
+            return (("Needs " + st[len("off: needs "):]).replace("Needs the ", "Needs ") if want_on else "Off", APEX_WARN if want_on else APEX_DIM)
         if st.startswith("off: game"):
             return ("Paused: game update", APEX_BAD)
         if st.startswith("off: tom_mods_off"):
@@ -224,6 +226,35 @@ init 999 python:
         if not tom_mod_status.get(mid, "").startswith("on"):
             return ("", APEX_DIM)
         return ("Running", APEX_OK) if apex_mm_get(mid, key) else ("Off", APEX_DIM)
+
+    APEX_MM_CATEGORIES = ("Characters", "Clothing", "Engine", "UI")
+    APEX_MM_CAT_ICON = {"Characters": "heart", "Clothing": "star", "Engine": "wrench", "UI": "overview"}
+
+    def apex_mm_rows():
+        """Apex's mods as a tree: ("cat", name, on, total) / ("group", name) / ("mod", module), A to Z at every level"""
+        mods = apex_mm_modules()
+        cats = sorted(set(m.get("category") or "Other" for m in mods), key=lambda c: (APEX_MM_CATEGORIES + (c,)).index(c))
+        rows = []
+        for c in cats:
+            ms = [m for m in mods if (m.get("category") or "Other") == c]
+            rows.append(("cat", c, sum(1 for m in ms if apex_mm_is_on(m["id"])), len(ms)))
+            if c in apex_mm_ui.setdefault("closed", []):
+                continue
+            for m in ms:
+                if not m.get("group"):
+                    rows.append(("mod", m))
+            for g in sorted(set(m["group"] for m in ms if m.get("group")), key=_apex_sort_key):
+                rows.append(("group", g))
+                rows.extend(("mod", m) for m in ms if m.get("group") == g)
+        return rows
+
+    def apex_mm_toggle_cat(c):
+        closed = apex_mm_ui.setdefault("closed", [])
+        if c in closed:
+            closed.remove(c)
+        else:
+            closed.append(c)
+        renpy.restart_interaction()
 
     def apex_mm_count_on():
         return sum(1 for m in apex_mm_modules() if apex_mm_is_on(m["id"]))
@@ -749,9 +780,9 @@ screen apex_modpack_manager():
                             text label size 13 bold act color (APEX_C["text"] if act else "#c4bccf") yalign 0.5 layout "nobreak"
                         if badge:
                             frame:
-                                xalign 1.0 yalign 0.5 padding (7, 1)
+                                xalign 1.0 yalign 0.5 padding (5, 1)
                                 background apex_ui("pill", bcol, 0.18)
-                                text badge size 10 bold True color bcol
+                                text badge size 9 bold True color bcol
         vbox:
             xpos 18 yalign 1.0 yoffset -18 xsize 180 spacing 10
             frame:
@@ -854,7 +885,6 @@ screen apex_mm_p_overview():
 
 # ---------------------------------------------------------------- page: Apex's mods
 screen apex_mm_p_apex():
-    $ mods = apex_mm_modules()
     $ vi = apex_mm_version()
     vbox:
         spacing 14
@@ -870,61 +900,83 @@ screen apex_mm_p_apex():
             mousewheel True draggable True scrollbars "vertical" spacing 6
             vbox:
                 spacing 8
-                for m in mods:
-                    $ on = apex_mm_is_on(m["id"])
-                    $ st, stc = apex_mm_status(m)
-                    frame:
-                        xsize 788 padding (16, 12)
-                        background apex_ui("panel", APEX_C["panel"])
-                        hbox:
-                            spacing 14
-                            use apex_switch(on, Function(apex_mm_toggle, m["id"]))
-                            vbox:
-                                xsize 470 spacing 3
-                                hbox:
-                                    spacing 8
-                                    text apex_mm_safe(m["title"]) size 15 bold True color (APEX_C["text"] if on else APEX_C["muted"])
-                                    text ("r" + m["rev"]) size 11 color APEX_C["purple"] yalign 1.0
-                                    if m.get("wip"):
-                                        frame:
-                                            padding (7, 1) yalign 0.5
-                                            background apex_ui("pill", "#ff9a3c", 0.18)
-                                            text apex_mm_safe(m["wip"]) size 9 bold True color "#ff9a3c"
-                                text apex_mm_text(m["id"], m["desc"]) size 12 color APEX_C["muted"]
-                            frame:
-                                xsize 200 yalign 0.5 padding (0, 0) background None
-                                hbox:
-                                    xalign 1.0 spacing 8
-                                    use apex_chip(st, stc)
-                                    if m.get("settings"):
-                                        button:
-                                            padding (5, 5) yalign 0.5
-                                            background apex_ui("panel", "#2a2236")
-                                            hover_background apex_ui("panel", APEX_C["purple"], 0.5)
-                                            action Show("apex_mm_settings", mid=m["id"], user=False)
-                                            add "apex_modpack/gear.png" zoom 0.8
-                    $ subs = m.get("subs") or []
-                    for i, s in enumerate(subs):
-                        $ son = bool(apex_mm_get(m["id"], s["key"]))
-                        $ sst, sstc = apex_mm_sub_status(m, s)
-                        frame:
-                            xsize 788 padding (16, 8)
-                            background apex_ui("panel", APEX_C["panel"], 0.55)
+                for r in apex_mm_rows():
+                    if r[0] == "cat":
+                        $ _closed = r[1] in apex_mm_ui.get("closed", [])
+                        button:
+                            xsize 788 padding (14, 8)
+                            background apex_ui("panel", APEX_C["purple"], 0.22)
+                            hover_background apex_ui("panel", APEX_C["purple"], 0.4)
+                            action Function(apex_mm_toggle_cat, r[1])
                             hbox:
-                                spacing 12
-                                null width 10
-                                text ("└" if i == len(subs) - 1 else "├") size 18 color APEX_C["dim"] yalign 0.5
-                                use apex_switch(son, Function(apex_mm_step, m["id"], s["key"], 1), on)
-                                vbox:
-                                    xsize 420 spacing 1
-                                    text apex_mm_safe(s["title"]) size 13 bold True color (APEX_C["text"] if (on and son) else APEX_C["muted"])
-                                    text apex_mm_text(m["id"], s.get("desc", "")) size 11 color APEX_C["muted"]
-                                frame:
-                                    xsize 200 yalign 0.5 padding (0, 0) background None
-                                    if sst:
-                                        frame:
-                                            xalign 1.0 padding (0, 0) background None
-                                            use apex_chip(sst, sstc)
+                                spacing 10
+                                text ("▸" if _closed else "▾") size 16 color APEX_C["gold"] yalign 0.5
+                                text r[1].upper() size 16 bold True color APEX_C["gold"] yalign 0.5
+                                text "%d of %d on" % (r[2], r[3]) size 11 color APEX_C["muted"] yalign 0.5
+                    elif r[0] == "group":
+                        hbox:
+                            spacing 8
+                            null width 14
+                            text "› " + apex_mm_safe(r[1]) size 14 bold True color APEX_C["purple"]
+                    else:
+                        use apex_mm_mod_row(r[1])
+
+
+screen apex_mm_mod_row(m):
+        $ on = apex_mm_is_on(m["id"])
+        $ st, stc = apex_mm_status(m)
+        frame:
+            xsize 788 padding (16, 12)
+            background apex_ui("panel", APEX_C["panel"])
+            hbox:
+                spacing 14
+                use apex_switch(on, Function(apex_mm_toggle, m["id"]))
+                vbox:
+                    xsize 470 spacing 3
+                    hbox:
+                        spacing 8
+                        text apex_mm_safe(m["title"]) size 15 bold True color (APEX_C["text"] if on else APEX_C["muted"])
+                        text ("r" + m["rev"]) size 11 color APEX_C["purple"] yalign 1.0
+                        if m.get("wip"):
+                            frame:
+                                padding (7, 1) yalign 0.5
+                                background apex_ui("pill", "#ff9a3c", 0.18)
+                                text apex_mm_safe(m["wip"]) size 9 bold True color "#ff9a3c"
+                    text apex_mm_text(m["id"], m["desc"]) size 12 color APEX_C["muted"]
+                frame:
+                    xsize 200 yalign 0.5 padding (0, 0) background None
+                    hbox:
+                        xalign 1.0 spacing 8
+                        use apex_chip(st, stc)
+                        if m.get("settings"):
+                            button:
+                                padding (5, 5) yalign 0.5
+                                background apex_ui("panel", "#2a2236")
+                                hover_background apex_ui("panel", APEX_C["purple"], 0.5)
+                                action Show("apex_mm_settings", mid=m["id"], user=False)
+                                add "apex_modpack/gear.png" zoom 0.8
+        $ subs = m.get("subs") or []
+        for i, s in enumerate(subs):
+            $ son = bool(apex_mm_get(m["id"], s["key"]))
+            $ sst, sstc = apex_mm_sub_status(m, s)
+            frame:
+                xsize 788 padding (16, 8)
+                background apex_ui("panel", APEX_C["panel"], 0.55)
+                hbox:
+                    spacing 12
+                    null width 10
+                    text ("└" if i == len(subs) - 1 else "├") size 18 color APEX_C["dim"] yalign 0.5
+                    use apex_switch(son, Function(apex_mm_step, m["id"], s["key"], 1), on)
+                    vbox:
+                        xsize 420 spacing 1
+                        text apex_mm_safe(s["title"]) size 13 bold True color (APEX_C["text"] if (on and son) else APEX_C["muted"])
+                        text apex_mm_text(m["id"], s.get("desc", "")) size 11 color APEX_C["muted"]
+                    frame:
+                        xsize 200 yalign 0.5 padding (0, 0) background None
+                        if sst:
+                            frame:
+                                xalign 1.0 padding (0, 0) background None
+                                use apex_chip(sst, sstc)
 
 
 # ---------------------------------------------------------------- page: your mods

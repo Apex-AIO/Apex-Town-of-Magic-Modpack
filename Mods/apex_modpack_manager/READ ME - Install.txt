@@ -14,21 +14,26 @@ APEX'S MODPACK MANAGER (main menu)
   It also shows each mod's revision, your game version, the version the pack was made for and the date
   of the last update.
 
-MODS
-  Nel's Auto Battler Sex Autonomy Mod   Nel teases monsters during her auto-battles, with a climax ladder.
-                                         Sub-mods: Half XP and Never One-Shots (balancing).
-  Game Engine Stutter Fix               Removes the short freezes in battle when a pose changes.
-  Appearance Menu Insta Unlock          Equip > Appearance is open from the start.
-  Celica's Autonomy Dildo Events        On quiet mornings Celica sometimes uses the dildo by herself as she wakes (1 in 9).
-  Clothing Remover & Combat Helpers     Red-X Shoes / Top / Pants items and Combat Helper accessories.
-  H-Scene Idle Loop                     Grope and H-scene animations keep looping on your turn.
-  HD x8 Upscale Project (VERY EARLY WIP) HD pictures when the window is bigger than 1066x600. F8 or the HD Toggle
-                                         button (under Health/Magic) switches them on and off.
-  Inventory Scroll Mod                  ITEMS and SPELLS scroll with the mouse wheel and grow as you get more.
-                                         Sub-mod: Movable Inventory Items (drag an item onto another square).
-                                         Inventory backups: the small button under the scroll bar.
-  Appearance/Accessories Scroll Mod     The same in Equip > Appearance and Accessories.
-                                         Sub-mod: Movable Equip Clothing/Accessories Mod.
+MODS (each one has its own switch in the manager)
+  CHARACTERS
+    Celica's Autonomy Dildo Events      On quiet mornings Celica sometimes uses the dildo by herself as she wakes (1 in 9).
+    H-Scene Idle Loop                   Grope and H-scene animations keep looping on your turn.
+    Nel's Auto Battler Sex Autonomy Mod Nel teases monsters during her auto-battles, with a climax ladder.
+                                        Balancing options: Half XP and Never One-Shots.
+  CLOTHING
+    Appearance Menu Insta Unlock        Equip > Appearance is open from the start.
+    Clothing Remover                    Red-X Shoes / Top / Pants items.
+    Combat Helpers                      Green / Orange / Red accessories with extra combat stats.
+  ENGINE
+    Game Engine Stutter Fix             Removes the short freezes in battle when a pose changes.
+    HD x8 Upscale Project (EARLY WIP)   HD pictures when the window is bigger than 1066x600. F8 or the HD Toggle
+                                        button (under Health/Magic) switches them on and off.
+  UI
+    Inventory Scroll Mod                Every item grid (ITEMS, SPELLS, Appearance, Accessories) scrolls with the
+                                        mouse wheel and grows as you get more.
+    Movable Inventory Items             Drag an item onto another square to swap them (needs Inventory Scroll Mod).
+    Inventory Backups                   A backup of your items at each new place; the small button under the
+                                        inventory puts one back.
 
 YOUR OWN MODS
   The "mods" folder is for your own mods and mods you download from others. Make one in the manager:

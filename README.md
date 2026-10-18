@@ -1,7 +1,7 @@
 <div align="center">
 
 # ⚗️ APEX'S MODPACK & MOD MANAGER
-### for Town of Magic v0.77.002 — 9 mods · a full mod manager · room for your own mods · many more mods to come
+### for Town of Magic v0.77.002 — 11 mods · a full mod manager · room for your own mods · many more mods to come
 
 [![Latest release](https://img.shields.io/github/v/release/Apex-AIO/Apex-Town-of-Magic-Modpack?style=for-the-badge&label=latest&color=ffc94d&labelColor=1a1522)](../../releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Apex-AIO/Apex-Town-of-Magic-Modpack/total?style=for-the-badge&color=9b6bff&labelColor=1a1522)](../../releases)
@@ -16,9 +16,9 @@
 
 | Download | What's inside | Last updated | Version | Size |
 |---|---|:-:|:-:|--:|
-| **Apex_Modpack** | All 9 mods + the Mod Manager + the mods folder (templates and the modding guide) | 2026-10-18 | v1.3.0 | 0.3 MB |
-| **Apex_HD_Pack** part 1 of 2 | HD pictures for the HD x8 project (add-on, needs the modpack) | 2026-10-18 | v1.3.0 | 1.8 GB |
-| **Apex_HD_Pack** part 2 of 2 | HD pictures, continued. Install both parts. | 2026-10-18 | v1.3.0 | 1.0 GB |
+| **Apex_Modpack** | All 11 mods + the Mod Manager + the mods folder (templates and the modding guide) | 2026-10-18 | v1.4.0 | 0.3 MB |
+| **Apex_HD_Pack** part 1 of 2 | HD pictures for the HD x8 project (add-on, needs the modpack) | 2026-10-18 | v1.4.0 | 1.8 GB |
+| **Apex_HD_Pack** part 2 of 2 | HD pictures, continued. Install both parts. | 2026-10-18 | v1.4.0 | 1.0 GB |
 
 <sub>Install steps are on the release page. Made for Town of Magic 0.77.002.</sub>
 
@@ -45,7 +45,7 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <img src="docs/images/progress.svg?v=ce947119" alt="HD project progress" width="820">
 
-<sub>An estimate of every game asset (the end goal). Updated with every release - v1.3.0, .</sub>
+<sub>An estimate of every game asset (the end goal). Updated with every release - v1.4.0, 18 Oct 2026.</sub>
 
 #### CHARACTERS
 <sub>every pose, face, outfit and animation frame of the female characters and creatures</sub>
@@ -141,7 +141,7 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 Everything happens in one place on the main menu — no file editing needed.
 
-<img src="docs/images/mm_overview.png" alt="Mod Manager overview" width="900">
+<img src="docs/images/mod_manager.gif" alt="Mod Manager pages: Overview, Apex's Mods, Your Mods, HD Project, Mod Tools, About" width="900">
 
 </div>
 
@@ -342,31 +342,18 @@ Your mod's name is found automatically from its folder. Advanced modders can use
 ## 🎮 THE MODS
 ### (so far — bound to be a lot more)
 
+Grouped like the in-game Mod Manager: **Characters**, **Clothing**, **Engine** and **UI**. Every mod has its own on/off switch.
+
 <ins>**Rule of thumb: don't touch mod settings if you don't know what they do!**</ins>
 
 </div>
 
 <details>
-<summary><b>👗 Appearance Menu Insta Unlock (r1.1)</b></summary>
-<div align="center">
-
-The **Equip > Appearance** tab is open from the very start, on new games and on old saves. You don't need to unlock the tailor first.
-
-<img src="docs/images/appearance_unlock.png" alt="Appearance tab unlocked on a new game" width="760">
-
-</div>
-</details>
+<summary><h3>🧑‍🎨 CHARACTERS</h3></summary>
 
 <details>
-<summary><b>👚 Appearance/Accessories Scroll Mod (r1.0)</b></summary>
-<div align="center">
-
-In **Equip**, the **Appearance** and **Accessories** grids scroll with the mouse wheel and grow as you collect more.
-
-**Sub-mod: Movable Equip Clothing/Accessories Mod** — drag clothes and accessories onto another square to sort them. Only squares of the same grid accept a drop: nothing can be dragged onto the worn or equipped slots.
-
-</div>
-</details>
+<summary><b>› Celica</b></summary>
+<blockquote>
 
 <details>
 <summary><b>🌅 Celica's Autonomy Dildo Events (r1.4)</b></summary>
@@ -377,42 +364,6 @@ On quiet mornings there's a **1 in 9 chance** that Celica uses her dildo by hers
 ⚙️ **Settings:** chance per morning (1 in 1 to 1 in 30), Lewdness needed (30 by default).
 
 <img src="docs/images/dildo_event.png" alt="Celica's morning dildo event" width="760">
-
-</div>
-</details>
-
-<details>
-<summary><b>❌ Clothing Remover & Combat Helpers (r1.4)</b></summary>
-<div align="center">
-
-**Red-X Shoes / Top / Pants:** equippable "nothing" items that fully remove that clothing, including its protective combat states, so she stays exposed. Stats: Allure/Lewdness +25; Willpower, Cooldown, Arcane and Speed −25.<br>
-**Combat Helpers (Green / Orange / Red):** accessories with 10% / 50% / 100% of Speedster's Blessing stats, for when the fights get too hard.<br>
-⚙️ **Settings:** red-X stat strength, the strength of each helper.
-
-<img src="docs/images/clothing_remover.png" alt="Clothing Remover and Combat Helper items" width="760">
-
-</div>
-</details>
-
-<details>
-<summary><b>⚡ Game Engine Stutter Fix (r1.1)</b></summary>
-<div align="center">
-
-Removes the short **~0.2–0.4 s freeze** in battle whenever a character changes pose. Measured: 184 ms → 0 ms per pose change. The whole game feels way smoother and snappier.
-
-</div>
-</details>
-
-<details>
-<summary><b>🖼️ HD x8 Upscale Project (r0.5) — VERY EARLY WIP</b></summary>
-<div align="center">
-
-AI-upscaled HD pictures, used automatically when your window is bigger than 1066×600 (1080p, 1440p, 4K). Characters and backgrounds are done a block at a time — see **HD Project progress** above. Needs the **Apex_HD_Pack** download.
-
-**HD Toggle:** press **F8** or click the **HD Toggle** button under Health and Magic to switch every HD picture back to the original and back again, instantly.<br>
-⚙️ **Settings:** picture memory.
-
-<img src="docs/images/hd_compare.png" alt="Original vs HD sprite" width="480">
 
 </div>
 </details>
@@ -430,21 +381,12 @@ On your turn, grope and H-scene animations <ins>**keep looping with their sounds
 </div>
 </details>
 
-<details>
-<summary><b>🎒 Inventory Scroll Mod (r1.0)</b></summary>
-<div align="center">
-
-The **ITEMS** and **SPELLS** grid scrolls with the **mouse wheel** instead of paging with arrows, and grows a new row whenever it's nearly full (7 of 9 squares, 10 of 12, ...).
-
-**Sub-mod: Movable Inventory Items** — hold the left mouse button on an item, drag it onto another square and let go: the two swap places. While you drag, a faded copy stays in the original square; let go anywhere that isn't a square and nothing moves.<br>
-**Item safety:** the mod only remembers *where* each item is drawn — it never adds, removes or moves the game's items. Every item is always shown exactly once (stress-tested with 180,000 random inventory changes).<br>
-**Inventory backups:** each time you arrive somewhere new, a backup of your items and gold is kept (the last 5 places). The small ↺ button under the scroll bar puts one back, with a list of exactly what changes.<br>
-While another window is open (Equip, a shop, the map, a question), the inventory doesn't react — just like the game's own.
-
-⚙️ **Settings:** how many backups to keep (0 = off).
-
-</div>
+</blockquote>
 </details>
+
+<details>
+<summary><b>› Nel</b></summary>
+<blockquote>
 
 <details>
 <summary><b>👻 Nel's Auto Battler Sex Autonomy Mod (r1.6)</b></summary>
@@ -458,12 +400,136 @@ When Nel possesses Celica and auto-battles, she sometimes stops fighting and **t
 Nel only talks some of the time while taunting, so it doesn't turn into spam<br>
 Celica takes no damage while Nel is taunting or climaxing<br>
 Nel only gains 0.5 body influence per climax instead of the game's 10<br>
-**Sub-mods (switch separately):** **Half XP** — Celica only gets 50% of the battle XP while Nel is in control (adjustable) · **Never One-Shots** — Nel's first hit leaves a monster on 1 HP<br>
+**Balancing options (switch separately):** **Half XP** — Celica only gets 50% of the battle XP while Nel is in control (adjustable) · **Never One-Shots** — Nel's first hit leaves a monster on 1 HP<br>
 ⚙️ **Settings:** taunt chance, cooldown, how often she talks, taunt time limit, lust needed for climaxes 1 to 5+, XP share, body influence.
 
 <img src="docs/images/mm_settings.png" alt="Nel's settings" width="760">
 
 </div>
+</details>
+
+</blockquote>
+</details>
+
+</details>
+
+<details>
+<summary><h3>👗 CLOTHING</h3></summary>
+<blockquote>
+
+<details>
+<summary><b>👗 Appearance Menu Insta Unlock (r1.1)</b></summary>
+<div align="center">
+
+The **Equip > Appearance** tab is open from the very start, on new games and on old saves. You don't need to unlock the tailor first.
+
+<img src="docs/images/appearance_unlock.png" alt="Appearance tab unlocked on a new game" width="760">
+
+</div>
+</details>
+
+<details>
+<summary><b>❌ Clothing Remover (r1.5)</b></summary>
+<div align="center">
+
+**Red-X Shoes / Top / Pants:** equippable "nothing" items that fully remove that clothing, including its protective combat states, so she stays exposed. Stats: Allure/Lewdness +25; Willpower, Cooldown, Arcane and Speed −25.
+
+⚙️ **Settings:** red-X stat strength.
+
+<img src="docs/images/clothing_remover.gif" alt="Clothing Remover: red-X top, pants and shoes" width="560">
+
+</div>
+</details>
+
+<details>
+<summary><b>♾️ Combat Helpers (r1.0)</b></summary>
+<div align="center">
+
+**Green / Orange / Red** accessories with 10% / 50% / 100% of Speedster's Blessing stats, for when the fights get too hard. One at a time; they aren't drawn on her.
+
+⚙️ **Settings:** the strength of each helper.
+
+<img src="docs/images/combat_helpers.gif" alt="Combat Helpers green, orange and red with their stats" width="560">
+
+</div>
+</details>
+
+</blockquote>
+</details>
+
+<details>
+<summary><h3>⚙️ ENGINE</h3></summary>
+<blockquote>
+
+<details>
+<summary><b>⚡ Game Engine Stutter Fix (r1.1)</b></summary>
+<div align="center">
+
+Removes the short **~0.2–0.4 s freeze** in battle whenever a character changes pose. The whole game feels way smoother and snappier.
+
+<img src="docs/images/stutter_fix.png" alt="Freeze per pose change: 184 ms without the mod, 0 ms with it" width="760">
+
+</div>
+</details>
+
+<details>
+<summary><b>🖼️ HD x8 Upscale Project (r0.5) — VERY EARLY WIP</b></summary>
+<div align="center">
+
+AI-upscaled HD pictures, used automatically when your window is bigger than 1066×600 (1080p, 1440p, 4K). Characters and backgrounds are done a block at a time — see **HD Project progress** above. Needs the **Apex_HD_Pack** download.
+
+**HD Toggle:** press **F8** or click the **HD Toggle** button under Health and Magic to switch every HD picture back to the original and back again, instantly.<br>
+⚙️ **Settings:** picture memory.
+
+<img src="docs/images/hd_toggle.gif" alt="HD Toggle switching between HD and the original pictures" width="480">
+
+</div>
+</details>
+
+</blockquote>
+</details>
+
+<details>
+<summary><h3>🧭 UI</h3></summary>
+<blockquote>
+
+<details>
+<summary><b>🎒 Inventory Scroll Mod (r1.1)</b></summary>
+<div align="center">
+
+Every item grid scrolls with the **mouse wheel** instead of paging with arrows, and grows a new row whenever it's nearly full (7 of 9 squares, 10 of 12, ...): **ITEMS** and **SPELLS**, and **Appearance** and **Accessories** in Equip.
+
+<img src="docs/images/inventory_scroll.gif" alt="Scrolling the ITEMS grid" width="330"> <img src="docs/images/inventory_scroll_equip.gif" alt="Scrolling the Appearance grid in Equip" width="460">
+
+</div>
+</details>
+
+<details>
+<summary><b>✋ Movable Inventory Items (r1.0)</b></summary>
+<div align="center">
+
+Hold the left mouse button on an item, drag it onto another square and let go: the two swap places. Works in every grid of the Inventory Scroll Mod (needs it on). While you drag, a faded copy stays in the original square; let go anywhere that isn't a square of the same grid and nothing moves — nothing can be dragged onto worn or equipped slots.<br>
+**Item safety:** only *where* each item is drawn is remembered — the game's items are never added, removed or moved. Every item is always shown exactly once (stress-tested with 180,000 random inventory changes). While another window is open (a shop, the map, a question), the inventory doesn't react — just like the game's own.
+
+<img src="docs/images/inventory_move.gif" alt="Dragging an item to another square" width="330"> <img src="docs/images/inventory_move_equip.gif" alt="Dragging clothing in Equip" width="460">
+
+</div>
+</details>
+
+<details>
+<summary><b>↺ Inventory Backups (r1.0)</b></summary>
+<div align="center">
+
+Each time you arrive somewhere new, a backup of your items and gold is kept (the last 5 places). The small **↺** button under the inventory opens the list and shows exactly what comes back, what is removed and how your gold changes before anything is put back. Clothes and accessories you're wearing stay on. Not possible during battles or scenes.
+
+⚙️ **Settings:** how many backups to keep (0 = off).
+
+<img src="docs/images/inventory_backups.png" alt="Inventory backups window" width="560">
+
+</div>
+</details>
+
+</blockquote>
 </details>
 
 ---
@@ -476,6 +542,12 @@ Nel only gains 0.5 body influence per climax instead of the game's 10<br>
 
 <details>
 <summary><b>Changelog</b></summary>
+
+**v1.4.0**
+- **The Mods** and the Mod Manager are grouped by category: Characters (Celica, Nel), Clothing, Engine, UI
+- Every mod is now standalone with its own switch: **Clothing Remover** and **Combat Helpers** are separate; **Movable Inventory Items** and **Inventory Backups** are their own mods
+- The **Inventory Scroll Mod** now covers every grid (ITEMS, SPELLS, Appearance, Accessories)
+- New GIFs and pictures for the mods and the Mod Manager
 
 **v1.3.0**
 - New: **Inventory Scroll Mod** + Movable Inventory Items, with inventory backups

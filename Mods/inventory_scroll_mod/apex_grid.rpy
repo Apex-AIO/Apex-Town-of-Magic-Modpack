@@ -17,6 +17,7 @@ init -5 python:
     APEX_GRID_CELL = (67, 75)
     APEX_GRID_SIZE = (205, 229)
     APEX_GRID_DRAG_START = 6          # pixels the mouse must move before a press becomes a drag
+    APEX_GRID_MOVABLE = False         # switched on by the Movable Inventory Items mod (inventory_move.rpy)
 
     # runtime only (plain dicts: never saved, never rolled back)
     APEX_GRID_TOP = _ag_bt.dict()     # grid id -> first visible row

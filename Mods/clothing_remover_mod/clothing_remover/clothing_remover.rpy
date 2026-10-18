@@ -1,4 +1,6 @@
-# clothing_remover.rpy  -  adds six pieces to Celica's Appearance tab
+# clothing_remover.rpy  -  two mods in one file, each with its own switch in Apex's Modpack Manager:
+#   Clothing Remover (clothing_remover)  the three red-X pieces below
+#   Combat Helpers   (combat_helpers)    the three Combat Helper accessories below
 #
 #   Shoes            visually removes her shoes (shoes are cosmetic, no effect in combat)
 #   Top/Bra          removes top + bra and puts her top in the 'exposed' state
@@ -28,9 +30,12 @@
 init 999 python:
     import builtins as _bt     # dict/list in Ren'Py scripts are Ren'Py's own types; check against the real ones
     # only when the shared guard says the game still matches what this mod was made for (tom_mod_guard.rpy)
-    if tom_mod_ok('clothing_remover',
+    _XR_NEEDS = ['is_equiped', 'inventory_add', 'attribute_get_max_value', 'attribute_mod_equip_value', 'Attribute', 'ColorHealth', 'ColorMagic', 'ColorOK']
+    XR_REMOVER_ON = tom_mod_ok('clothing_remover',
                   hooks=['clothes_dict_set', 'clothes_equip', 'clothes_redress_item', 'fix_clothes_button', 'fix_clothes_button_enabled', 'equip_procedure', 'refresh_attire_dict', 'clothes_redress_all', 'Item', 'Equip_Inventory'],
-                  needs=['is_equiped', 'inventory_add', 'attribute_get_max_value', 'attribute_mod_equip_value', 'Attribute', 'gemstone_is_garment_guardian', 'clothes_equiparealevel_disabled', 'refresh_gui_screen', 'clothes_get_equip_level', 'get_enemy_player', 'ColorHealth', 'ColorMagic', 'ColorOK']):
+                  needs=_XR_NEEDS + ['gemstone_is_garment_guardian', 'clothes_equiparealevel_disabled', 'refresh_gui_screen', 'clothes_get_equip_level', 'get_enemy_player'])
+    XR_HELPERS_ON = tom_mod_ok('combat_helpers', hooks=['Item', 'Equip_Inventory'], needs=_XR_NEEDS)
+    if XR_REMOVER_ON or XR_HELPERS_ON:
         import os, io, time
         import renpy.store as store
 
@@ -48,13 +53,13 @@ init 999 python:
         # HP and MP regen 10% of max per battle turn.
         XR_HELPER_BASE = {"a_arcane": 50, "a_speed": 50, "a_luck": 50, "a_cooldown": 50, "a_willpower": 100}
         XR_HELPER_REGEN = 10
-        XR_HELPER_SCALE = tuple((c, tom_setting('clothing_remover', 'helper_' + c, d) / 100.0)
+        XR_HELPER_SCALE = tuple((c, tom_setting('combat_helpers', 'helper_' + c, d) / 100.0)
                                 for c, d in (("green", 10), ("orange", 50), ("red", 100)))
 
         def _xr_items():
             # one dict per item: var, name, desc, image, order, properties, equip_extra, stats (shown values), regen (% per turn)
             rem_props = ["equipable", "haswideshadow", "unique", "toggleattire"]
-            items = [
+            items = [] if not XR_REMOVER_ON else [
                 dict(var="i_xr_shoes", name="Shoes", desc="Visually removes", image=XR_ICON, order=2390, props=rem_props,
                      extra={"name": "nude", "equip_area": ["feet|1"], "stripable": True, "molestable": True, "xr": "feet"}, stats={}, regen=0),
                 dict(var="i_xr_top", name="Top/Bra", desc="Visually removes and sets player in 'exposed' state for top body part", image=XR_ICON, order=2391, props=rem_props,
@@ -62,14 +67,14 @@ init 999 python:
                 dict(var="i_xr_bottom", name="Pants/Underwear", desc="Visually removes and sets player in 'exposed' state for pants body part", image=XR_ICON, order=2392, props=rem_props,
                      extra={"name": "nude", "equip_area": ["bottom|0"], "block_area": ["bottom|1"], "stripable": True, "molestable": True, "xr": "bottom"}, stats=XR_REMOVER_STATS, regen=0),
             ]
-            for i, (color, k) in enumerate(XR_HELPER_SCALE):
+            for i, (color, k) in enumerate(XR_HELPER_SCALE if XR_HELPERS_ON else ()):
                 # own slot "helper|0": one helper at a time, no clothes_dict entry (no "name"), never drawn on her
                 items.append(dict(var="i_xr_helper_" + color, name="Combat Helper " + color.title(), desc="Helpful Combat Stats",
                                   image="clothing_remover/helper_%s.png" % color, order=2393 + i, props=["equipable", "hasshadow", "unique", "toggleattire"],
                                   extra={"equip_area": ["helper|0"]}, stats={a: v * k for a, v in XR_HELPER_BASE.items()}, regen=XR_HELPER_REGEN * k))
             return items
 
-        XR_VARS = ["i_xr_shoes", "i_xr_top", "i_xr_bottom"] + ["i_xr_helper_" + c for c, k in XR_HELPER_SCALE]
+        XR_VARS = [s["var"] for s in _xr_items()]
 
         def _xr_num(v):
             return int(v) if float(v).is_integer() else round(v, 2)
@@ -193,54 +198,55 @@ init 999 python:
             except Exception as e:
                 _xr_log("install error %r" % (e,))
 
-        # ---- keep the removers' areas stripped whatever the game does
-        _xr_orig_clothes_dict_set = clothes_dict_set
-        _xr_orig_clothes_equip = clothes_equip
-        _xr_orig_clothes_redress_item = clothes_redress_item
-        _xr_orig_fix_clothes_button = fix_clothes_button
+        if XR_REMOVER_ON:
+            # ---- keep the removers' areas stripped whatever the game does
+            _xr_orig_clothes_dict_set = clothes_dict_set
+            _xr_orig_clothes_equip = clothes_equip
+            _xr_orig_clothes_redress_item = clothes_redress_item
+            _xr_orig_fix_clothes_button = fix_clothes_button
 
-        def clothes_dict_set(area=None, level=None, pos=None, value=None):
-            if pos == 1 and value is False and area is not None and level is not None:
-                if str(area) + "|" + str(level) in _xr_exposed_keys():
-                    return
-            return _xr_orig_clothes_dict_set(area, level, pos, value)
+            def clothes_dict_set(area=None, level=None, pos=None, value=None):
+                if pos == 1 and value is False and area is not None and level is not None:
+                    if str(area) + "|" + str(level) in _xr_exposed_keys():
+                        return
+                return _xr_orig_clothes_dict_set(area, level, pos, value)
 
-        def clothes_equip(equip_extra=None):
-            r = _xr_orig_clothes_equip(equip_extra)
-            _xr_enforce()
-            return r
+            def clothes_equip(equip_extra=None):
+                r = _xr_orig_clothes_equip(equip_extra)
+                _xr_enforce()
+                return r
 
-        def clothes_redress_item(initem=None):
-            r = _xr_orig_clothes_redress_item(initem)
-            _xr_enforce()
-            return r
+            def clothes_redress_item(initem=None):
+                r = _xr_orig_clothes_redress_item(initem)
+                _xr_enforce()
+                return r
 
-        def fix_clothes_button():
-            r = _xr_orig_fix_clothes_button()
-            _xr_enforce()
-            return r
+            def fix_clothes_button():
+                r = _xr_orig_fix_clothes_button()
+                _xr_enforce()
+                return r
 
-        _xr_orig_equip_procedure = equip_procedure
+            _xr_orig_equip_procedure = equip_procedure
 
-        def equip_procedure(item=None, action=None):
-            r = _xr_orig_equip_procedure(item, action)
-            # clicking a worn red X takes it off: put her default clothes back on right away
-            if item is not None and _xr_is_remover(item) and not is_equiped(item):
-                refresh_attire_dict()
-                refresh_gui_screen()
-            return r
+            def equip_procedure(item=None, action=None):
+                r = _xr_orig_equip_procedure(item, action)
+                # clicking a worn red X takes it off: put her default clothes back on right away
+                if item is not None and _xr_is_remover(item) and not is_equiped(item):
+                    refresh_attire_dict()
+                    refresh_gui_screen()
+                return r
 
-        def fix_clothes_button_enabled():
-            # same as the game's, but a remover is not "torn clothes" to fix
-            if gemstone_is_garment_guardian():
+            def fix_clothes_button_enabled():
+                # same as the game's, but a remover is not "torn clothes" to fix
+                if gemstone_is_garment_guardian():
+                    return False
+                if get_enemy_player() != e_celica:
+                    return False
+                held = _xr_exposed_keys()
+                for key, value in clothes_dict.items():
+                    if value[1] == True and key not in held and not clothes_equiparealevel_disabled(key):
+                        return True
                 return False
-            if get_enemy_player() != e_celica:
-                return False
-            held = _xr_exposed_keys()
-            for key, value in clothes_dict.items():
-                if value[1] == True and key not in held and not clothes_equiparealevel_disabled(key):
-                    return True
-            return False
 
         if _xr_after_load not in config.after_load_callbacks:
             config.after_load_callbacks.append(_xr_after_load)
