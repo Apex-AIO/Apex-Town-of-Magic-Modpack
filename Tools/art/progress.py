@@ -153,7 +153,7 @@ def update_readme(p, version="", date=""):
     path = os.path.join(WS, "README.md")
     if not os.path.exists(path):
         return False
-    _update_badges(path, version)
+    # (the Latest/Downloads badges are live shields.io badges - not rewritten here)
     t = open(path, encoding="utf8").read()
     a, b = "<!-- PROGRESS:START -->", "<!-- PROGRESS:END -->"
     if a not in t or b not in t:
