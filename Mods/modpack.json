@@ -1,6 +1,6 @@
 {
  "name": "Apex's Modpack",
- "version": "1.5.0",
+ "version": "1.5.1",
  "made_for_game": "0.77.002",
  "tip_url": "https://buymeacoffee.com/apex_modding",
  "core": {
@@ -28,7 +28,7 @@
    "title": "Nel's Auto Battler Sex Autonomy Mod",
    "category": "Characters",
    "group": "Nel",
-   "rev": "1.7",
+   "rev": "1.8",
    "desc": "At the start of each of her turns, Nel has a {chance} chance to taunt the monsters, teasing them to come and fuck her until she orgasms.",
    "files": {
     "nel_taunt_mod/nel_taunt.rpy": "apex_modpack/nel_taunt.rpy"
@@ -222,7 +222,7 @@
    "id": "clothing_remover",
    "title": "Clothing Remover",
    "category": "Clothing",
-   "rev": "1.5",
+   "rev": "1.6",
    "desc": "Red-X Shoes / Top / Pants items fully remove that clothing, including its protective combat states, so she stays exposed.",
    "files": {
     "clothing_remover_mod/clothing_remover/clothing_remover.rpy": "apex_modpack/clothing_remover.rpy",
@@ -308,7 +308,7 @@
    "title": "HD x8 Upscale Project",
    "category": "Engine",
    "wip": "VERY EARLY WIP",
-   "rev": "0.6",
+   "rev": "0.7",
    "desc": "AI-upscaled HD pictures (x8), added a block at a time: characters and backgrounds so far (see the HD Project page). Used when the window is bigger than 1066x600. Needs the HD pack. Switch HD on or off in game with F8 or the HD Toggle button.",
    "files": {
     "hd_sprites_mod/hd_sprites.rpy": "apex_modpack/hd_sprites.rpy",

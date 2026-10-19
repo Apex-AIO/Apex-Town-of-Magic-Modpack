@@ -1,0 +1,185 @@
+{
+ "1": {
+  "class_type": "CheckpointLoaderSimple",
+  "inputs": {
+   "ckpt_name": "waiIllustriousSDXL_v170.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "input.png"
+  }
+ },
+ "9": {
+  "class_type": "UpscaleModelLoader",
+  "inputs": {
+   "model_name": "4x-ReboutBlend.pth"
+  }
+ },
+ "10": {
+  "class_type": "ImageUpscaleWithModel",
+  "inputs": {
+   "upscale_model": [
+    "9",
+    0
+   ],
+   "image": [
+    "4",
+    0
+   ]
+  }
+ },
+ "20": {
+  "class_type": "LoraLoader",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "clip": [
+    "1",
+    1
+   ],
+   "lora_name": "DetailerILv2-000008.safetensors",
+   "strength_model": 0.6,
+   "strength_clip": 0.6
+  }
+ },
+ "21": {
+  "class_type": "LoraLoader",
+  "inputs": {
+   "model": [
+    "20",
+    0
+   ],
+   "clip": [
+    "20",
+    1
+   ],
+   "lora_name": "Smooth_Booster_v5.safetensors",
+   "strength_model": 0.35,
+   "strength_clip": 0.35
+  }
+ },
+ "22": {
+  "class_type": "LoraLoader",
+  "inputs": {
+   "model": [
+    "21",
+    0
+   ],
+   "clip": [
+    "21",
+    1
+   ],
+   "lora_name": "Niji_semi_realism_v5.safetensors",
+   "strength_model": 0.5,
+   "strength_clip": 0.5
+  }
+ },
+ "2": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "22",
+    1
+   ],
+   "text": "masterpiece, best quality, Jeddtl02, detailed skin, smooth blended shading, soft gradients, semi-realistic, realistic skin, subtle muscle definition, clean lineart, game sprite, simple background"
+  }
+ },
+ "3": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "22",
+    1
+   ],
+   "text": "blurry, soft, jpeg artifacts, noise, grain, sketch, text, bad anatomy, deformed, extra toes, missing toes, fused toes, extra fingers"
+  }
+ },
+ "7": {
+  "class_type": "ControlNetLoader",
+  "inputs": {
+   "control_net_name": "xinsir_controlnet_tile_sdxl.safetensors"
+  }
+ },
+ "8": {
+  "class_type": "ControlNetApplyAdvanced",
+  "inputs": {
+   "positive": [
+    "2",
+    0
+   ],
+   "negative": [
+    "3",
+    0
+   ],
+   "control_net": [
+    "7",
+    0
+   ],
+   "image": [
+    "10",
+    0
+   ],
+   "strength": 0.8,
+   "start_percent": 0.0,
+   "end_percent": 1.0
+  }
+ },
+ "5": {
+  "class_type": "UltimateSDUpscaleNoUpscale",
+  "inputs": {
+   "upscaled_image": [
+    "10",
+    0
+   ],
+   "model": [
+    "22",
+    0
+   ],
+   "positive": [
+    "8",
+    0
+   ],
+   "negative": [
+    "8",
+    1
+   ],
+   "vae": [
+    "1",
+    2
+   ],
+   "seed": 1,
+   "steps": 14,
+   "cfg": 5.0,
+   "sampler_name": "euler",
+   "scheduler": "normal",
+   "denoise": 0.6,
+   "mode_type": "Linear",
+   "tile_width": 1024,
+   "tile_height": 1024,
+   "mask_blur": 16,
+   "tile_padding": 64,
+   "seam_fix_mode": "None",
+   "seam_fix_denoise": 0.2,
+   "seam_fix_width": 64,
+   "seam_fix_mask_blur": 8,
+   "seam_fix_padding": 16,
+   "force_uniform_tiles": false,
+   "tiled_decode": false,
+   "batch_size": 1
+  }
+ },
+ "6": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "5",
+    0
+   ],
+   "filename_prefix": "hd_batch"
+  }
+ }
+}

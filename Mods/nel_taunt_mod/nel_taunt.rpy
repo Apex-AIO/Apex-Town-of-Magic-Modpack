@@ -16,6 +16,7 @@
 #   7. While Nel is in control, Celica gets only 50% of the battle XP (Nel does the killing).
 #   8. Nel never kills a monster with her first hit on it: that hit leaves it on 1 HP, the next one kills.
 #   9. A climax while Nel possesses her raises Nel's body influence on Celica by 0.5 (the game: 10).
+#10. Rock Spitter kisses give 3x the lust while Violet is worn (NT_VIOLET_KISS); if clothing that cannot be torn keeps them kissing, the kiss lust cap is lifted after 4 actions (NT_CAPPED_MAX).
 # Monsters switched off in the game's preferences (sex monsters) are left alone.
 #
 # Settings (below): NT_CHANCE, NT_COOLDOWN, NT_MAX_TURNS, NT_TALK, NT_ORGASM_LUST, NT_XP_SHARE.   Debug log: NT_LOG = True -> game/nel_taunt_log.txt
@@ -45,8 +46,10 @@ init 999 python:
                                                          # Celica's share of the battle XP while Nel is in control
         NT_NO_ONE_SHOT = _nt_set('no_one_shot', True)    # her first hit on a monster leaves it on 1 HP
         NT_ORGASM_INFLUENCE = _nt_set('influence', 0.5)  # Nel's body influence gained per climax while she possesses Celica (game: 10)
+        NT_VIOLET_KISS = 3         # Rock Spitter kiss lust multiplier while Violet is worn
+        NT_CAPPED_MAX = 4         # monster actions in a row that can't make her climax (kiss) before that limit is lifted
         NT_LOG = False
-        NT_TEST_WEAK = False       # TESTING ONLY: Nel's hits do 1 damage so monsters live long enough to see the taunt
+        NT_TEST_WEAK = False      # TESTING ONLY: Nel's hits do 1 damage so monsters live long enough to see the taunt
         _NT_DEFAULTS = dict(NT_CHANCE=NT_CHANCE, NT_COOLDOWN=NT_COOLDOWN, NT_MAX_TURNS=NT_MAX_TURNS, NT_TALK=NT_TALK,
                             NT_ORGASM_LUST=list(NT_ORGASM_LUST), NT_XP_SHARE=NT_XP_SHARE, NT_NO_ONE_SHOT=NT_NO_ONE_SHOT,
                             NT_ORGASM_INFLUENCE=NT_ORGASM_INFLUENCE, NT_LOG=NT_LOG, NT_TEST_WEAK=NT_TEST_WEAK)
@@ -210,7 +213,20 @@ init 999 python:
             spot = "top" if "top" in area else "bottom" if "bottom" in area else None
             mol = _nt_moves(m, "molest")
             if mol:
-                u = _nt_random.choice(mol)
+                # Moves like the Rock Spitter's kiss hold her lust at 99 ("targetcannotclimax"): they are foreplay while the
+                # clothing is torn off, then the monster moves on to moves that can make her climax.  Clothing that can't be
+                # torn (Violet's slime suits) keeps those moves from ever appearing: the monster kisses forever and she
+                # never climaxes.  After a few capped moves in a row with nothing new, the cap is lifted so the next one can.
+                free = [x for x in mol if "targetcannotclimax" not in (x[8] or [])]
+                if free:
+                    st["capped"] = 0
+                    u = _nt_random.choice(free)
+                else:
+                    u = _nt_random.choice(mol)
+                    st["capped"] = st.get("capped", 0) + 1
+                    if st["capped"] > NT_CAPPED_MAX:
+                        _nt_log("%s: only moves that stop a climax (%s) for %d actions: cap lifted" % (m.get_name(), u[2], st["capped"] - 1))
+                        u = tuple(u[:8]) + ([p for p in (u[8] or []) if p != "targetcannotclimax"],) + tuple(u[9:])
                 tear = spot if (spot and clothes_get_equip_level(spot) != -1) else None
                 _nt_log("%s molests %s (%s)%s" % (m.get_name(), area, u[2], " + tears " + tear if tear else ""))
                 return _nt_as_decision(u, tear)
@@ -221,7 +237,26 @@ init 999 python:
 
         _nt_orig_enemy_decides = enemy_decides
 
+        def _nt_violet_worn():
+            try:
+                return any(i.has_property("slimegirl_disable_other_equipareas") for i in main_vars["attire_list"])
+            except Exception:
+                return False
+
         def enemy_decides(in_enemy=None, overide_move_list=[], in_target_list=None, flags={}):
+            r = _nt_enemy_decides(in_enemy, overide_move_list, in_target_list, flags)
+            # Rock Spitter kisses give 4x the lust while Celica (or Nel in her body) wears Violet
+            try:
+                if r and r[1] == "_kiss" and getattr(in_enemy, "image", None) == "rockspitter" and r[-1] is e_celica \
+                        and r[14] and "targetarousalinc" in r[14] and _nt_violet_worn():
+                    extra = dict(r[14])
+                    extra["targetarousalinc"] = extra["targetarousalinc"] * NT_VIOLET_KISS
+                    r = tuple(r[:14]) + (extra,) + tuple(r[15:])
+            except Exception as e:
+                _nt_log("violet kiss error %r" % (e,))
+            return r
+
+        def _nt_enemy_decides(in_enemy=None, overide_move_list=[], in_target_list=None, flags={}):
             try:
                 if _nt_active() and not overide_move_list and in_target_list is None:
                     st = _nt_state()
@@ -353,7 +388,7 @@ init 999 python:
         def _nt_begin():
             _nt_report("taunt")
             st = _nt_state()
-            st.update(phase="taunt", turns=0, climaxed=False)
+            st.update(phase="taunt", turns=0, climaxed=False, capped=0)
 
         def _nt_end():
             st = _nt_state()

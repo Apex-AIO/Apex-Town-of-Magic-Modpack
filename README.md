@@ -16,9 +16,9 @@
 
 | Download | What's inside | Last updated | Version | Size |
 |---|---|:-:|:-:|--:|
-| **Apex_Modpack** | All 13 mods + the Mod Manager + the mods folder (templates and the modding guide) | 2026-10-19 | v1.5.0 | 0.4 MB |
-| **Apex_HD_Pack** part 1 of 2 | HD pictures for the HD x8 project (add-on, needs the modpack) | 2026-10-19 | v1.5.0 | 1.9 GB |
-| **Apex_HD_Pack** part 2 of 2 | HD pictures, continued. Install both parts. | 2026-10-19 | v1.5.0 | 1.7 GB |
+| **Apex_Modpack** | All 13 mods + the Mod Manager + the mods folder (templates and the modding guide) | 2026-10-20 | v1.5.1 | 0.4 MB |
+| **Apex_HD_Pack** part 1 of 2 | HD pictures for the HD x8 project (add-on, needs the modpack) | 2026-10-20 | v1.5.1 | 1.9 GB |
+| **Apex_HD_Pack** part 2 of 2 | HD pictures, continued. Install both parts. | 2026-10-20 | v1.5.1 | 1.7 GB |
 
 <sub>Install steps are on the release page. Made for Town of Magic 0.77.002.</sub>
 
@@ -43,14 +43,14 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 #### ALL GAME ASSETS TO SCALE
 
-<img src="docs/images/progress.svg?v=c7ae712d" alt="HD project progress" width="820">
+<img src="docs/images/progress.svg?v=5bda25ff" alt="HD project progress" width="820">
 
-<sub>An estimate of every game asset (the end goal). Updated with every release - v1.5.0, 19 Oct 2026.</sub>
+<sub>An estimate of every game asset (the end goal). Updated with every release - v1.5.1, 20 Oct 2026.</sub>
 
 #### CHARACTERS
 <sub>every pose, face, outfit and animation frame of every character and creature</sub>
 
-<img src="docs/images/progress_characters.svg?v=c3423472" alt="Characters" width="820">
+<img src="docs/images/progress_characters.svg?v=c0d15edc" alt="Characters" width="820">
 
 #### BACKGROUNDS
 <sub>locations, window views, lights, animated backgrounds and event pictures</sub>
@@ -65,19 +65,19 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 </div>
 
 <details>
-<summary><b>🧑‍🎨 Characters in detail — currently encountered in my own save (39 of 183 characters)</b></summary>
+<summary><b>🧑‍🎨 Characters in detail — currently encountered in my own save (40 of 183 characters)</b></summary>
 
 <div align="center">
 
-<img src="docs/images/progress/characters_celica.svg?v=5159870e" alt="Celica" width="700">
+<img src="docs/images/progress/characters_celica.svg?v=224ee18f" alt="Celica" width="700">
 
 <img src="docs/images/progress/characters_demoness.svg?v=377eb54b" alt="Demoness" width="700">
 
-<img src="docs/images/progress/characters_nel.svg?v=1fbf11cb" alt="Nel" width="700">
+<img src="docs/images/progress/characters_nel.svg?v=1c0c8336" alt="Nel" width="700">
 
 <img src="docs/images/progress/characters_evie.svg?v=1d1cd3c1" alt="Evie" width="700">
 
-<img src="docs/images/progress/characters_slime_girl.svg?v=2d0bda82" alt="Slime Girl" width="700">
+<img src="docs/images/progress/characters_slime_girl.svg?v=06482358" alt="Slime Girl" width="700">
 
 <img src="docs/images/progress/characters_fairy.svg?v=e6bcc7bf" alt="Fairy" width="700">
 
@@ -91,19 +91,21 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <img src="docs/images/progress/characters_cornel.svg?v=a031c470" alt="Cornel" width="700">
 
+<img src="docs/images/progress/characters_dark_knight.svg?v=99d11e99" alt="Dark Knight" width="700">
+
 <img src="docs/images/progress/characters_maid.svg?v=eeac3fd2" alt="Maid" width="700">
 
 <img src="docs/images/progress/characters_edgar.svg?v=b82f61f1" alt="Edgar" width="700">
 
 <img src="docs/images/progress/characters_jack.svg?v=4dd5e54a" alt="Jack" width="700">
 
+<img src="docs/images/progress/characters_barkeeper.svg?v=ba01fb4f" alt="Barkeeper" width="700">
+
 <img src="docs/images/progress/characters_morden.svg?v=7e2b3eae" alt="Morden" width="700">
 
-<img src="docs/images/progress/characters_barkeeper.svg?v=442734a9" alt="Barkeeper" width="700">
+<img src="docs/images/progress/characters_bert.svg?v=696add5a" alt="Bert" width="700">
 
 <img src="docs/images/progress/characters_liam.svg?v=6e1043a5" alt="Liam" width="700">
-
-<img src="docs/images/progress/characters_bert.svg?v=962b1a3c" alt="Bert" width="700">
 
 <img src="docs/images/progress/characters_phineas_pholly.svg?v=f65538c7" alt="Phineas Pholly" width="700">
 
@@ -149,7 +151,7 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 </div>
 
-<sub>Not encountered yet (144): Alraune, Anubis Warrior, Avalloc, Baron Everard, Bee-Girl, Bellona, Biter, Blightbloom, Booty, Busty, Capt. Ceres, Cedric, Celestian, Celica (child), Celica (fairy), Celica (spirit), Cellshroom, Cephrina, Cindy, Clara, Cozzy, Cyclopus, Dark Cape, Dark Knight, Dark Painting, Demon Sloth Blimp, Demon Sloth Dick, Domenea, Drylia, Dwarf Guard, Dwarf Watch, Eeris, Elandorr, Elaran, Eleth Shop Keeper, Elith, Elize, Elyrana, Emma, Envy, Envy Demon, Fargrim, Faylen, Faylen (spirit), Fire Golem, Fire Ray, Fire Wyvern, Forest Hermit, Gaius, Galgatin, Galiene (spirit), Gavin, Genie, Genie Celica, Giant Spider, Glace, Gluttony Demon, Gluttony's Tongue, Golem, Gorgroth, Graham, Greed Demon, Grimm, Grimmerock, Huge Slime, Ice Armor, Ice Golem, Inara, Kael, King Therbin, Kitsune, Lamia, Layla, Lena, Lena (shop keeper), Leraie, Liamspirit, Lilith, Lily, Lucina, Luna, Lust, Lust Demon, Lyra, Lysander, Madame Samira, Mana Stalker, Manfred, Margarilda, Marlene, Masked Dwarf, Mimic, Mindflayer, Mirania, Miriam, Nahla, Noctriel, Noctyra, Noxtar, Oberon, Penelope, Phantom Pirate, Phantom Sword, Pirate, Pixella, Pride Demon, Prince Rajak, Puck, Puppet, Queen Brynja, Richard, Roderick, Rurik, Rusty, Saya, Shade, Silgri, Skull Imp, Sloth Demon, Succubus, Sylphie, Sylvia, Taenaran, Talkstone, Tentaknight, Tessa, Topi, Trixi, Umbral Groper, Undead, Vaerandor, Valen, Velvetia, Vera, Violet, Vivi, Vivi's Panties, Voidgazer, Vorath, Warden, Wrath Demon, Xantherus, Yaiba, Zaid</sub>
+<sub>Not encountered yet (143): Alraune, Anubis Warrior, Avalloc, Baron Everard, Bee-Girl, Bellona, Biter, Blightbloom, Booty, Busty, Capt. Ceres, Cedric, Celestian, Celica (child), Celica (fairy), Celica (spirit), Cellshroom, Cephrina, Cindy, Clara, Cozzy, Cyclopus, Dark Cape, Dark Painting, Demon Sloth Blimp, Demon Sloth Dick, Domenea, Drylia, Dwarf Guard, Dwarf Watch, Eeris, Elandorr, Elaran, Eleth Shop Keeper, Elith, Elize, Elyrana, Emma, Envy, Envy Demon, Fargrim, Faylen, Faylen (spirit), Fire Golem, Fire Ray, Fire Wyvern, Forest Hermit, Gaius, Galgatin, Galiene (spirit), Gavin, Genie, Genie Celica, Giant Spider, Glace, Gluttony Demon, Gluttony's Tongue, Golem, Gorgroth, Graham, Greed Demon, Grimm, Grimmerock, Huge Slime, Ice Armor, Ice Golem, Inara, Kael, King Therbin, Kitsune, Lamia, Layla, Lena, Lena (shop keeper), Leraie, Liamspirit, Lilith, Lily, Lucina, Luna, Lust, Lust Demon, Lyra, Lysander, Madame Samira, Mana Stalker, Manfred, Margarilda, Marlene, Masked Dwarf, Mimic, Mindflayer, Mirania, Miriam, Nahla, Noctriel, Noctyra, Noxtar, Oberon, Penelope, Phantom Pirate, Phantom Sword, Pirate, Pixella, Pride Demon, Prince Rajak, Puck, Puppet, Queen Brynja, Richard, Roderick, Rurik, Rusty, Saya, Shade, Silgri, Skull Imp, Sloth Demon, Succubus, Sylphie, Sylvia, Taenaran, Talkstone, Tentaknight, Tessa, Topi, Trixi, Umbral Groper, Undead, Vaerandor, Valen, Velvetia, Vera, Violet, Vivi, Vivi's Panties, Voidgazer, Vorath, Warden, Wrath Demon, Xantherus, Yaiba, Zaid</sub>
 
 </details>
 
@@ -451,7 +453,7 @@ On your turn, grope and H-scene animations <ins>**keep looping with their sounds
 <blockquote>
 
 <details>
-<summary><b>👻 Nel's Auto Battler Sex Autonomy Mod (r1.7)</b></summary>
+<summary><b>👻 Nel's Auto Battler Sex Autonomy Mod (r1.8)</b></summary>
 <div align="center">
 
 When Nel possesses Celica and auto-battles, she sometimes stops fighting and **taunts the monsters**, teasing them to come and use Celica's body until she climaxes. Monsters grab, grope and tear her clothes, Nel comments on it in her own voice, then she shoos them off and goes back to fighting.
@@ -503,10 +505,12 @@ The **Equip > Appearance** tab is open from the very start, on new games and on 
 </details>
 
 <details>
-<summary><b>❌ Clothing Remover (r1.5)</b></summary>
+<summary><b>❌ Clothing Remover (r1.6)</b></summary>
 <div align="center">
 
 **Red-X Shoes / Top / Pants:** equippable "nothing" items that fully remove that clothing, including its protective combat states, so she stays exposed. Stats: Allure/Lewdness +25; Willpower, Cooldown, Arcane and Speed −25.
+
+**Click to remove:** in **Equip > Appearance**, click a piece in the EQUIPPED list to take it off, click again to put it back. Taking off a bra or panties also takes off the top or pants over it. Violet's suits and hair are left alone. (The game only allows this where changing clothes is allowed, e.g. not in hostile places.)
 
 ⚙️ **Settings:** red-X stat strength.
 
@@ -547,12 +551,12 @@ Removes the short **~0.2–0.4 s freezes** in battle: when a character changes p
 </details>
 
 <details>
-<summary><b>🖼️ HD x8 Upscale Project (r0.6) — VERY EARLY WIP</b></summary>
+<summary><b>🖼️ HD x8 Upscale Project (r0.7) — VERY EARLY WIP</b></summary>
 <div align="center">
 
 AI-upscaled HD pictures, used automatically when your window is bigger than 1066×600 (1080p, 1440p, 4K). All backgrounds and **all menus, icons, symbols, the main menu and the world map** are done; characters are done a block at a time — see **HD Project progress** above. Needs the **Apex_HD_Pack** download.
 
-**HD Toggle:** press **F8** or click the **HD Toggle** button under Health and Magic to switch every HD picture back to the original and back again, instantly.<br>
+**HD Toggle:** press **F8** or click the **HD Toggle** button under Health and Magic to switch every HD picture (characters, backgrounds, items, icons and menus) back to the original and back again, instantly.<br>
 ⚙️ **Settings:** picture memory.
 
 <img src="docs/images/hd_toggle.gif" alt="HD Toggle switching between HD and the original pictures" width="480">
@@ -627,6 +631,12 @@ Each time you arrive somewhere new, a backup of your items and gold is kept (the
 
 <details>
 <summary><b>Changelog</b></summary>
+
+**v1.5.1**
+- Fixed: the **HD Toggle** / F8 now switches *everything* (backgrounds, items, icons, menus), not only characters
+- New: **click-to-remove** clothing in Equip > Appearance (click worn clothes in the EQUIPPED list; bra/panties also take off what covers them)
+- Fixed: **Nel's auto-battle stuck kissing** (Rock Spitters in Dimore Cave never made her climax while she wore Violet); Rock Spitter kisses now give 3x lust while Violet is worn
+- HD: more Celica, Dark Knight, Slime Girl, Nel, Bert and Barkeeper pictures
 
 **v1.5.0**
 - New: **Update checker** in the Mod Manager (start-up check with a Download / No prompt, plus a manual button above Game Version)

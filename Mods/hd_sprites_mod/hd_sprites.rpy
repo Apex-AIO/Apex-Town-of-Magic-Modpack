@@ -78,8 +78,12 @@ init 5 python:
         im = _hd_improxy
 
         # ---- HD on/off: F8 or the "HD Toggle" button under Health/Magic (remembered between sessions) ----
-        # Ren'Py picks the @2/@4 file each time a picture is drawn, so switching automatic_oversampling takes effect
-        # on the very next frame for every picture: characters, backgrounds, everything upscaled.
+        # Ren'Py picks the @2/@4 file each time a picture is drawn, so switching automatic_oversampling changes every
+        # picture that is drawn again: characters, backgrounds, items, icons, interface.  Pictures that did not change
+        # (backgrounds, icons, frames) are not drawn again by themselves: Ren'Py keeps their last drawing (render cache)
+        # and would show the old quality until something moved.  Emptying that cache (not the pictures in memory, so
+        # there is no hitch) makes everything redraw at once.
+        import renpy.display.render as _hd_render
         if persistent.apex_hd_off:
             config.automatic_oversampling = None
 
@@ -89,7 +93,11 @@ init 5 python:
         def apex_hd_toggle():
             persistent.apex_hd_off = not persistent.apex_hd_off
             config.automatic_oversampling = None if persistent.apex_hd_off else 4
-            # no memory wipe: the pictures of the other quality simply age out of Ren'Py's picture memory
+            try:
+                _hd_render.free_memory()
+                renpy.force_full_redraw()
+            except Exception as e:
+                tom_mod_error('hd_sprites', 'toggle redraw', e)
             renpy.notify("HD pictures %s" % ("OFF (original pictures)" if persistent.apex_hd_off else "ON"))
             renpy.restart_interaction()
 

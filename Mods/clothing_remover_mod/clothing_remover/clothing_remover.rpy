@@ -250,7 +250,108 @@ init 999 python:
                         return True
                 return False
 
+            # ---- Equip > Appearance: click a worn piece in the EQUIPPED list (left) to take it off, click again to put it back.
+            # The game's own icons there do nothing (NullAction), so transparent buttons are laid over them (overlay,
+            # zorder -17).  "Off" = the same 'stripped' state a monster causes; the pieces over it (the top over a bra,
+            # the pants over panties) are protection, so they come off with it.  Pieces of Violet's suits and hair are left alone.
+            XR_EQ_POS = (267 + 10 + 15, 38 + 60 + 15)       # the game's list: event screen (267, 38) + inner frame (10, 60) + (15, 15)
+            XR_EQ_BLOCKING = ("select_item_frame", "gotitem_frame", "confirm_frame", "shopmenu_frame", "fusemenu_frame", "book_frame", "map_frame")
+            XR_EQ_OWN = ("action_frame", "apex_inv_hud", "apex_equip_grid", "apex_hd_toggle", "quick_menu", "setup_frame", "apex_xr_equipped")
+
+            def _xr_eq_blocked():
+                # a window or question is open over Equip: leave the game's own list alone
+                for n in XR_EQ_BLOCKING:
+                    if renpy.get_screen(n) is not None:
+                        return True
+                try:
+                    for tag in renpy.get_showing_tags("screens"):
+                        if tag in XR_EQ_OWN:
+                            continue
+                        sd = renpy.get_screen(tag)
+                        if sd is not None and getattr(sd, "modal", False) is True:
+                            return True
+                except Exception:
+                    pass
+                return False
+
+            def _xr_eq_item_ok(item):
+                return not (item.has_property("special") or item.has_property("hair_attire"))
+
+            def _xr_eq_stripped(item):
+                keys = [k for k in item.get_equip_area_list() if k in clothes_dict]
+                return bool(keys) and all(clothes_dict[k][1] == True for k in keys)
+
+            def _xr_eq_click(item):
+                try:
+                    if _xr_is_remover(item):
+                        equip_procedure(item, "unequip")          # the wrapper above puts her default clothes back
+                    elif _xr_eq_stripped(item):
+                        for key in item.get_equip_area_list():
+                            area, level = key.split("|")
+                            clothes_dict_set(area, level, 1, False)
+                    else:
+                        keys = set(item.get_equip_area_list()) | set(item.get_block_area_list())
+                        for key in list(keys):
+                            area, level = key.split("|")
+                            for other in clothes_dict.keys():
+                                oarea, olevel = other.split("|")
+                                if oarea == area and int(olevel) > int(level):
+                                    keys.add(other)
+                        for key in keys:
+                            area, level = key.split("|")
+                            clothes_dict_set(area, level, 1, True)
+                    _xr_enforce()
+                    refresh_gui_screen()
+                    renpy.restart_interaction()
+                except Exception as e:
+                    tom_mod_error('clothing_remover', 'click-to-remove', e)
+
+            def apex_xr_equipped_view():
+                """[(item, x, y, stripped, clickable, tooltip)] while Equip > Appearance shows Celica's worn clothes, else []"""
+                try:
+                    if not is_setup_frame_active() or store._menu or store.main_menu:
+                        return []
+                    sd = renpy.get_screen("setup_frame")
+                    if sd is None or tuple(getattr(sd, "screen_name", ("setup_frame",)))[0] != "setup_frame":
+                        return []                       # the shop and the fuse screen use the same tag: not Equip
+                    if getattr(store, "setup_frame_select", None) != "Appearance" or get_enemy_player() != e_celica:
+                        return []
+                    if clothes_are_empty() or _xr_eq_blocked():
+                        return []
+                    can = bool(is_menu_enabled() and change_clothes_btn_enabled())
+                    rv = []
+                    for i, item in enumerate(print_sorted_attire_list()):
+                        x = XR_EQ_POS[0] + 35 * (i % 2) + 1
+                        y = XR_EQ_POS[1] + 39 * (i // 2) + 1
+                        ok = can and is_item_menu_enabled(item) and _xr_eq_item_ok(item)
+                        st = _xr_eq_stripped(item) and not _xr_is_remover(item)
+                        tip = trl(item_get_name(item)) + trl(item_get_type(item)) + "\n" + item_get_desc(item)
+                        if ok:
+                            tip += "\n{color=#ffd34d}" + ("Click to put it back on" if st else ("Click to take it off" if not _xr_is_remover(item) else "Click to take it off (her clothes come back)")) + "{/color}"
+                        rv.append((item, x, y, st, ok, tip))
+                    return rv
+                except Exception as e:
+                    tom_mod_error('clothing_remover', 'equipped view', e)
+                    return []
+
+            if "apex_xr_equipped" not in config.overlay_screens:
+                config.overlay_screens.append("apex_xr_equipped")
+
         if _xr_after_load not in config.after_load_callbacks:
             config.after_load_callbacks.append(_xr_after_load)
         if _xr_tick.__name__ not in [getattr(f, "__name__", "") for f in config.periodic_callbacks]:
             config.periodic_callbacks.append(_xr_tick)
+
+
+# the click-to-remove buttons over Equip > Appearance's EQUIPPED list (see apex_xr_equipped_view above)
+screen apex_xr_equipped():
+    zorder -17
+    # a save can bring this overlay back while the mod is switched off: then draw nothing
+    if hasattr(store, "apex_xr_equipped_view"):
+        for _it, _x, _y, _st, _ok, _tip in apex_xr_equipped_view():
+            fixed area (_x, _y, 33, 37):
+                if _st:
+                    add Solid("#000000a0") size (33, 37)
+                    add Solid("#ff3030") size (33, 2) ypos 17
+                if _ok:
+                    imagebutton idle Solid("#00000000") hover Solid("#ffffff30") xysize (33, 37) action Function(_xr_eq_click, _it) tooltip _tip
