@@ -310,16 +310,18 @@ screen apex_nel_report():
                         if not _v["kills"]:
                             text "None this time." size 12 color "#FFFFFFA0"
                         else:
-                            hbox spacing 8 box_wrap True:
-                                for _k in _v["kills"]:
-                                    frame padding (4, 4) background Solid("#ffffff10"):
-                                        vbox spacing 2 xsize 76:
-                                            if _k.get("pic"):
-                                                add Transform(Crop(tuple(_k["pic"][1:5]) if len(_k["pic"]) == 5 else (0, 0, _k["pic"][1], _k["pic"][2]), _k["pic"][0]), fit="contain", xysize=(76, 62)) xalign 0.5
-                                            else:
-                                                null height 62
-                                            text apex_nr_safe(_k["name"]) size 10 color "#FFFFFF" xalign 0.5 text_align 0.5
-                                            text "x%d" % _k["n"] size 11 bold True color ColorClick xalign 0.5
+                            viewport:
+                              xfill True ymaximum 200 child_size (700, None) mousewheel True draggable True
+                              hbox spacing 8 box_wrap True:
+                                  for _k in _v["kills"]:
+                                      frame padding (4, 4) background Solid("#ffffff10"):
+                                          vbox spacing 2 xsize 76:
+                                              if _k.get("pic"):
+                                                  add Transform(Crop(tuple(_k["pic"][1:5]) if len(_k["pic"]) == 5 else (0, 0, _k["pic"][1], _k["pic"][2]), _k["pic"][0]), fit="contain", xysize=(76, 62)) xalign 0.5
+                                              else:
+                                                  null height 62
+                                              text apex_nr_safe(_k["name"]) size 10 color "#FFFFFF" xalign 0.5 text_align 0.5
+                                              text "x%d" % _k["n"] size 11 bold True color ColorClick xalign 0.5
                 # totals
                 hbox spacing 10:
                     frame xsize 360 padding (10, 8) background Solid("#00000055"):

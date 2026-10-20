@@ -26,7 +26,7 @@ def _apex_mods_loader():
     base = renpy.config.basedir
     mods = os.path.join(base, "mods")
     data = os.path.join(mods, "_manager")
-    state = dict(version=APEX_LOADER_VERSION, root=mods, mods=[], files={}, conflicts=[], errors=[], log=[],
+    state = dict(version=APEX_LOADER_VERSION, root=mods, mods=[], files={}, block=[], conflicts=[], errors=[], log=[],
                  settings_file=os.path.join(data, "settings.json"), crash_recovered=[])
     renpy.apex_mods = state
 
@@ -132,20 +132,55 @@ def _apex_mods_loader():
         if not os.path.isdir(folder) or entry.startswith(("_", ".")):
             continue
         info = read_info(folder)
+        if entry.lower() == "game" or os.path.isdir(os.path.join(folder, "game")):
+            # mods downloaded from the forums have no mod_info.txt: that is normal, not a problem
+            info["warnings"] = [w for w in info["warnings"] if not w.startswith("No mod_info.txt")]
         info["id"] = entry
         info["folder"] = folder
         on = bool(settings["enabled"].get(entry, True))          # a new mod dropped in starts ON
         info["enabled"] = on
         info["auto_off"] = settings["auto_off"].get(entry)
         info["scripts"], info["assets"] = [], []
+        # Mods downloaded for this game come as a "game" folder (the zip's game\... goes into the game folder).  A mod folder
+        # with a "game" folder inside - or a folder that is itself called "game" - is loaded the same way: every file in it,
+        # scripts included, takes the place of the game file with the same path (a modified copy of a game script REPLACES
+        # the original; a new file is added).
+        gameroot = None
+        if os.path.isdir(os.path.join(folder, "game")):
+            gameroot = os.path.join(folder, "game")
+        elif entry.lower() == "game":
+            gameroot = folder
+        info["game_style"] = gameroot is not None
+        if gameroot == folder:
+            info["warnings"].append("This folder is called 'game', so it is loaded like a mod's game folder. Tip: put it inside a folder named after the mod (mods\\<ModName>\\game) so you can tell mods apart.")
         if on:
-            for dp, dns, fns in os.walk(folder):
+            for dp, dns, fns in os.walk(gameroot or folder):
                 dns[:] = [d for d in dns if not d.startswith((".", "_"))]
                 for fn in fns:
                     full = os.path.join(dp, fn)
-                    rel = os.path.relpath(full, folder).replace("\\", "/")
+                    rel = os.path.relpath(full, gameroot or folder).replace("\\", "/")
                     low = fn.lower()
                     if low in ("mod_info.txt", "error report.txt", "log.txt") or low.endswith((".bak", ".tmp")):
+                        continue
+                    if gameroot and low.endswith((".rpy", ".rpyc", "_ren.py", ".rpym", ".rpymc")):
+                        # a game-style script takes the game's own path.  Its compiled twin is not listed (Ren'Py finds it
+                        # next to it); the game's own compiled copy inside the archive is blocked by name instead.
+                        stem = rel[:-4] if low.endswith(".rpy") else rel[:-7] if low.endswith("_ren.py") else rel[:-5] if low.endswith(".rpym") else None
+                        if stem is None and os.path.exists(full[:-1]):
+                            # the mod's compiled twin: Ren'Py reads "<name>.rpyc" through the game's file system, which would
+                            # hand it the ORIGINAL game's compiled script from the archive - so it must be listed too
+                            if rel not in names_seen:
+                                names_seen[rel] = entry
+                                state["files"][rel] = (gameroot, full)
+                            continue
+                        if rel in names_seen:
+                            state["conflicts"].append((rel, names_seen[rel], entry))
+                            continue
+                        names_seen[rel] = entry
+                        state["files"][rel] = (gameroot, full)
+                        if stem is not None:
+                            state["block"].append(stem + (".rpymc" if low.endswith(".rpym") else ".rpyc"))
+                        info["scripts"].append(rel)
                         continue
                     if low.endswith((".rpy", ".rpyc", "_ren.py", ".rpym", ".rpymc")):
                         # scripts: their own name, so two mods can both have "script.rpy"
@@ -155,14 +190,15 @@ def _apex_mods_loader():
                         state["files"][name] = (base, full)
                         info["scripts"].append(rel)
                     else:
-                        state["files"]["mods/%s/%s" % (entry, rel)] = (base, full)       # always reachable by own path
+                        if not gameroot:
+                            state["files"]["mods/%s/%s" % (entry, rel)] = (base, full)       # always reachable by own path
                         if not low.endswith(ASSET_EXTS):
                             continue                                     # notes / docs: only by their own path
                         if rel in names_seen:
                             state["conflicts"].append((rel, names_seen[rel], entry))
                             continue
                         names_seen[rel] = entry
-                        state["files"][rel] = (folder, full)            # and by the game's path (replaces / adds)
+                        state["files"][rel] = (gameroot or folder, full)            # and by the game's path (replaces / adds)
                         info["assets"].append(rel)
         state["mods"].append(info)
         log("mod '%s' (%s): %s, %d scripts, %d files" % (entry, info["name"], "ON" if on else "off",
@@ -179,6 +215,8 @@ def _apex_mods_loader():
         for name, (dn, full) in state["files"].items():
             add(dn, name, renpy.loader.game_files, seen)
             renpy.loader.loadable_cache[name] = True     # Ren'Py looks names up in their real spelling too
+        for name in state["block"]:
+            seen.add(name)                               # the game's compiled copy of a script a mod replaces is not listed
 
     def open_cb(name):
         k = state["files"].get(name) or state["files"].get(lower.get(name.lower(), ""))
@@ -231,12 +269,16 @@ def apex_explain(text):
     return "Read the last lines of the report below: they name the file and line where it went wrong."
 
 
+_APEX_SEEN = set()
+
+
 def _apex_exception_handler(short, full, traceback_fn=None):
     """Ren'Py calls this for any error while the game runs.  Errors from a mod in the mods folder are recorded,
     that mod is switched off for the next start, and the game carries on.  Everything else: Ren'Py as usual."""
     try:
-        if "apex_modpack/" in full:
-            # an error inside one of Apex's own mods: keep a copy next to the game's own traceback.txt
+        if "apex_modpack/" in full and hash(full[-600:]) not in _APEX_SEEN and len(_APEX_SEEN) < 50:
+            # an error inside one of Apex's own mods: keep a copy next to the game's own traceback.txt (each different error once)
+            _APEX_SEEN.add(hash(full[-600:]))
             with io.open(os.path.join(renpy.config.gamedir, "apex_mod_errors.txt"), "a", encoding="utf8") as f:
                 f.write(u"==== %s  UNCAUGHT ERROR in Apex's mods (the game showed its error screen)\n%s\n"
                         % (time.strftime("%Y-%m-%d %H:%M:%S"), full.rstrip()))
@@ -247,6 +289,10 @@ def _apex_exception_handler(short, full, traceback_fn=None):
         mod = _apex_mod_of(full)
         if not st or not mod or mod.startswith("_"):
             return False
+        reported = st.setdefault("reported", set())
+        if mod in reported:
+            return True            # already reported this session (a callback that fails every frame): no more files, no more pop-ups
+        reported.add(mod)
         where = re.findall(r'File "(mods/[^"]+)", line (\d+)', full)
         rec = {"mod": mod, "when": time.strftime("%Y-%m-%d %H:%M:%S"), "short": short.strip()[-1500:],
                "where": "%s line %s" % where[-1] if where else "", "hint": apex_explain(full)}

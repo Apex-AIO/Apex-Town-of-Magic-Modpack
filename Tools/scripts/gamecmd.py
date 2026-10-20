@@ -2,6 +2,10 @@
 usage: python gamecmd.py "code"     or     python gamecmd.py -f file.py      [--wait SECONDS]
 """
 import sys, os, time
+try:
+    sys.stdout.reconfigure(encoding="utf8", errors="replace")      # mod names with accents/symbols must not crash the printout
+except Exception:
+    pass
 GAME = (os.path.join(os.environ["TOM_GAME_DIR"], "game", "claude_debug") if os.environ.get("TOM_GAME_DIR") else
         os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "game", "claude_debug")))
 

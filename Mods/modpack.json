@@ -1,10 +1,10 @@
 {
  "name": "Apex's Modpack",
- "version": "1.5.1",
+ "version": "1.5.2",
  "made_for_game": "0.77.002",
  "tip_url": "https://buymeacoffee.com/apex_modding",
  "core": {
-  "rev": "2.3",
+  "rev": "2.5",
   "files": {
    "_shared/tom_mod_guard.rpy": "apex_modpack/tom_mod_guard.rpy",
    "apex_modpack_manager/apex_modpack_manager.rpy": "apex_modpack/apex_modpack_manager.rpy",
@@ -427,7 +427,7 @@
    "title": "Nel's Battle Report",
    "category": "Characters",
    "group": "Nel",
-   "rev": "1.0",
+   "rev": "1.1",
    "desc": "When Nel leaves Celica's body after auto-battling, a report shows the monsters she defeated, items (rarest first), XP, skill XP, gold, taunts, climaxes and how long it took.",
    "files": {
     "nel_report_mod/nel_report.rpy": "apex_modpack/nel_report.rpy"

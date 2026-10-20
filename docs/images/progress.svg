@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="820" height="44" viewBox="0 0 820 44">
   <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#ffc94d"/><stop offset="1" stop-color="#9b6bff"/></linearGradient></defs>
   <rect x="0" y="0" width="820" height="44" rx="22.0" fill="#1a1522" stroke="#2c2438"/>
-  <rect x="2" y="2" width="102.8" height="40" rx="20.0" fill="url(#g)"/>
-  <text x="410.0" y="28.0" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#ffffff">HD Project: 12.6%  -  3,930 of 31,293 game assets</text>
+  <rect x="2" y="2" width="112.6" height="40" rx="20.0" fill="url(#g)"/>
+  <text x="410.0" y="28.0" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#ffffff">HD Project: 13.8%  -  4,322 of 31,293 game assets</text>
 </svg>

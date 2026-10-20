@@ -641,7 +641,7 @@ def main():
             j["ticket"]["label"] = "%s frame %d" % (j["rel"], j["f"] + 1)
 
     def complete(j, detailed):
-        if j["ctx"]:
+        if j["ctx"] and "below" in j:                                   # (a frame with nothing visible has no stack to un-mix)
             B = np.array(j["below"]).astype(np.float32)
             Bc = B[..., :3] * (B[..., 3:] / 255.0)
             D = np.array(detailed).astype(np.float32)
@@ -671,22 +671,40 @@ def main():
         print("[%d/%d] %s frame %d   %.0fs elapsed, ~%.0f min left" % (
             done, total, os.path.basename(j["rel"]), j["f"] + 1, el, el / done * (total - done) / 60), flush=True)
 
+    def failed(j, where):
+        # one bad frame must not stop the batch: log it (that picture is not saved, a re-run tries it again)
+        import traceback
+        msg = "%s frame %d (%s): %s" % (j["rel"], j["f"] + 1, where, traceback.format_exc().strip().splitlines()[-1])
+        print("FAILED " + msg, flush=True)
+        try:
+            with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "Upscale", "failed.txt"), "a", encoding="utf8") as lf:
+                lf.write(msg + "\n")
+        except Exception:
+            pass
+
     while jobs or inflight:
         while jobs and len(inflight) < QUEUE:
             j = jobs.popleft()
-            prepare(j)
-            if j["ticket"] is None:
-                complete(j, j["big"])
+            try:
+                prepare(j)
+                if j["ticket"] is None:
+                    complete(j, j["big"])
+                    done += 1
+                    report(j)
+                else:
+                    inflight.append(j)
+            except Exception:
                 done += 1
-                report(j)
-            else:
-                inflight.append(j)
+                failed(j, "prepare")
         finished = False
         for j in list(inflight):
             res = detail_poll(j["ticket"])
             if res is not None:
                 inflight.remove(j)
-                complete(j, res)
+                try:
+                    complete(j, res)
+                except Exception:
+                    failed(j, "complete")
                 done += 1
                 finished = True
                 report(j)

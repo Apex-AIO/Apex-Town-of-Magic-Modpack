@@ -3,6 +3,9 @@ THE MODS FOLDER - for YOUR mods (and mods you download from others)
 
 * One folder per mod, right here. Restart the game and it shows up in
   Apex's Modpack Manager -> Your Mods (main menu), switched on.
+* Mods downloaded from the forums (a zip with a "game" folder inside): make a folder for the mod here and put that
+  "game" folder in it, e.g.  mods\Some Mod\game\...   It works as if you had copied it into the game folder:
+  its files replace the game's files with the same name. If a file is replaced by two mods, the first one (A-Z) wins.
 * Make your own: Apex's Modpack Manager -> Mod Tools -> Create a new mod.
 * Full help: _guide/Modding Guide.html (open it in your browser).
 

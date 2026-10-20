@@ -676,16 +676,17 @@ init 999 python:
                 and bool(renpy.get_screen("main_menu")) and not renpy.get_screen("apex_modpack_manager"))
 
     def apex_upd_label():
+        """(text, text color, dot color) for the GitHub version line of the Game Version panel"""
         s = APEX_UPD["state"]
         if s == "checking":
-            return ("Checking for updates...", APEX_C["muted"])
+            return ("Checking...", APEX_C["muted"], APEX_C["dim"])
         if s == "new":
-            return ("Update available: v%s" % APEX_UPD["latest"], APEX_C["gold"])
+            return ("v%s (new!)" % APEX_UPD["latest"], APEX_C["gold"], APEX_C["gold"])
         if s == "latest":
-            return ("Up to date (v%s)" % apex_upd_current(), APEX_OK)
+            return ("v%s" % APEX_UPD["latest"], APEX_C["text"], APEX_OK)
         if s == "error":
-            return ("Couldn't check (offline?)", APEX_WARN)
-        return ("v%s" % apex_upd_current(), APEX_C["muted"])
+            return ("Couldn't check", APEX_C["muted"], APEX_WARN)
+        return ("not checked yet", APEX_C["muted"], APEX_C["dim"])
 
     # at game start, once, in the background
     if APEX_BUILD is not None and persistent.apex_upd_auto is not False and APEX_UPD["state"] == "idle":
@@ -802,7 +803,7 @@ screen apex_switch(on, action, enabled=True):
             add apex_ui("pill", (APEX_OK if on else "#4a4258") if enabled else "#2c2636") xsize 42 ysize 22
             add apex_ui("knob", "#ffffff" if enabled else "#77708a") xpos (22 if on else 2) ypos 2
 
-screen apex_btn(label, action, icon=None, kind="secondary", w=None):
+screen apex_btn(label, action, icon=None, kind="secondary", w=None, tsize=13):
     $ bgc = {"primary": APEX_C["gold"], "secondary": "#2a2236", "danger": "#ff5c6c", "ghost": "#000000"}[kind]
     $ fgc = "#16111c" if kind == "primary" else "#ffffff"
     button:
@@ -817,7 +818,7 @@ screen apex_btn(label, action, icon=None, kind="secondary", w=None):
             xalign 0.5
             if icon:
                 add apex_ui("ic_" + icon, fgc) yalign 0.5 zoom 0.8
-            text label size 13 bold True color fgc yalign 0.5 layout "nobreak"
+            text label size tsize bold True color fgc yalign 0.5 layout "nobreak"
 
 screen apex_page_head(title, subtitle):
     vbox:
@@ -886,34 +887,40 @@ screen apex_modpack_manager():
         vbox:
             xpos 18 yalign 1.0 yoffset -18 xsize 180 spacing 10
             frame:
-                xfill True padding (12, 8)
-                background apex_ui("panel", APEX_C["panel"])
-                vbox:
-                    spacing 4
-                    text "UPDATES" size 9 color APEX_C["dim"] kerning 1.5
-                    $ _ul, _uc = apex_upd_label()
-                    text _ul size 12 bold True color _uc
-                    if APEX_UPD["state"] == "new":
-                        use apex_btn("Download v" + APEX_UPD["latest"], OpenURL(APEX_UPD["url"]), "star", "primary", 156)
-                    else:
-                        use apex_btn("Check for updates", Function(apex_upd_check), "restart", "secondary", 156)
-                    textbutton ("Check at start: " + ("On" if apex_upd_auto() else "Off")):
-                        text_size 10
-                        text_color APEX_C["muted"]
-                        text_hover_color "#ffffff"
-                        padding (0, 0)
-                        action Function(apex_upd_toggle_auto)
-            frame:
                 xfill True padding (12, 10)
                 background apex_ui("panel", APEX_C["panel"])
                 vbox:
-                    spacing 2
+                    spacing 3
                     text "GAME VERSION" size 9 color APEX_C["dim"] kerning 1.5
                     hbox:
                         spacing 6
                         add apex_ui("dot", {"match": APEX_OK, "minor": APEX_WARN}.get(vi["level"], APEX_BAD)) yalign 0.5 zoom 0.8
                         text vi["game"] size 14 bold True color APEX_C["text"]
-                    text ("Made for %s" % vi["made_for"]) size 10 color APEX_C["muted"]
+                    null height 4
+                    text "Apex's GitHub Version" size 9 color APEX_C["dim"] kerning 0.5
+                    $ _ul, _uc, _ud = apex_upd_label()
+                    hbox:
+                        spacing 6
+                        add apex_ui("dot", _ud) yalign 0.5 zoom 0.8
+                        text _ul size 14 bold True color _uc
+                    null height 4
+                    if APEX_UPD["state"] == "new":
+                        use apex_btn("Download v" + APEX_UPD["latest"], OpenURL(APEX_UPD["url"]), "star", "primary", 156, 11)
+                    else:
+                        use apex_btn("Check for updates", Function(apex_upd_check), "restart", "secondary", 156, 11)
+                    # tick box: no pop-up and no check when the game starts (the button above checks by hand)
+                    button:
+                        xfill True padding (0, 2)
+                        action Function(apex_upd_toggle_auto)
+                        hbox:
+                            spacing 6
+                            frame:
+                                xysize (12, 12) padding (0, 0) yoffset 1
+                                background Solid(APEX_C["muted"])
+                                frame:
+                                    xysize (10, 10) align (0.5, 0.5) padding (0, 0)
+                                    background Solid(APEX_C["gold"] if not apex_upd_auto() else APEX_C["panel"])
+                            text "Disable automatic GitHub update checker" size 10 color APEX_C["muted"] hover_color "#ffffff" xsize 136
             if apex_mm_pending():
                 use apex_btn("Restart now", Function(apex_mm_restart), "restart", "primary", 180)
             use apex_btn("Back", If(apex_mm_pending(), Show("apex_mm_restart_prompt", quitting=False), Return()), "back", "secondary", 180)
@@ -1587,6 +1594,7 @@ screen apex_update_prompt():
             text "A new version is out!" size 20 bold True color APEX_C["gold"] xalign 0.5
             text apex_mm_safe("Apex's Modpack v%s is available (you have v%s)." % (APEX_UPD["latest"], apex_upd_current())) size 14 color APEX_C["text"] text_align 0.5 xalign 0.5
             text "Download opens the release page in your browser. Install it the same way as before: drag the game and mods folders into your Town of Magic folder." size 12 color APEX_C["muted"] text_align 0.5 xalign 0.5
+            text "Don't want this window at launch? Open Apex's Modpack Manager and tick \"Disable automatic GitHub update checker\" (under Game Version). You can still check by hand with the Check for updates button." size 11 color APEX_C["dim"] text_align 0.5 xalign 0.5
             hbox:
                 xalign 0.5 spacing 12
                 use apex_btn("Download", [OpenURL(APEX_UPD["url"]), Function(apex_upd_decline), Hide("apex_update_prompt")], "star", "primary")
