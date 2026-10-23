@@ -21,7 +21,10 @@ init 8 python:
 
         def _nr_active():
             try:
-                return enemy_has_status(e_celica, s_possessionnel)
+                if enemy_has_status(e_celica, s_possessionnel):
+                    return True
+                f = getattr(store, "apex_auto_active", None)      # Celica's Smart Auto Battle
+                return bool(f is not None and f())
             except Exception:
                 return False
 
@@ -98,7 +101,7 @@ init 8 python:
         _nr_orig_inventory_add = inventory_add
 
         def inventory_add(in_inventory=None, in_item=None, in_total=1):
-            if in_item is not None and in_inventory is not None and _nr_active():
+            if in_item is not None and in_inventory is not None and _nr_active() and not getattr(store, "APEX_NR_IGNORE", False):
                 try:
                     import sys as _nr_sys
                     caller = _nr_sys._getframe(1).f_code.co_filename.replace("\\", "/")
@@ -172,6 +175,22 @@ init 8 python:
         if _nr_after_load not in config.after_load_callbacks:
             config.after_load_callbacks.append(_nr_after_load)
 
+        def apex_nr_finish_auto(min_seconds=20):
+            """Celica's Smart Auto Battle ended: open the report when there is something to report
+            (and the mode ran for at least min_seconds of real time: a short run shows nothing)"""
+            r = _nr_rec(start=False)
+            if r is None:
+                return
+            short = _nr_time.time() - r.get("start_real", _nr_time.time()) < min_seconds
+            if short or not (r.get("battles") or r.get("kills") or r.get("items") or r.get("coins")):
+                store.main_vars["apex_nel_report"] = None
+                return
+            r["closing"] = True
+            r["src"] = "auto"
+            r["end_game"] = _nr_minutes()
+            r["real"] = _nr_time.time() - r.get("start_real", _nr_time.time())
+            renpy.show_screen("apex_nel_report")
+
         # ---- what the sheet shows
         APEX_RARITY = [(9, "LEGENDARY", "#ffcc33"), (7, "EPIC", "#c46bff"), (5, "RARE", "#4da3ff"), (3, "UNCOMMON", "#46d36b"),
                        (0, "COMMON", "#b8b0c8")]
@@ -194,7 +213,7 @@ init 8 python:
             return dict(kills=r.get("kills", []), items=items, xp=r.get("xp", 0) + r.get("xp_bonus", 0),
                         xp_base=r.get("xp", 0), xp_bonus=r.get("xp_bonus", 0), sp=r.get("sp", 0) + r.get("sp_bonus", 0),
                         coins=r.get("coins", 0), taunts=r.get("taunts", 0), climaxes=r.get("climaxes", 0),
-                        battles=r.get("battles", 0), game="%dh %02dm" % (mins // 60, mins % 60),
+                        battles=r.get("battles", 0), auto=(r.get("src") == "auto"), game="%dh %02dm" % (mins // 60, mins % 60),
                         real="%dm %02ds" % (secs // 60, secs % 60), killed=sum(k["n"] for k in r.get("kills", [])))
 
         def apex_nr_close():
@@ -298,8 +317,8 @@ screen apex_nel_report():
             vbox spacing 10:
                 hbox xfill True:
                     vbox:
-                        text "NEL'S BATTLE REPORT" size 22 bold True color "#7ef0e0" outlines [(absolute(1), "#000", absolute(1), absolute(1))]
-                        text "While Nel had Celica's body" size 11 color "#FFFFFFA0"
+                        text ("AUTO BATTLE REPORT" if _v["auto"] else "NEL'S BATTLE REPORT") size 22 bold True color "#7ef0e0" outlines [(absolute(1), "#000", absolute(1), absolute(1))]
+                        text ("While Celica's Smart Auto Battle was on" if _v["auto"] else "While Nel had Celica's body") size 11 color "#FFFFFFA0"
                     vbox xalign 1.0:
                         text "%s in game  ·  %s real time" % (_v["game"], _v["real"]) size 12 color "#FFFFFF" xalign 1.0
                         text "%d battle%s won" % (_v["battles"], "" if _v["battles"] == 1 else "s") size 11 color "#FFFFFFA0" xalign 1.0
@@ -336,8 +355,9 @@ screen apex_nel_report():
                             hbox spacing 6:
                                 add "GUI/coin.png" yalign 0.5
                                 text "%d gold" % _v["coins"] size 15 bold True color "#ffd24a" yalign 0.5
-                            text "Invited the monsters  %d time%s" % (_v["taunts"], "" if _v["taunts"] == 1 else "s") size 13 color "#ff8fd0"
-                            text "Climaxes  %d" % _v["climaxes"] size 13 color "#ff8fd0"
+                            if not _v["auto"]:
+                                text "Invited the monsters  %d time%s" % (_v["taunts"], "" if _v["taunts"] == 1 else "s") size 13 color "#ff8fd0"
+                                text "Climaxes  %d" % _v["climaxes"] size 13 color "#ff8fd0"
                 # items: rarest first, left to right
                 frame xfill True padding (10, 8) background Solid("#00000055"):
                     vbox spacing 6:

@@ -14,10 +14,11 @@ wait = 20.0
 if "--wait" in args:
     i = args.index("--wait"); wait = float(args[i + 1]); del args[i:i + 2]
 src = open(args[1], encoding="utf8").read() if args[0] == "-f" else args[0]
-out = os.path.join(GAME, "out.txt")
+BID = os.environ.get("TOM_BRIDGE_ID", "claude")     # Claude's test game only (never the player's game)
+out = os.path.join(GAME, "out_%s.txt" % BID)
 if os.path.exists(out):
     os.remove(out)
-with open(os.path.join(GAME, "cmd.py"), "w", encoding="utf8") as f:
+with open(os.path.join(GAME, "cmd_%s.py" % BID), "w", encoding="utf8") as f:
     f.write(src)
 t = time.time()
 while time.time() - t < wait:

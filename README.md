@@ -1,7 +1,7 @@
 <div align="center">
 
 # ⚗️ APEX'S MODPACK & MOD MANAGER
-### for Town of Magic v0.77.002 — 13 mods · a full mod manager · room for your own mods · many more mods to come
+### for Town of Magic v0.77.002 — 15 mods · a full mod manager · room for your own mods · many more mods to come
 
 [![Latest release](https://img.shields.io/github/v/release/Apex-AIO/Apex-Town-of-Magic-Modpack?style=for-the-badge&label=latest&color=ffc94d&labelColor=1a1522)](../../releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Apex-AIO/Apex-Town-of-Magic-Modpack/total?style=for-the-badge&color=9b6bff&labelColor=1a1522)](../../releases)
@@ -16,12 +16,12 @@
 
 | Download | What's inside | Last updated | Version | Size |
 |---|---|:-:|:-:|--:|
-| **Apex_Modpack** | All 13 mods + the Mod Manager + the mods folder (templates and the modding guide) | 2026-10-20 | v1.5.2 | 0.4 MB |
-| **Apex_HD_Pack** part 1 of 3 | HD pictures for the HD x8 project (add-on, needs the modpack) | 2026-10-20 | v1.5.2 | 1.9 GB |
-| **Apex_HD_Pack** part 2 of 3 | HD pictures, continued. Install all three parts. | 2026-10-20 | v1.5.2 | 1.9 GB |
-| **Apex_HD_Pack** part 3 of 3 | HD pictures, the last part. | 2026-10-20 | v1.5.2 | 22 MB |
+| **Apex_Modpack** | All 15 mods + the Mod Manager + the mods folder (templates and the modding guide) | 2026-10-23 | v1.6.0 | 0.4 MB |
+| **Apex_HD_Pack** part 1 of 3 | HD pictures for the HD x8 project (add-on, needs the modpack) | 2026-10-20 | [v1.5.2](../../releases/tag/v1.5.2) (unchanged) | 1.9 GB |
+| **Apex_HD_Pack** part 2 of 3 | HD pictures, continued. Install all three parts. | 2026-10-20 | [v1.5.2](../../releases/tag/v1.5.2) (unchanged) | 1.9 GB |
+| **Apex_HD_Pack** part 3 of 3 | HD pictures, the last part. | 2026-10-20 | [v1.5.2](../../releases/tag/v1.5.2) (unchanged) | 22 MB |
 
-<sub>Install steps are on the release page. Made for Town of Magic 0.77.002.</sub>
+<sub>The HD Pack did not change in 1.6.0: use the three parts from the [v1.5.2 release](../../releases/tag/v1.5.2). Install steps are on the release page. Made for Town of Magic 0.77.002.</sub>
 
 ### ☕ Enjoying it?
 Please support the game's developer, Deimus, first. If you'd still like to support the modpack's future development:
@@ -44,14 +44,14 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 #### ALL GAME ASSETS TO SCALE
 
-<img src="docs/images/progress.svg?v=cca56895" alt="HD project progress" width="820">
+<img src="docs/images/progress.svg?v=efc584e9" alt="HD project progress" width="820">
 
-<sub>An estimate of every game asset (the end goal). Updated with every release - v1.5.2, 20 Oct 2026.</sub>
+<sub>An estimate of every game asset (the end goal). Updated with every release - v1.6.0, 23 Oct 2026.</sub>
 
 #### CHARACTERS
 <sub>every pose, face, outfit and animation frame of every character and creature</sub>
 
-<img src="docs/images/progress_characters.svg?v=55805ada" alt="Characters" width="820">
+<img src="docs/images/progress_characters.svg?v=e2b942d7" alt="Characters" width="820">
 
 #### BACKGROUNDS
 <sub>locations, window views, lights, animated backgrounds and event pictures</sub>
@@ -66,21 +66,23 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 </div>
 
 <details>
-<summary><b>🧑‍🎨 Characters in detail — currently encountered in my own save (51 of 183 characters)</b></summary>
+<summary><b>🧑‍🎨 Characters in detail — currently encountered in my own save (57 of 183 characters)</b></summary>
 
 <div align="center">
 
-<img src="docs/images/progress/characters_celica.svg?v=7213f955" alt="Celica" width="700">
+<img src="docs/images/progress/characters_celica.svg?v=c83f1ff1" alt="Celica" width="700">
 
-<img src="docs/images/progress/characters_demoness.svg?v=6cba307b" alt="Demoness" width="700">
+<img src="docs/images/progress/characters_demoness.svg?v=6aaab48c" alt="Demoness" width="700">
+
+<img src="docs/images/progress/characters_galiene.svg?v=efe11bd3" alt="Galiene" width="700">
 
 <img src="docs/images/progress/characters_nel.svg?v=1c0c8336" alt="Nel" width="700">
 
 <img src="docs/images/progress/characters_slime_girl.svg?v=e4366d03" alt="Slime Girl" width="700">
 
-<img src="docs/images/progress/characters_evie.svg?v=1d1cd3c1" alt="Evie" width="700">
+<img src="docs/images/progress/characters_evie.svg?v=ed7b5027" alt="Evie" width="700">
 
-<img src="docs/images/progress/characters_galiene.svg?v=de8183d2" alt="Galiene" width="700">
+<img src="docs/images/progress/characters_liam.svg?v=d8bd401e" alt="Liam" width="700">
 
 <img src="docs/images/progress/characters_fairy.svg?v=e6bcc7bf" alt="Fairy" width="700">
 
@@ -88,15 +90,17 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <img src="docs/images/progress/characters_fortune_teller.svg?v=a2c66566" alt="Fortune Teller" width="700">
 
-<img src="docs/images/progress/characters_liam.svg?v=240d2e6d" alt="Liam" width="700">
+<img src="docs/images/progress/characters_jack.svg?v=91b59e7d" alt="Jack" width="700">
 
 <img src="docs/images/progress/characters_drylia.svg?v=f059ab51" alt="Drylia" width="700">
 
 <img src="docs/images/progress/characters_lucan.svg?v=1f700fd2" alt="Lucan" width="700">
 
+<img src="docs/images/progress/characters_celica_spirit.svg?v=a85f7293" alt="Celica (spirit)" width="700">
+
 <img src="docs/images/progress/characters_cornel.svg?v=a031c470" alt="Cornel" width="700">
 
-<img src="docs/images/progress/characters_celica_spirit.svg?v=f98b2dbf" alt="Celica (spirit)" width="700">
+<img src="docs/images/progress/characters_faylen.svg?v=a2396188" alt="Faylen" width="700">
 
 <img src="docs/images/progress/characters_dark_knight.svg?v=99d11e99" alt="Dark Knight" width="700">
 
@@ -104,9 +108,9 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <img src="docs/images/progress/characters_edgar.svg?v=b82f61f1" alt="Edgar" width="700">
 
-<img src="docs/images/progress/characters_jack.svg?v=4dd5e54a" alt="Jack" width="700">
-
 <img src="docs/images/progress/characters_taenaran.svg?v=52c53f72" alt="Taenaran" width="700">
+
+<img src="docs/images/progress/characters_black_cat.svg?v=cab58745" alt="Black Cat" width="700">
 
 <img src="docs/images/progress/characters_barkeeper.svg?v=ba01fb4f" alt="Barkeeper" width="700">
 
@@ -114,19 +118,25 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <img src="docs/images/progress/characters_bert.svg?v=696add5a" alt="Bert" width="700">
 
+<img src="docs/images/progress/characters_cyclopus.svg?v=92226a18" alt="Cyclopus" width="700">
+
 <img src="docs/images/progress/characters_lena_shop_keeper.svg?v=be2ea931" alt="Lena (shop keeper)" width="700">
 
-<img src="docs/images/progress/characters_cyclopus.svg?v=f47c55e1" alt="Cyclopus" width="700">
+<img src="docs/images/progress/characters_puppet.svg?v=645444fa" alt="Puppet" width="700">
+
+<img src="docs/images/progress/characters_joanna.svg?v=5140c5b0" alt="Joanna" width="700">
 
 <img src="docs/images/progress/characters_phineas_pholly.svg?v=f65538c7" alt="Phineas Pholly" width="700">
 
-<img src="docs/images/progress/characters_joanna.svg?v=d900dd4f" alt="Joanna" width="700">
+<img src="docs/images/progress/characters_marlene.svg?v=92e0a34a" alt="Marlene" width="700">
 
-<img src="docs/images/progress/characters_black_cat.svg?v=d4e5dbb3" alt="Black Cat" width="700">
+<img src="docs/images/progress/characters_manfred.svg?v=456f73ce" alt="Manfred" width="700">
 
 <img src="docs/images/progress/characters_avalloc.svg?v=f6d001a8" alt="Avalloc" width="700">
 
 <img src="docs/images/progress/characters_godrin.svg?v=8e03c29c" alt="Godrin" width="700">
+
+<img src="docs/images/progress/characters_fisherman.svg?v=5c829237" alt="Fisherman" width="700">
 
 <img src="docs/images/progress/characters_gary.svg?v=4bfef1be" alt="Gary" width="700">
 
@@ -134,19 +144,23 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <img src="docs/images/progress/characters_giant_hornet.svg?v=74e44d83" alt="Giant Hornet" width="700">
 
-<img src="docs/images/progress/characters_toy_customer.svg?v=0a55a094" alt="Toy Customer" width="700">
+<img src="docs/images/progress/characters_fire_ray.svg?v=2ce5f57e" alt="Fire Ray" width="700">
 
-<img src="docs/images/progress/characters_fire_ray.svg?v=5f8238df" alt="Fire Ray" width="700">
+<img src="docs/images/progress/characters_toy_customer.svg?v=0a55a094" alt="Toy Customer" width="700">
 
 <img src="docs/images/progress/characters_giant_spider.svg?v=e8e4beaa" alt="Giant Spider" width="700">
 
+<img src="docs/images/progress/characters_biter.svg?v=91727f99" alt="Biter" width="700">
+
 <img src="docs/images/progress/characters_mimic.svg?v=7651edd8" alt="Mimic" width="700">
+
+<img src="docs/images/progress/characters_alraune.svg?v=41d4d120" alt="Alraune" width="700">
 
 <img src="docs/images/progress/characters_electric_jellyfish.svg?v=e8c80b28" alt="Electric Jellyfish" width="700">
 
 <img src="docs/images/progress/characters_lamia.svg?v=064c448c" alt="Lamia" width="700">
 
-<img src="docs/images/progress/characters_fisherman.svg?v=a30fc733" alt="Fisherman" width="700">
+<img src="docs/images/progress/characters_pawn_shop_keeper.svg?v=90ec3434" alt="Pawn Shop Keeper" width="700">
 
 <img src="docs/images/progress/characters_dark_fairy.svg?v=feb14e5c" alt="Dark Fairy" width="700">
 
@@ -156,7 +170,7 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <img src="docs/images/progress/characters_slime.svg?v=3b9812ed" alt="Slime" width="700">
 
-<img src="docs/images/progress/characters_pawn_shop_keeper.svg?v=5d3ab069" alt="Pawn Shop Keeper" width="700">
+<img src="docs/images/progress/characters_elandorr.svg?v=19e0b825" alt="Elandorr" width="700">
 
 <img src="docs/images/progress/characters_balloon.svg?v=9750c696" alt="Balloon" width="700">
 
@@ -170,11 +184,9 @@ Please support the game's developer, Deimus, first. If you'd still like to suppo
 
 <img src="docs/images/progress/characters_walter_turner.svg?v=3cd33961" alt="Walter Turner" width="700">
 
-<img src="docs/images/progress/characters_elandorr.svg?v=db856432" alt="Elandorr" width="700">
-
 </div>
 
-<sub>Not encountered yet (132): Alraune, Anubis Warrior, Baron Everard, Bee-Girl, Bellona, Biter, Blightbloom, Booty, Busty, Capt. Ceres, Cedric, Celestian, Celica (child), Celica (fairy), Cellshroom, Cephrina, Cindy, Clara, Cozzy, Dark Cape, Dark Painting, Demon Sloth Blimp, Demon Sloth Dick, Domenea, Dwarf Guard, Dwarf Watch, Eeris, Elaran, Eleth Shop Keeper, Elith, Elize, Elyrana, Emma, Envy, Envy Demon, Fargrim, Faylen, Faylen (spirit), Fire Golem, Fire Wyvern, Forest Hermit, Gaius, Galgatin, Galiene (spirit), Gavin, Genie, Genie Celica, Glace, Gluttony Demon, Gluttony's Tongue, Golem, Gorgroth, Graham, Greed Demon, Grimm, Grimmerock, Huge Slime, Ice Armor, Ice Golem, Inara, Kael, King Therbin, Kitsune, Layla, Lena, Leraie, Liamspirit, Lilith, Lily, Lucina, Luna, Lust, Lust Demon, Lyra, Lysander, Madame Samira, Mana Stalker, Manfred, Margarilda, Marlene, Masked Dwarf, Mindflayer, Mirania, Miriam, Nahla, Noctriel, Noctyra, Noxtar, Oberon, Penelope, Phantom Pirate, Phantom Sword, Pirate, Pixella, Pride Demon, Prince Rajak, Puck, Puppet, Queen Brynja, Richard, Roderick, Rurik, Rusty, Saya, Shade, Silgri, Skull Imp, Sloth Demon, Succubus, Sylphie, Sylvia, Talkstone, Tentaknight, Tessa, Topi, Trixi, Umbral Groper, Undead, Vaerandor, Valen, Velvetia, Vera, Violet, Vivi, Vivi's Panties, Voidgazer, Vorath, Warden, Wrath Demon, Xantherus, Yaiba, Zaid</sub>
+<sub>Not encountered yet (126): Anubis Warrior, Baron Everard, Bee-Girl, Bellona, Blightbloom, Booty, Busty, Capt. Ceres, Cedric, Celestian, Celica (child), Celica (fairy), Cellshroom, Cephrina, Cindy, Clara, Cozzy, Dark Cape, Dark Painting, Demon Sloth Blimp, Demon Sloth Dick, Domenea, Dwarf Guard, Dwarf Watch, Eeris, Elaran, Eleth Shop Keeper, Elith, Elize, Elyrana, Emma, Envy, Envy Demon, Fargrim, Faylen (spirit), Fire Golem, Fire Wyvern, Forest Hermit, Gaius, Galgatin, Galiene (spirit), Gavin, Genie, Genie Celica, Glace, Gluttony Demon, Gluttony's Tongue, Golem, Gorgroth, Graham, Greed Demon, Grimm, Grimmerock, Huge Slime, Ice Armor, Ice Golem, Inara, Kael, King Therbin, Kitsune, Layla, Lena, Leraie, Liamspirit, Lilith, Lily, Lucina, Luna, Lust, Lust Demon, Lyra, Lysander, Madame Samira, Mana Stalker, Margarilda, Masked Dwarf, Mindflayer, Mirania, Miriam, Nahla, Noctriel, Noctyra, Noxtar, Oberon, Penelope, Phantom Pirate, Phantom Sword, Pirate, Pixella, Pride Demon, Prince Rajak, Puck, Queen Brynja, Richard, Roderick, Rurik, Rusty, Saya, Shade, Silgri, Skull Imp, Sloth Demon, Succubus, Sylphie, Sylvia, Talkstone, Tentaknight, Tessa, Topi, Trixi, Umbral Groper, Undead, Vaerandor, Valen, Velvetia, Vera, Violet, Vivi, Vivi's Panties, Voidgazer, Vorath, Warden, Wrath Demon, Xantherus, Yaiba, Zaid</sub>
 
 </details>
 
@@ -468,6 +480,25 @@ On your turn, grope and H-scene animations <ins>**keep looping with their sounds
 </div>
 </details>
 
+<details>
+<summary><b>🤖 Celica's Smart Auto Battle (r1.1)</b></summary>
+<div align="center">
+
+An **Auto Battle Mode: On/Off** button appears under the Attributes frame whenever **Explore** is available. Switch it on and Celica explores and fights by herself; switch it off at any moment, even in the middle of a fight, to take the controls back.
+
+**How she fights** (the same computer control Nel's auto-battle uses, so every game rule still applies):<br>
+**Focus kill:** she always attacks the monster with the least health (all equal: random, then she sticks with it)<br>
+**Smart spells:** the spell with the most damage against *that* monster, worked out with the game's own formulas (element table, weaknesses and strengths, levels, Arcane). Damage beyond what the monster has left doesn't count, and a spell that kills is the cheapest one that does. Cooldowns and MP are respected<br>
+**Struggling:** only when every monster holds her (or nothing can be cast)<br>
+**Potions:** a Health Potion below a health limit, a Magic Potion when MP runs out, Cleanse or the matching Anti-potion for bad statuses<br>
+**Between fights:** she checks the place she is in and crafts, in this order: **1.** the Anti-potion for every debuff the monsters there can cause (Confusion and Sleep in Misty Marsh, Poison for the hornets, Sleep for the fairies ...), only when its protection is not already on, **2.** one Health Potion, **3.** two Magic Potions, never more. She drinks the Anti-potion before exploring. She also clicks through the "you got" windows and presses Explore again<br>
+**It stops by itself** when Explore is not available any more (energy 0, night, wrong place), when a **cut scene** starts (no fight, no clickable Explore, story text on screen: she never skips story scenes), when something needs a decision, when health is low and no potion is left, or when nothing is happening. A **report** (see Nel's Battle Report) opens when it ends, but only after at least 20 seconds of auto-play.
+
+⚙️ **Settings:** Use potions, Craft potions (switched separately), Health Potion limit.
+
+</div>
+</details>
+
 </blockquote>
 </details>
 
@@ -496,7 +527,7 @@ Nel only gains 0.5 body influence per climax instead of the game's 10<br>
 </details>
 
 <details>
-<summary><b>📋 Nel's Battle Report (r1.1)</b></summary>
+<summary><b>📋 Nel's Battle Report (r1.2)</b></summary>
 <div align="center">
 
 When Nel leaves Celica's body after an auto-battle ("Bye…!"), a **report sheet** shows everything she did while she was in control:<br>
@@ -641,6 +672,15 @@ Each time you arrive somewhere new, a backup of your items and gold is kept (the
 </div>
 </details>
 
+<details>
+<summary><b>⌨️ WASD Map Movement (r1.0)</b></summary>
+<div align="center">
+
+Move around the map with **W, A, S, D** as well as the arrow keys. The big purple arrows on the map border can still be clicked. Nothing is saved and no game setting changes: the mod only adds the four letters to the keys the map arrows already listen to.
+
+</div>
+</details>
+
 </blockquote>
 </details>
 
@@ -654,6 +694,11 @@ Each time you arrive somewhere new, a backup of your items and gold is kept (the
 
 <details>
 <summary><b>Changelog</b></summary>
+
+**v1.6.0**
+- New mod: **Celica's Smart Auto Battle** (button under the Attributes frame): she explores and fights by herself with focus kills, damage-based spell choice, region-aware potion crafting (Anti-potion for the place's debuffs, then 1 Health, then 2 Magic) and a stop when a cut scene starts
+- New mod: **WASD Map Movement**: move around the map with W, A, S and D as well as the arrow keys
+- Changed: Nel's Battle Report also covers Celica's auto battles and only opens after at least 20 seconds of auto-play
 
 **v1.5.2**
 - New: **mods made by others** (a `game` folder, as downloaded) work from `mods\<ModName>\game`; they replace the game's files like a normal install

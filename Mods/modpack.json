@@ -1,6 +1,6 @@
 {
  "name": "Apex's Modpack",
- "version": "1.5.2",
+ "version": "1.6.0",
  "made_for_game": "0.77.002",
  "tip_url": "https://buymeacoffee.com/apex_modding",
  "core": {
@@ -423,14 +423,63 @@
    }
   },
   {
+   "id": "smart_auto",
+   "title": "Celica's Smart Auto Battle",
+   "category": "Characters",
+   "group": "Celica",
+   "rev": "1.1",
+   "desc": "An Auto Battle Mode button under the Attributes frame (shown while Explore is available): Celica explores and fights by herself. She focus-kills the weakest monster with the spell that does the most damage to it, struggles only when all of them hold her, uses potions, crafts the potions she needs and stops when something needs you. A report opens when it ends.",
+   "files": {
+    "smart_auto_battle_mod/smart_auto_battle.rpy": "apex_modpack/smart_auto_battle.rpy"
+   },
+   "subs": [
+    {
+     "key": "use_potions",
+     "type": "bool",
+     "default": true,
+     "title": "Use potions",
+     "desc": "Drinks Health Potions below {potion_hp} health, Magic Potions when her MP runs out, Cleanse / Anti-potions for bad statuses."
+    },
+    {
+     "key": "craft",
+     "type": "bool",
+     "default": true,
+     "title": "Craft potions",
+     "desc": "Before exploring: crafts one Anti-potion for each status the monsters of this place can cause (only when its protection is off), then keeps 1 Health and 2 Magic Potions."
+    }
+   ],
+   "settings": [
+    {
+     "key": "potion_hp",
+     "type": "percent",
+     "default": 35,
+     "min": 10,
+     "max": 90,
+     "step": 5,
+     "label": "Health Potion below",
+     "help": "She drinks a Health Potion when her health is under this."
+    }
+   ]
+  },
+  {
    "id": "nel_report",
    "title": "Nel's Battle Report",
    "category": "Characters",
    "group": "Nel",
-   "rev": "1.1",
+   "rev": "1.2",
    "desc": "When Nel leaves Celica's body after auto-battling, a report shows the monsters she defeated, items (rarest first), XP, skill XP, gold, taunts, climaxes and how long it took.",
    "files": {
     "nel_report_mod/nel_report.rpy": "apex_modpack/nel_report.rpy"
+   }
+  },
+  {
+   "id": "wasd_map",
+   "title": "WASD Map Movement",
+   "category": "UI",
+   "rev": "1.0",
+   "desc": "Move around the map with W, A, S and D as well as the arrow keys. The purple arrows on the map border still work with the mouse.",
+   "files": {
+    "wasd_map_mod/wasd_map.rpy": "apex_modpack/wasd_map.rpy"
    }
   }
  ],

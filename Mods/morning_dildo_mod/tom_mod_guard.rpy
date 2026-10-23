@@ -51,6 +51,8 @@ init 0 python:
         "Item": "916e549c3199",    #
         "Equip_Inventory": "1f9ac58003b6",    #
         "enemy_decides": "5a426adba885",    # enemy.rpy:358
+        "enemy_is_playable": "64e3499325db",    # enemy.rpy:3370
+        "get_button_keysymlist": "a7b0abf20266",    # keymaps.rpy:6
         "enemy_mod_hp": "d3d7b648db6c",    # enemy.rpy:1671
         "body_influencelvl_mod": "322056f69bed",    # body_influence.rpy:463
         "attribute_mod": "e28e2afa5682",    # attribute.rpy:364
