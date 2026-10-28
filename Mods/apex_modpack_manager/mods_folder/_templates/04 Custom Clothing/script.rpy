@@ -11,3 +11,8 @@ init python:
         description="A bright red top.",
         stats={"allure": apex_setting("allure", 5)},
     )
+
+    # Same thing with the game's own fields (use these instead of area= when you need more control):
+    #   equip_area=["top|0", "sleeves|1"]   areas it is worn on (first = main area); slots: top, bottom, feet, head, sleeves; levels |0 / |1
+    #   block_area=["top|1"]                areas it covers, so nothing else fits there
+    #   order=2500, properties=[...], stripable=True, molestable=True, extra={"extra_cost": 0}

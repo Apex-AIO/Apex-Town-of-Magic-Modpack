@@ -120,6 +120,7 @@ your mod: mods/My Mod/images/CHAR/celica/celica_top_normal-530-530-1.png</pre>
     apex_add_clothing("red_top", "Red Top", area="top", picture="redtop",
                       icon="icon_redtop.png", description="A bright red top.",
                       stats={"allure": 5})</pre>
+<p><b>Exact version</b> (the game's own fields): <code>equip_area=["top|0", "sleeves|1"]</code> is where it is worn (the first entry is the main area), <code>block_area=["top|1"]</code> is what it covers so nothing else fits there. Areas are <code>top</code>, <code>bottom</code>, <code>feet</code>, <code>head</code>, <code>sleeves</code>, each with a layer <code>|0</code> (inner) or <code>|1</code> (outer). Optional: <code>order</code>, <code>properties</code>, <code>stripable</code>, <code>molestable</code>, <code>extra={...}</code>.</p>
 <p>The game draws each piece of clothing as its own picture on top of Celica, <b>one picture per pose</b>:</p>
 <table>
 <tr><th>area</th><th>word in the picture name</th><th>standing picture</th></tr>

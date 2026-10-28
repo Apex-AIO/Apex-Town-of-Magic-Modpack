@@ -1,10 +1,10 @@
 {
  "name": "Apex's Modpack",
- "version": "1.6.0",
+ "version": "1.6.1",
  "made_for_game": "0.77.002",
  "tip_url": "https://buymeacoffee.com/apex_modding",
  "core": {
-  "rev": "2.5",
+  "rev": "2.6",
   "files": {
    "_shared/tom_mod_guard.rpy": "apex_modpack/tom_mod_guard.rpy",
    "apex_modpack_manager/apex_modpack_manager.rpy": "apex_modpack/apex_modpack_manager.rpy",

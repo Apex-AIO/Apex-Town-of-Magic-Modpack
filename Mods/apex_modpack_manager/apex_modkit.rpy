@@ -8,7 +8,9 @@
 #   apex_notify("text")                                a small message on screen
 #   apex_add_accessory("ring", "Lucky Ring", icon="ring.png", description="...", stats={"luck": 10}, regen=0)
 #   apex_add_clothing("reddress", "Red Dress", area="top", picture="reddress", icon="icon.png", stats={"allure": 5})
-#   apex_give("ring")                                  give one of YOUR items to the player (again)
+#   apex_add_clothing("vest", "Vest", equip_area=["top|0", "sleeves|1"], block_area=["top|1"], picture="vest", order=2500)
+#                                                      exact game areas (top/bottom/feet/head/sleeves, each |0 or |1)
+#   apex_give("ring")                                 give one of YOUR items to the player (again)
 #   apex_on_new_game(func)  apex_on_load(func)  apex_on_wakeup(func)  apex_on_label("label name", func)
 #   apex_every(seconds, func)                          run func every few seconds while playing
 #   apex_wakeup_scene("my label", chance=0.2)          play your own scene (a label) on some quiet mornings
@@ -156,28 +158,74 @@ init -900 python:
             desc=description, stats=_ak_check_stats(mod, stats), regen=regen, give=give,
             props=["equipable", "hasshadow", "unique", "toggleattire"], extra={"equip_area": ["acc_%s|0" % _ak_var(mod, item_id)]})
 
-    def apex_add_clothing(item_id, name, area, picture, icon=None, description="", stats=None, give=True,
-                          tucked_in=True, mod=None):
-        """wearable clothing.  area: top, bra, bottom, panties or shoes.  picture: the name in the picture files -
-        Celica wearing it in a pose is  images/CHAR/celica/<pose>_<area word>_<picture>-<size>.png  (see the guide).
+    _AK_SLOTS = ("top", "bottom", "feet", "head", "sleeves", "hair")      # the game's area names; each has |0 and |1 (hair: |0)
+
+    def _ak_area_list(mod, fname, value):
+        """a list of game areas like ["top|0", "sleeves|1"] - checked, so a typo is explained instead of breaking the game"""
+        if isinstance(value, str):
+            value = [value]
+        good = []
+        for v in (value or []):
+            s = str(v).strip().lower()
+            slot, _, level = s.partition("|")
+            if slot in _AK_SLOTS and level in ("0", "1"):
+                good.append(s)
+            else:
+                apex_mod_problem("%s: '%s' is not a game area - use e.g. top|0, top|1, bottom|0, bottom|1, feet|1, head|1, sleeves|1 "
+                                 "(slots: %s; level 0 = underwear/inner layer, 1 = outer layer)" % (fname, v, ", ".join(_AK_SLOTS)), mod)
+        return good
+
+    def apex_add_clothing(item_id, name, area=None, picture="", icon=None, description="", stats=None, give=True,
+                          tucked_in=True, equip_area=None, block_area=None, order=None, properties=None,
+                          stripable=True, molestable=True, extra=None, mod=None):
+        """wearable clothing.  Simple: area = top, bra, bottom, panties or shoes.  Exact (same as the game's own clothes):
+        equip_area = ["top|0", "sleeves|1"] (areas it is worn on; the first one is the main area and shows its inventory
+        picture) and block_area = ["top|1"] (areas it covers, so nothing else can be worn there); each of top, bottom, feet,
+        head, sleeves has a |0 and |1 layer.  order = sort position in the inventory, properties = the game's item
+        properties (default: equipable, haswideshadow, unique, toggleattire), stripable / molestable = whether she can be
+        stripped / groped out of it, extra = more game clothing keys (e.g. extra_cost).  picture: the name in the picture
+        files - Celica wearing it in a pose is  images/CHAR/celica/<pose>_<area word>_<picture>-<size>.png  (see the guide).
         Poses without a picture show her without that piece."""
         mod = _ak_mod(mod)
-        a = _AK_AREAS.get(str(area).lower())
-        if a is None:
-            apex_mod_problem("apex_add_clothing('%s'): area must be one of %s, not '%s'" % (item_id, ", ".join(_AK_AREAS), area), mod)
+        if equip_area is None and area is None:
+            apex_mod_problem("apex_add_clothing('%s'): give area=... or equip_area=[...]" % item_id, mod)
             return
-        word = {"top": "top", "bra": "top", "bottom": "bottom", "panties": "bottom", "shoes": "feet"}[area.lower()]
-        if not renpy.loadable("images/CHAR/celica/celica_%s_%s-530-530-1.png" % (word, picture)):
+        if equip_area is None:
+            a = _AK_AREAS.get(str(area).lower())
+            if a is None:
+                apex_mod_problem("apex_add_clothing('%s'): area must be one of %s, not '%s'" % (item_id, ", ".join(_AK_AREAS), area), mod)
+                return
+            areas = [a]
+            if block_area is None and a in ("top|0", "bottom|0"):
+                block_area = [a.split("|")[0] + "|1"]
+        else:
+            areas = _ak_area_list(mod, "equip_area", equip_area)
+            if not areas:
+                apex_mod_problem("apex_add_clothing('%s'): equip_area has no valid area" % item_id, mod)
+                return
+        blocks = _ak_area_list(mod, "block_area", block_area)
+        word = areas[0].split("|")[0]
+        if word in ("top", "bottom", "feet") and not renpy.loadable("images/CHAR/celica/celica_%s_%s-530-530-1.png" % (word, picture)):
             apex_mod_problem("no picture of Celica standing in '%s': add images/CHAR/celica/celica_%s_%s-530-530-1.png "
                              "to your mod (other poses are optional)" % (name, word, picture), mod)
-        props = ["equipable", "haswideshadow", "unique", "toggleattire"] + (["belowpants"] if (word == "top" and tucked_in) else [])
-        extra = {"name": picture, "equip_area": [a], "stripable": True, "molestable": True}
-        if a == "top|0":
-            extra["block_area"] = ["top|1"]
-        if a == "bottom|0":
-            extra["block_area"] = ["bottom|1"]
+        if properties is None:
+            props = ["equipable", "haswideshadow", "unique", "toggleattire"] + (["belowpants"] if (word == "top" and tucked_in) else [])
+        else:
+            props = list(properties)
+            if "equipable" not in props:
+                props.insert(0, "equipable")
+        ex = {"name": picture, "equip_area": areas, "stripable": bool(stripable), "molestable": bool(molestable)}
+        if blocks:
+            ex["block_area"] = blocks
+        if isinstance(extra, dict):
+            for k, v in extra.items():
+                if k not in ("name", "equip_area", "block_area"):
+                    ex[k] = v
+        item_order = order if (isinstance(order, int) and not isinstance(order, bool)) else None
+        if order is not None and item_order is None:
+            apex_mod_problem("apex_add_clothing('%s'): order must be a whole number, got %r" % (item_id, order), mod)
         _ak_items["%s/%s" % (mod, item_id)] = dict(mod=mod, id=item_id, name=name, icon=_ak_icon(mod, icon),
-            desc=description, stats=_ak_check_stats(mod, stats), regen=0, give=give, props=props, extra=extra)
+            desc=description, stats=_ak_check_stats(mod, stats), regen=0, give=give, props=props, extra=ex, order=item_order)
 
     def _ak_stat_dict(stats, regen):
         d = {}
@@ -213,7 +261,7 @@ init -900 python:
                         pass
                 item.name, item.image = s["name"], s["icon"]
                 item.refresh_imagetext()
-                item.order, item.rarity, item.cost = 9000, 1, 0
+                item.order, item.rarity, item.cost = s.get("order") or 9000, 1, 0
                 item.properties = list(s["props"])
                 item.equip_extra = dict(s["extra"])
                 new = _ak_stat_dict(s["stats"], s["regen"])

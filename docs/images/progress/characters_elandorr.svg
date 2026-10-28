@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="820" height="30" viewBox="0 0 820 30">
   <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#ffc94d"/><stop offset="1" stop-color="#9b6bff"/></linearGradient></defs>
   <rect x="0" y="0" width="820" height="30" rx="15.0" fill="#1a1522" stroke="#2c2438"/>
-  <rect x="2" y="2" width="489.6" height="26" rx="13.0" fill="url(#g)"/>
-  <text x="410.0" y="21.0" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#ffffff">Elandorr: 60.0%  -  3 of 5</text>
+  <rect x="2" y="2" width="816.0" height="26" rx="13.0" fill="url(#g)"/>
+  <text x="410.0" y="21.0" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#ffffff">Elandorr: 100.0%  -  5 of 5</text>
 </svg>
